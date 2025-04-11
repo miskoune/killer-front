@@ -61,7 +61,7 @@
   --radius-small: 5px;
 
   /** Colors for mobile */
-  --button-primary: hsl(210deg 7% 30%);
+  --button-primary: hsl(0, 0%, 100%);
   --button-primary-pressed: hsl(210deg 7% 20%);
 
   --button-secondary: hsl(231deg 15% 50%);

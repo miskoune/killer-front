@@ -1,14 +1,11 @@
 import { useTranslation } from '@killerparty/intl';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import NotFoundSrc from '@/assets/images/not-found.jpg';
 import { Button } from '@/components/Button';
-
-import styles from './styles/index.module.css';
+import { Typography } from '@/components/ui/Typography';
 
 export function NotFoundPage(): JSX.Element {
   const navigate = useNavigate();
-  const { state: errorMessage } = useLocation();
   const { t } = useTranslation();
 
   const handleGoBack = (): void => {
@@ -16,18 +13,15 @@ export function NotFoundPage(): JSX.Element {
   };
 
   return (
-    <>
-      <div className={styles.infos}>
-        <h1>{t('notfound.title')}</h1>
-        <p>{t('notfound.description')}</p>
-        {errorMessage && (
-          <p>{t('notfound.reason', { reason: errorMessage })}</p>
-        )}
-      </div>
-      <img alt="notFound" className={styles.image} src={NotFoundSrc} />
+    <div className="flex flex-col items-center m-auto gap-4 justify-center w-[500px]">
+      <Typography.H1 className="text-center">404</Typography.H1>
+      <Typography.H2 className="text-center">
+        {t('notfound.description')}
+      </Typography.H2>
+
       <Button color="primary" onClick={handleGoBack}>
         {t('notfound.back')}
       </Button>
-    </>
+    </div>
   );
 }
