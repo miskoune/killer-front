@@ -1,4 +1,4 @@
-name: Testing
+name: Test and deploy 🚀
 on:
   push:
     branches: [main]
@@ -7,7 +7,7 @@ on:
 env:
   FRONT_URL: ${{ secrets.FRONT_URL }}
 jobs:
-  tests:
+  test-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Copy Repository
@@ -34,3 +34,6 @@ jobs:
 
       - name: Lint code
         run: pnpm lint
+
+      - name: Deploy to production
+        run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
