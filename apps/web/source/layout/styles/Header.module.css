@@ -19,7 +19,7 @@
 
 .text {
   margin-right: var(--spacing-small);
-  color: var(--color-black-10);
+  color: var(--color-white);
   font-weight: 600;
   text-transform: uppercase;
 }

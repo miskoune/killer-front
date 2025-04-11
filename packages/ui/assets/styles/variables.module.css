@@ -1,6 +1,6 @@
 :root {
   /** Application colors */
-  --color-body: hsl(30deg 75% 97%);
+  --color-body: hsl(200, 13%, 9%);
   --color-body-secondary: hsl(28deg 89% 96%);
   --color-loader: hsl(27deg 65% 90%);
 

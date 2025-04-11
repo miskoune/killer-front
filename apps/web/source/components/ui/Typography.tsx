@@ -53,10 +53,7 @@ function H3({ children, className, ...props }: H3Props) {
 function Blockquote({ children, className }: Props) {
   return (
     <blockquote
-      className={cn(
-        'border-l-4 pl-4 italic border-zinc-400 text-slate-500',
-        className,
-      )}
+      className={cn('italic border-zinc-400 text-slate-400', className)}
     >
       {children}
     </blockquote>
