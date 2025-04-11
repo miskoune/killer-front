@@ -4,7 +4,7 @@
 @import url('@/assets/styles/animations.module.css');
 
 :root {
-  --color-body: hsl(200deg 13% 9%);
+  --color-body: hsl(250deg 13% 9%);
   --color-body-secondary: hsl(210deg 7% 15%);
   --color-text: hsl(210deg 7% 95%);
   --color-text-secondary: hsl(210deg 7% 80%);
@@ -34,7 +34,12 @@ input {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-text);
 }
 

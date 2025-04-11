@@ -5,6 +5,8 @@
 
 .layout {
   width: 100%;
+  max-width: 64rem;
+  margin: auto;
   transition: width 0.5s cubic-bezier(0.55, 0, 0.1, 1);
   will-change: width;
 }

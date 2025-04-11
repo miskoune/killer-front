@@ -1,15 +1,23 @@
-import { Menu } from './Menu';
+import { useNavigate } from 'react-router-dom';
+
+import { LanguageSelector } from './Menu';
 import styles from './styles/Header.module.css';
 
-function Header(): JSX.Element {
+export function Header(): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.content}>
       <header className={styles.header}>
-        <p className={styles.text}>Killer Party</p>
-        <Menu />
+        <button
+          type="button"
+          className={styles.text}
+          onClick={() => navigate('/')}
+        >
+          Killer Party
+        </button>
+        <LanguageSelector />
       </header>
     </div>
   );
 }
-
-export default Header;

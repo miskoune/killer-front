@@ -1,6 +1,4 @@
 import { useTranslation } from '@killerparty/intl';
-import { Languages } from 'lucide-react';
-import React from 'react';
 
 import {
   ListItem,
@@ -12,38 +10,36 @@ import {
 } from '@/components/ui/NavigationMenu';
 import { languageToLocale, localeToLanguage } from '@/constants/languages';
 
-export function Menu() {
-  const { t, i18n } = useTranslation();
+export function LanguageSelector() {
+  const { i18n } = useTranslation();
 
   const handleUpdateLanguage = (language: string): void => {
     i18n.changeLanguage(languageToLocale[language]);
     localStorage.setItem('locale', languageToLocale[language]);
   };
 
+  const language = localeToLanguage[i18n.language];
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            <div className="flex items-center">
-              <Languages className="h-4 w-4 mr-2" />
-              {localeToLanguage[i18n.language]}
+            <div className="flex items-center gap-2 justify-center">
+              <p>{language}</p>
+              {language === 'Français' ? '🇫🇷' : '🇺🇸'}
             </div>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="left-0 grid gap-3 p-4 lg:grid-cols-1 md:w-[200px]">
+            <ul className="grid gap-2 p-3 md:w-[130px]">
               <ListItem
                 onClick={() => handleUpdateLanguage('Français')}
-                title="Français"
-              >
-                {t('menu.language.french')}
-              </ListItem>
+                title="Français 🇫🇷"
+              />
               <ListItem
                 onClick={() => handleUpdateLanguage('English')}
-                title="English"
-              >
-                {t('menu.language.english')}
-              </ListItem>
+                title="English 🇺🇸"
+              />
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>

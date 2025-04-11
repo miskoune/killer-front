@@ -16,7 +16,7 @@ const NavigationMenuViewport = React.forwardRef<
         origin-top-center relative mt-1.5 
         h-[var(--radix-navigation-menu-viewport-height)] 
         w-full rounded-md 
-        bg-test text-white
+        bg-hover text-white
         data-[state=open]:animate-in 
         data-[state=closed]:animate-out 
         md:w-[var(--radix-navigation-menu-viewport-width)]
@@ -165,7 +165,7 @@ const ListItem = React.forwardRef<
           className={cn(
             `
             block select-none cursor-pointer 
-            space-y-1 rounded-md p-3 
+            space-y-1 rounded-md p-2 
             leading-none no-underline 
             outline-none transition-colors
             hover:bg-accent hover:text-accent-foreground 
@@ -177,7 +177,7 @@ const ListItem = React.forwardRef<
         >
           <div
             className={cn(`
-            text-sm font-medium leading-none
+            text-m font-medium leading-none
           `)}
           >
             {title}

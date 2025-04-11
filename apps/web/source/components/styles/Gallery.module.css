@@ -2,13 +2,13 @@
   display: flex;
   overflow: auto;
   flex-direction: row;
+  justify-content: center;
   padding: 20px var(--spacing-small);
   gap: var(--spacing-medium);
 
   @media (width >= 720px) {
     padding-top: var(--spacing-large);
-    padding-bottom: var(--spacing-large);
-    padding-left: var(--spacing-large);
+    padding-bottom: var(--spacing-xlarge);
   }
 }
 

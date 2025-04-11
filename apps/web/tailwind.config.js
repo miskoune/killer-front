@@ -19,7 +19,7 @@ module.exports = {
           DEFAULT: 'hsl(var(--brand))',
           foreground: 'hsl(var(--brand-foreground))',
         },
-        test: 'rgb(32 36 38)',
+        hover: 'rgb(33 32 37)',
         border: 'var(--color-black-90)',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
