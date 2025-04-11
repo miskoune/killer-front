@@ -3,8 +3,6 @@
   overflow: auto;
   flex-direction: row;
   padding: 20px var(--spacing-small);
-  border-top: 1px solid var(--color-black-90);
-  border-bottom: 1px solid var(--color-black-90);
   gap: var(--spacing-medium);
 
   @media (width >= 720px) {
