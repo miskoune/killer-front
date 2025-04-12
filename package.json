@@ -5,7 +5,7 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
+    "start": "turbo run start",
     "tsc": "turbo run tsc",
     "lint": "turbo run lint",
     "test": "turbo run test",

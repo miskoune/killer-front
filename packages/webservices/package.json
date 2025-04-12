@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "tsup source/index.ts  --format cjs,esm --dts --external react ",
-    "dev": "tsup source/index.ts --format cjs,esm --watch --dts --external react",
+    "start": "tsup source/index.ts --format cjs,esm --watch --dts --external react",
     "clean": "rm -rf node_modules"
   },
   "devDependencies": {

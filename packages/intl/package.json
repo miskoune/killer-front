@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "tsup source/index.ts --format cjs,esm --dts",
-    "dev": "tsup source/index.ts --format cjs,esm --dts --watch",
+    "start": "tsup source/index.ts --format cjs,esm --dts --watch",
     "clean": "rm -rf node_modules"
   },
   "dependencies": {

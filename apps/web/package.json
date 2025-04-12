@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "vite serve",
+    "start": "vite serve",
     "build": "vite build",
     "lint": "pnpm lint:js && pnpm lint:css",
     "lint:js": "eslint . --ext .ts,.tsx",
@@ -17,7 +17,7 @@
   },
   "scripts-info": {
     "presinstall": "Script executed before installing dependencies",
-    "dev": "Start the application on development environment",
+    "start": "Start the application on development environment",
     "build": "Build the application on production environment",
     "lint": "Run linters",
     "lint:js": "Run JavaScript linter",

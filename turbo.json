@@ -5,7 +5,7 @@
       "outputs": ["build/**", "dist/**"],
       "dependsOn": ["^build"]
     },
-    "dev": {
+    "start": {
       "cache": false
     },
     "tsc": {},
