@@ -4,6 +4,72 @@
 
 @layer base {
   :root {
+    --color-body: hsl(200deg 13% 9%);
+    --color-body-secondary: hsl(28deg 89% 96%);
+    --color-loader: hsl(27deg 65% 90%);
+
+    /** White colors */
+    --color-white: hsl(255deg 100% 100%);
+
+    /** Black colors */
+    --color-black-10: hsl(210deg 7% 10%);
+    --color-black-20: hsl(210deg 7% 20%);
+    --color-black-30: hsl(210deg 7% 30%);
+    --color-black-40: hsl(210deg 7% 40%);
+    --color-black-50: hsl(210deg 7% 50%);
+    --color-black-60: hsl(210deg 7% 60%);
+    --color-black-70: hsl(210deg 7% 70%);
+    --color-black-80: hsl(210deg 7% 80%);
+    --color-black-90: hsl(210deg 7% 90%);
+
+    /** Grey colors */
+    --color-grey-40: hsl(20deg 3% 40%);
+
+    /** Yellow colors */
+    --color-yellow-40: hsl(53deg 100% 40%);
+    --color-yellow-50: hsl(53deg 100% 50%);
+    --color-yellow-60: hsl(53deg 100% 60%);
+    --color-yellow-70: hsl(53deg 98% 70%);
+    --color-yellow-80: hsl(53deg 98% 80%);
+    --color-yellow-90: hsl(53deg 100% 90%);
+
+    /** Blue colors */
+    --color-blue-90: hsl(207deg 96% 90%);
+    --color-blue-70: hsl(207deg 96% 70%);
+
+    /** Green colors */
+    --color-green-40: hsl(151deg 63% 40%);
+
+    /** Red colors */
+    --color-red-80: hsl(360deg 100% 80%);
+    --color-red-70: hsl(360deg 100% 70%);
+    --color-red-65: hsl(360deg 100% 65%);
+
+    /** Font sizes */
+    --text-very-small: 14px;
+    --text-small: 16px;
+    --text-medium: 18px;
+    --text-large: 20px;
+
+    /** Box shadows */
+    --shadow-small: var(--color-black-80) 0 2px 4px;
+    --shadow-large: var(--color-black-40) 0 2px 4px;
+
+    /** Spacing */
+    --spacing-small: 10px;
+    --spacing-medium: 15px;
+    --spacing-large: 20px;
+    --spacing-xlarge: 30px;
+
+    /** Radius */
+    --radius-small: 5px;
+
+    /** Colors for mobile */
+    --button-primary: hsl(0deg 0% 100%);
+    --button-primary-pressed: hsl(210deg 7% 20%);
+    --button-secondary: hsl(231deg 15% 50%);
+    --button-secondary-pressed: hsl(231deg 15% 40%);
+    --primary-subtitle: hsl(231deg 15% 50%);
     --brand: hsl(200deg 13% 9%);
     --brand-foreground: 30 80% 95%;
     --background: 0 0% 100%;
@@ -25,29 +91,6 @@
     --destructive: 0 100% 50%;
     --destructive-foreground: 210 40% 98%;
     --ring: 215 20.2% 65.1%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
-    --accent: 216 34% 17%;
-    --accent-foreground: 210 40% 98%;
-    --popover: 224 71% 4%;
-    --popover-foreground: 215 20.2% 65.1%;
-    --border: 216 34% 17%;
-    --input: 216 34% 17%;
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
-    --secondary: 222.2 47.4% 11.2%;
-    --secondary-foreground: 210 40% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --ring: 216 34% 17%;
     --radius: 0.5rem;
   }
 }
