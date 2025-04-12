@@ -39,7 +39,11 @@ export function HomePage(): JSX.Element {
             <Typography.H1>{t('home.title')}</Typography.H1>
             <p>{t('home.description')}</p>
           </div>
-          <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
+          <Lottie
+            className={styles.mobileLottie}
+            animationData={HomeLottie}
+            style={{ transform: 'scaleX(-1)' }}
+          />
           <div className="flex items-center">
             <a
               href="https://apps.apple.com/fr/app/killerparty/id6468843961"
@@ -65,7 +69,11 @@ export function HomePage(): JSX.Element {
             </TooltipProvider>
           </div>
         </div>
-        <Lottie className={styles.webLottie} animationData={HomeLottie} />
+        <Lottie
+          className={styles.webLottie}
+          animationData={HomeLottie}
+          style={{ transform: 'scaleX(-1)' }}
+        />
       </div>
       <Gallery
         currentAvatar={defaultAvatar}

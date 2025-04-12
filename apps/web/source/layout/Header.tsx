@@ -11,9 +11,12 @@ export function Header(): JSX.Element {
 
   return (
     <div
-      className={clsx('fixed top-0 right-0 left-0 z-50 bg-brand', {
-        'border-b border-white/20': isScrolled,
-      })}
+      className={clsx(
+        'fixed top-0 right-0 left-0 z-50 bg-brand border-b border-white/10 transition-colors duration-500',
+        {
+          'border-b border-white/50': isScrolled,
+        },
+      )}
     >
       <header className="flex max-w-7xl mx-auto items-center justify-between p-4">
         <button

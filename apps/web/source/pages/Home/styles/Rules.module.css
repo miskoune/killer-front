@@ -25,7 +25,6 @@
   align-items: center;
   justify-content: center;
   margin-right: 60px;
-  margin-left: 60px;
   color: var(--color-white);
   font-size: 48px;
   font-weight: 700;
@@ -48,5 +47,3 @@
     opacity: 1;
   }
 }
-
-
