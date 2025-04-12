@@ -15,10 +15,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        brand: {
-          DEFAULT: 'hsl(var(--brand))',
-          foreground: 'hsl(var(--brand-foreground))',
-        },
+        brand: 'var(--color-body)',
         hover: 'rgb(33 32 37)',
         border: 'var(--color-black-90)',
         input: 'hsl(var(--input))',

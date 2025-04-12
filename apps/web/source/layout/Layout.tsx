@@ -7,17 +7,16 @@ import { ModalContext } from '@/context/modal';
 import { useSession } from '@/services/player/queries';
 
 import { Header } from './Header';
-import styles from './styles/Layout.module.css';
 
 export function Layout(): JSX.Element {
   const { modal, closeModal } = useContext(ModalContext);
   const { isLoading, session, refetchSession } = useSession();
 
   return (
-    <div className={styles.application}>
-      <div className={clsx(styles.layout)}>
+    <div className="flex h-full">
+      <div className={clsx('w-full mx-auto')}>
         <Header />
-        <section className={styles.content}>
+        <section className="max-w-7xl mx-auto p-4 mt-[60px]">
           <Outlet context={{ isLoading, session, refetchSession }} />
         </section>
       </div>

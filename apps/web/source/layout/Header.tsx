@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useScroll } from '@/hooks/useScroll';
 
 import { LanguageSelector } from './Menu';
-import styles from './styles/Header.module.css';
 
 export function Header(): JSX.Element {
   const navigate = useNavigate();
@@ -12,14 +11,14 @@ export function Header(): JSX.Element {
 
   return (
     <div
-      className={clsx(styles.content, {
+      className={clsx('fixed top-0 right-0 left-0 z-50 bg-brand', {
         'border-b border-white/20': isScrolled,
       })}
     >
-      <header className={styles.header}>
+      <header className="flex max-w-7xl mx-auto items-center justify-between p-4">
         <button
           type="button"
-          className={styles.text}
+          className="mr-2 text-white font-semibold uppercase"
           onClick={() => navigate('/')}
         >
           Killer Party

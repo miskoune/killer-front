@@ -41,10 +41,6 @@
 }
 
 .webLottie {
-  max-width: 35vw;
-  height: 70vh;
-  margin-top: -30px;
-
   @media (width <= 720px) {
     display: none;
   }

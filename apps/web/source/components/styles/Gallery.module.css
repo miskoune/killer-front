@@ -1,19 +1,27 @@
 .gallery {
   display: flex;
-  overflow: auto;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 20px var(--spacing-small);
   gap: var(--spacing-medium);
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (width >= 720px) {
-    padding-top: var(--spacing-large);
-    padding-bottom: var(--spacing-xlarge);
+    justify-content: center;
+    margin-bottom: 50px;
   }
 }
 
 .content {
   position: relative;
+  flex-shrink: 0;
 }
 
 .selected svg {

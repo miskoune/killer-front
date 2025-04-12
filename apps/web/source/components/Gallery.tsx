@@ -11,6 +11,7 @@ import Gladiator from '@/assets/images/avatars/gladiator.svg';
 import Jedi from '@/assets/images/avatars/jedi.svg';
 import Milk from '@/assets/images/avatars/milk.svg';
 import Pirate from '@/assets/images/avatars/pirate.svg';
+import Samurai from '@/assets/images/avatars/samurai.svg';
 import { onEnter } from '@/helpers/keys';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
@@ -25,6 +26,7 @@ export const avatarList: Record<string, JSX.Element> = {
   gladiator: <Gladiator />,
   jedi: <Jedi />,
   milk: <Milk />,
+  samurai: <Samurai />,
   pirate: <Pirate />,
 };
 
