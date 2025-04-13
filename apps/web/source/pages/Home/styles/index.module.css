@@ -41,7 +41,7 @@
 }
 
 .webLottie {
-  max-width: 32rem;
+  max-width: 30rem;
 
   @media (width <= 720px) {
     display: none;

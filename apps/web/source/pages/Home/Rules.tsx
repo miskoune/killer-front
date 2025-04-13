@@ -2,15 +2,15 @@ import { useTranslation } from '@killerparty/intl';
 
 import { Typography } from '@/components/ui/Typography';
 
-import styles from './styles/Rules.module.css';
-
 export function Rules(): JSX.Element {
   const { t } = useTranslation();
 
   return (
     <>
-      <div className={styles.step}>
-        <span className={styles.number}>1.</span>
+      <div className="flex items-center rounded-lg py-8 my-2 cursor-pointer gap-8 transition-all duration-300 ease-in-out hover:bg-white/5 hover:translate-x-[10px] md:flex-row flex-col">
+        <span className="hidden md:flex items-center justify-center ml-4 mr-12 text-white text-5xl font-bold transition-all duration-300">
+          1.
+        </span>
         <div>
           <Typography.H3>{t('home.first.rule.title')}</Typography.H3>
           <Typography.Blockquote>
@@ -18,8 +18,10 @@ export function Rules(): JSX.Element {
           </Typography.Blockquote>
         </div>
       </div>
-      <div className={styles.step}>
-        <span className={styles.number}>2.</span>
+      <div className="flex items-center py-8 rounded-lg my-2 cursor-pointer gap-8 transition-all duration-300 ease-in-out hover:bg-white/5 hover:translate-x-[10px] md:flex-row flex-col">
+        <span className="hidden md:flex items-center justify-center ml-4 mr-12 text-white text-5xl font-bold transition-all duration-300">
+          2.
+        </span>
         <div>
           <Typography.H3>{t('home.second.rule.title')}</Typography.H3>
           <Typography.Blockquote>
@@ -27,8 +29,10 @@ export function Rules(): JSX.Element {
           </Typography.Blockquote>
         </div>
       </div>
-      <div className={styles.step}>
-        <span className={styles.number}>3.</span>
+      <div className="flex items-center py-8 rounded-lg my-2 cursor-pointer gap-8 transition-all duration-300 ease-in-out hover:bg-white/5 hover:translate-x-[10px] md:flex-row flex-col">
+        <span className="hidden md:flex items-center justify-center ml-4 mr-12 text-white text-5xl font-bold transition-all duration-300">
+          3.
+        </span>
         <div>
           <Typography.H2>{t('home.third.rule.title')}</Typography.H2>
           <Typography.Blockquote>
