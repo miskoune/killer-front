@@ -4,7 +4,7 @@ import svgr from 'vite-plugin-svgr';
 
 export const Plugins = [
   react(),
-  mkcert({ hosts: ['localhost', 'dev.killerparty.app'] }),
+  mkcert({ hosts: ['localhost'] }),
   svgr({
     exportAsDefault: true,
     svgrOptions: { titleProp: true },

@@ -12,9 +12,7 @@ import { Routes } from './routes';
 import '@/assets/styles/app.module.css';
 import '@/assets/styles/tailwind.css';
 
-const NODE_APP = document.getElementById('app');
-
-const root = createRoot(NODE_APP!);
+const root = createRoot(document.body);
 
 setupIntl(localStorage.getItem('locale'));
 

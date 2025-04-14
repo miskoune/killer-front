@@ -4,6 +4,6 @@
     "postcss-nesting": {},
     "autoprefixer": {},
     "postcss-preset-env": {},
-    "tailwindcss": {}
+    "@tailwindcss/postcss": {}
   }
 }
