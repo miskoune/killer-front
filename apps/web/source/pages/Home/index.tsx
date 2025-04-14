@@ -17,7 +17,6 @@ import { Typography } from '@/components/ui/Typography';
 import { type SessionQuery } from '@/services/player/types';
 
 import { Rules } from './Rules';
-import styles from './styles/index.module.css';
 
 export function HomePage(): JSX.Element {
   const navigate = useNavigate();
@@ -33,14 +32,16 @@ export function HomePage(): JSX.Element {
 
   return (
     <>
-      <div className={styles.content}>
+      <div className="flex items-center justify-between md:flex-row flex-col">
         <div>
-          <div className={styles.resume}>
-            <Typography.H1>{t('home.title')}</Typography.H1>
+          <div className="py-8 md:py-[30px]">
+            <Typography.H1 className="mb-[20px] md:mb-[30px]">
+              {t('home.title')}
+            </Typography.H1>
             <p>{t('home.description')}</p>
           </div>
           <Lottie
-            className={styles.mobileLottie}
+            className="md:hidden max-w-[80vw] mx-auto"
             animationData={HomeLottie}
             style={{ transform: 'scaleX(-1)' }}
           />
@@ -70,7 +71,7 @@ export function HomePage(): JSX.Element {
           </div>
         </div>
         <Lottie
-          className={styles.webLottie}
+          className="hidden md:block max-w-[30rem]"
           animationData={HomeLottie}
           style={{ transform: 'scaleX(-1)' }}
         />

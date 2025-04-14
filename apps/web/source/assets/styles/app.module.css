@@ -1,7 +1,6 @@
 @import url('@killerparty/ui/assets/styles/fonts.module.css');
 @import url('@killerparty/ui/assets/styles/variables.module.css');
 @import url('@/assets/styles/preflight.module.css');
-@import url('@/assets/styles/animations.module.css');
 
 :root {
   --color-body: hsl(250deg 13% 9%);
@@ -11,7 +10,7 @@
 
   background-color: var(--color-body);
   font-family: Inter, sans-serif;
-  letter-spacing: -0.05rem;
+  letter-spacing: -0.02rem;
 }
 
 body,

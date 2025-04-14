@@ -1,7 +1,5 @@
 import { toast, ToastBar, Toaster } from 'react-hot-toast';
 
-import styles from './styles/Notification.module.css';
-
 export function Notification(): JSX.Element {
   const closeNotification = (id: string) => (): void => {
     toast.dismiss(id);
@@ -30,7 +28,7 @@ export function Notification(): JSX.Element {
       {(toaster) => (
         <div
           role="presentation"
-          className={styles.notification}
+          className="cursor-pointer"
           onClick={closeNotification(toaster.id)}
         >
           <ToastBar toast={toaster}>

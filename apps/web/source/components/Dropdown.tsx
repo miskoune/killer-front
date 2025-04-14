@@ -4,8 +4,6 @@ import Active from '@/assets/icons/active.svg';
 import Expand from '@/assets/icons/expand.svg';
 import { onEnter } from '@/helpers/keys';
 
-import styles from './styles/Dropdown.module.css';
-
 interface Props {
   items: string[];
   activeItem: string;
@@ -29,27 +27,27 @@ export function Dropdown({ items, activeItem, onClick }: Props): JSX.Element {
       <div
         role="button"
         tabIndex={0}
-        className={styles.dropdown}
+        className="flex items-center justify-between p-2 border border-gray-300 rounded cursor-pointer hover:bg-gray-100"
         onClick={handleShowList}
         onKeyDown={({ key }) => onEnter({ key, fn: handleShowList })}
       >
-        <p>{activeItem}</p>
+        <p className="text-lg">{activeItem}</p>
         <Expand />
       </div>
       {showList && (
-        <div className={styles.list}>
+        <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded shadow-md">
           {items.map((item) => (
             <div
               role="button"
               tabIndex={0}
-              className={styles.item}
+              className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100"
               key={item}
               onClick={() => handleClick(item)}
               onKeyDown={({ key }) =>
                 onEnter({ key, fn: () => handleClick(item) })
               }
             >
-              <p>{item}</p>
+              <p className="text-lg">{item}</p>
               {item === activeItem && <Active />}
             </div>
           ))}

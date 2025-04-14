@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useScroll } from '@/hooks/useScroll';
 
-import { LanguageSelector } from './Menu';
+import { LanguageSelector } from './LanguageSelector';
 
 export function Header(): JSX.Element {
   const navigate = useNavigate();
