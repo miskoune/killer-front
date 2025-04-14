@@ -11,10 +11,6 @@ html {
   height: 100%;
 }
 
-* {
-  font-size: var(--text-small);
-}
-
 p,
 span,
 input {

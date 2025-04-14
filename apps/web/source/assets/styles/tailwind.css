@@ -89,4 +89,8 @@
   --destructive-foreground: 210 40% 98%;
   --ring: 215 20.2% 65.1%;
   --radius: 0.5rem;
+
+  /** Text colors */
+  --color-text: hsl(210deg 7% 95%);
+  --color-text-secondary: hsl(210deg 7% 80%);
 }
