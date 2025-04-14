@@ -16,8 +16,6 @@ import { onEnter } from '@/helpers/keys';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
-import styles from './styles/Gallery.module.css';
-
 export const avatarList: Record<string, JSX.Element> = {
   avenger: <Avenger />,
   beach: <Beach />,
@@ -60,9 +58,9 @@ export function Gallery({
   );
 
   return (
-    <div className={styles.gallery}>
+    <div className="flex flex-wrap gap-4 p-4 md:mt-[40px] md:mb-[100px]">
       {Object.entries(avatarList).map(([name, avatar]) => (
-        <div key={name} className={styles.content}>
+        <div key={name} className="relative flex">
           <div
             role="button"
             onClick={() => handleAvatarClick(name)}
@@ -70,13 +68,19 @@ export function Gallery({
               onEnter({ key, fn: () => handleAvatarClick(name) })
             }
             tabIndex={0}
-            className={clsx(styles.avatar, {
-              [styles.selected]: selectedAvatar === name,
-            })}
+            className={clsx(
+              'rounded-full drop-shadow [&>svg]:rounded-full [&>svg]:drop-shadow [&>svg]:w-[100px] [&>svg]:min-w-[100px] [&>svg]:h-[100px]',
+              {
+                'shadow-sm shadow-[0_0_0_5px_var(--color-green-40)]':
+                  selectedAvatar === name,
+              },
+            )}
           >
             {avatar}
           </div>
-          {selectedAvatar === name && <Checked className={styles.checked} />}
+          {selectedAvatar === name && (
+            <Checked className="absolute top-[70%] right-0 h-[30px]" />
+          )}
         </div>
       ))}
     </div>
