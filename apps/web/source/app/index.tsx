@@ -2,7 +2,7 @@ import { setupIntl } from '@killerparty/intl';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRoot } from 'react-dom/client';
 
-import { Toaster } from '@/components/ui/Toaster';
+import { Toaster } from '@/components/Toaster';
 import { QueryConfig } from '@/constants/config';
 import { ModalProvider } from '@/context/modal';
 import { SidebarProvider } from '@/context/sidebar';

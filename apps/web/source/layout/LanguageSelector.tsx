@@ -7,7 +7,7 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '@/components/ui/NavigationMenu';
+} from '@/components/NavigationMenu';
 import { languageToLocale, localeToLanguage } from '@/constants/languages';
 
 export function LanguageSelector() {

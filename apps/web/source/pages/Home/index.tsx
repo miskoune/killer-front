@@ -12,8 +12,8 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/Tooltip';
-import { Typography } from '@/components/ui/Typography';
+} from '@/components/Tooltip';
+import { Typography } from '@/components/Typography';
 import { type SessionQuery } from '@/services/player/types';
 
 import { Rules } from './Rules';
