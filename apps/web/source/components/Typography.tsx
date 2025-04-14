@@ -1,31 +1,18 @@
-import { cn } from '@/lib/utils';
-
 interface Props {
   children: JSX.Element | string;
-  className?: string;
 }
 
-function H1({ children, className }: Props) {
+function H1({ children }: Props) {
   return (
-    <h1
-      className={cn(
-        'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl whitespace-pre-line',
-        className,
-      )}
-    >
+    <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl whitespace-pre-line">
       {children}
     </h1>
   );
 }
 
-function H2({ children, className }: Props) {
+function H2({ children }: Props) {
   return (
-    <h2
-      className={cn(
-        'scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0',
-        className,
-      )}
-    >
+    <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
       {children}
     </h2>
   );
@@ -33,28 +20,19 @@ function H2({ children, className }: Props) {
 
 interface H3Props extends React.ComponentPropsWithoutRef<'h3'> {
   children: string | JSX.Element | JSX.Element[];
-  className?: string;
 }
 
-function H3({ children, className, ...props }: H3Props) {
+function H3({ children }: H3Props) {
   return (
-    <h3
-      className={cn(
-        'scroll-m-20 text-2xl font-semibold tracking-tight',
-        className,
-      )}
-      {...props}
-    >
+    <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
       {children}
     </h3>
   );
 }
 
-function Blockquote({ children, className }: Props) {
+function Blockquote({ children }: Props) {
   return (
-    <blockquote
-      className={cn('italic border-zinc-400 text-slate-400', className)}
-    >
+    <blockquote className="italic border-zinc-400 text-slate-400">
       {children}
     </blockquote>
   );

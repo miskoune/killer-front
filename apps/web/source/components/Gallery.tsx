@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { useMemo } from 'react';
 import { toast } from 'sonner';
 
@@ -13,6 +12,7 @@ import Milk from '@/assets/images/avatars/milk.svg';
 import Pirate from '@/assets/images/avatars/pirate.svg';
 import Samurai from '@/assets/images/avatars/samurai.svg';
 import { onEnter } from '@/helpers/keys';
+import { classNames } from '@/helpers/utils';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
@@ -68,7 +68,7 @@ export function Gallery({
               onEnter({ key, fn: () => handleAvatarClick(name) })
             }
             tabIndex={0}
-            className={clsx(
+            className={classNames(
               'rounded-full drop-shadow [&>svg]:rounded-full [&>svg]:drop-shadow [&>svg]:w-[100px] [&>svg]:min-w-[100px] [&>svg]:h-[100px]',
               {
                 'shadow-sm shadow-[0_0_0_5px_var(--color-green-40)]':

@@ -1,7 +1,5 @@
-import { clsx } from 'clsx';
-
 import Spinner from '@/assets/icons/spinner.svg';
-import { isPromise } from '@/helpers/utils';
+import { classNames, isPromise } from '@/helpers/utils';
 import { useSafeState } from '@/hooks/useSafeState';
 
 const BASE_CLASSES = [
@@ -60,13 +58,17 @@ export function Button({
   return (
     <button
       {...props}
-      className={clsx(BASE_CLASSES, COLOR_CLASSES[color], props.className)}
+      className={classNames(
+        BASE_CLASSES,
+        COLOR_CLASSES[color],
+        props.className,
+      )}
       onClick={handleClick}
       type="button"
       disabled={isLoading || disabled}
     >
       {isLoading && <Spinner className="absolute h-5 w-5 animate-spin" />}
-      <span className={clsx({ invisible: isLoading })}>{children}</span>
+      <span className={classNames({ invisible: isLoading })}>{children}</span>
     </button>
   );
 }
