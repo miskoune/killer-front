@@ -18,8 +18,7 @@
 }
 
 /** Toaster */
-:where([data-sonner-toaster][dir='ltr']),
-[data-sonner-toast][data-styled='true'] [data-close-button] {
+[data-sonner-toaster][dir='ltr'] {
   --toast-close-button-start: unset;
   --toast-close-button-end: 0;
   --toast-close-button-transform: translate(40%, -40%);

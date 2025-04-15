@@ -13,7 +13,6 @@ export function Toaster({ ...props }: ToasterProps) {
         error: <CircleX className="stroke-white w-6 h-6" />,
       }}
       toastOptions={{
-        duration: 300000,
         classNames: {
           closeButton: '!bg-white/80 hover:!bg-white !transition !duration-500',
           success: '!bg-emerald-500 !border-none',
