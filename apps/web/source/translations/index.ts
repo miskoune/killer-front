@@ -4,10 +4,13 @@ import {
   useTranslation as useI18nTranslation,
 } from 'react-i18next';
 
-import english from '../locales/en-US.json';
-import french from '../locales/fr-FR.json';
+import english from './locales/en-US.json';
+import french from './locales/fr-FR.json';
 
-import { Locale } from './constants';
+const LOCALE = {
+  FRENCH: 'fr-FR',
+  ENGLISH: 'en-US',
+} as const;
 
 export type TranslationKey = keyof typeof french | keyof typeof english;
 
@@ -17,11 +20,11 @@ export type TranslationKey = keyof typeof french | keyof typeof english;
  */
 function setupIntl(userLocale: string | null): void {
   i18next.use(initReactI18next).init({
-    lng: userLocale || Locale.FRENCH,
+    lng: userLocale || LOCALE.FRENCH,
     returnNull: false,
     resources: {
-      [Locale.FRENCH]: { translation: french },
-      [Locale.ENGLISH]: { translation: english },
+      [LOCALE.FRENCH]: { translation: french },
+      [LOCALE.ENGLISH]: { translation: english },
     },
     interpolation: { escapeValue: false },
   });
@@ -47,4 +50,4 @@ function useTranslation() {
   return { ...i18nTranslation, t: translate };
 }
 
-export { setupIntl, useTranslation, t, Locale };
+export { setupIntl, useTranslation, t, LOCALE };

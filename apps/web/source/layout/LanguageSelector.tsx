@@ -1,5 +1,3 @@
-import { useTranslation } from '@killerparty/intl';
-
 import {
   ListItem,
   NavigationMenu,
@@ -9,6 +7,7 @@ import {
   NavigationMenuTrigger,
 } from '@/components/NavigationMenu';
 import { languageToLocale, localeToLanguage } from '@/constants/languages';
+import { useTranslation } from '@/translations';
 
 export function LanguageSelector() {
   const { i18n } = useTranslation();

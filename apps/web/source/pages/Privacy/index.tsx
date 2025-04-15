@@ -1,4 +1,4 @@
-import { useTranslation } from '@killerparty/intl';
+import { useTranslation } from '@/translations';
 
 export function PrivacyPage(): JSX.Element {
   const { t } = useTranslation();

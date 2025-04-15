@@ -1,7 +1,5 @@
-import { useTranslation } from '@killerparty/intl';
-import Lottie from 'lottie-react';
-
-import Pumpkin from '@/assets/lotties/pumpkin.json';
+import { Typography } from '@/components/Typography';
+import { useTranslation } from '@/translations';
 
 import styles from './styles/index.module.css';
 
@@ -10,8 +8,7 @@ export function ContactPage(): JSX.Element {
 
   return (
     <div className={styles.content}>
-      <Lottie className={styles.lottie} animationData={Pumpkin} />
-      <h1>{t('contact.title')}</h1>
+      <Typography.H1>{t('contact.title')}</Typography.H1>
       <p>{t('contact.description')}</p>
       <a className={styles.contact} href={`mailto:${t('contact.email')}`}>
         {t('contact.email')}

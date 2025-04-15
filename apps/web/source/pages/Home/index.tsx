@@ -1,4 +1,3 @@
-import { useTranslation } from '@killerparty/intl';
 import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
@@ -15,6 +14,7 @@ import {
 } from '@/components/Tooltip';
 import { Typography } from '@/components/Typography';
 import { type SessionQuery } from '@/services/player/types';
+import { useTranslation } from '@/translations';
 
 import { Rules } from './Rules';
 

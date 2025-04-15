@@ -1,10 +1,10 @@
-import { setupIntl } from '@killerparty/intl';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRoot } from 'react-dom/client';
 
 import { Toaster } from '@/components/Toaster';
 import { QueryConfig } from '@/constants/config';
 import { ModalProvider } from '@/context/modal';
+import { setupIntl } from '@/translations';
 
 import { Routes } from './routes';
 

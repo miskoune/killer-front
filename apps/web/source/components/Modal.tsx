@@ -1,7 +1,7 @@
-import { useTranslation } from '@killerparty/intl';
 import { type ReactNode } from 'react';
 
 import Close from '@/assets/icons/close.svg';
+import { useTranslation } from '@/translations';
 
 interface Props {
   children: ReactNode;

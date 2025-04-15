@@ -5,6 +5,8 @@
   justify-content: center;
   margin: 0 auto;
   text-align: center;
+  margin-top: 100px;
+  gap: 1rem;
 
   & > p {
     color: var(--color-black-20);

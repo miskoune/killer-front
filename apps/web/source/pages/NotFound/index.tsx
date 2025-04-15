@@ -1,8 +1,8 @@
-import { useTranslation } from '@killerparty/intl';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
 import { Typography } from '@/components/Typography';
+import { useTranslation } from '@/translations';
 
 export function NotFoundPage(): JSX.Element {
   const navigate = useNavigate();

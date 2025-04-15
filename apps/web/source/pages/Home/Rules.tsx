@@ -1,6 +1,5 @@
-import { useTranslation } from '@killerparty/intl';
-
 import { Typography } from '@/components/Typography';
+import { useTranslation } from '@/translations';
 
 export function Rules(): JSX.Element {
   const { t } = useTranslation();

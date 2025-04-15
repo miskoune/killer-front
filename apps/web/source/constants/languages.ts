@@ -1,11 +1,11 @@
-import { Locale } from '@killerparty/intl';
+import { LOCALE } from '@/translations';
 
 export const languageToLocale: Record<string, string> = {
-  Français: Locale.FRENCH,
-  English: Locale.ENGLISH,
+  Français: LOCALE.FRENCH,
+  English: LOCALE.ENGLISH,
 };
 
 export const localeToLanguage: Record<string, string> = {
-  [Locale.FRENCH]: 'Français',
-  [Locale.ENGLISH]: 'English',
+  [LOCALE.FRENCH]: 'Français',
+  [LOCALE.ENGLISH]: 'English',
 };
