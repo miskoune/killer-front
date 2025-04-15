@@ -7,9 +7,14 @@ on:
 jobs:
   test-and-deploy:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./apps/web
+
     steps:
       - name: Copy Repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -19,7 +24,7 @@ jobs:
       - name: Installs pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8.x.x
+          version: 10.x.x
 
       - name: Install dependencies
         run: pnpm install

@@ -1,13 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "build": {
-      "outputs": ["build/**", "dist/**"],
-      "dependsOn": ["^build"]
-    },
-    "start": {
-      "cache": false
-    },
     "tsc": {},
     "lint": {},
     "test": {},

@@ -9,8 +9,7 @@
     "build:android:dev": "eas build --platform android --profile development --local",
     "build:android:prod": "eas build --platform android --profile production",
     "clean": "rm -rf node_modules",
-    "tsc": "tsc",
-    "postinstall": "cd ../.. && turbo build"
+    "tsc": "tsc"
   },
   "scripts-info": {
     "dev:mobile": "Start the expo development server",
@@ -19,8 +18,7 @@
     "build:android:dev": "Build the Android app in development mode",
     "build:android:prod": "Build the Android app in production mode",
     "clean": "Removes the node_modules folder",
-    "tsc": "Runs the typescript compiler",
-    "postinstall": "Build all shared packages in the monorepo"
+    "tsc": "Runs the typescript compiler"
   },
   "dependencies": {
     "@killerparty/intl": "workspace:*",
