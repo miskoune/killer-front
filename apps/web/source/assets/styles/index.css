@@ -17,6 +17,13 @@
   --shadow-green: var(--color-green) 0 0 0 6px;
 }
 
+:where([data-sonner-toaster][dir='ltr']) {
+  /** Toaster */
+  --toast-close-button-start: unset;
+  --toast-close-button-end: 0;
+  --toast-close-button-transform: translate(40%, -40%);
+}
+
 h1 {
   @apply text-4xl md:text-5xl;
 }
