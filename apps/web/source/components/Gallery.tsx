@@ -69,10 +69,9 @@ export function Gallery({
             }
             tabIndex={0}
             className={classNames(
-              'rounded-full drop-shadow [&>svg]:rounded-full [&>svg]:drop-shadow [&>svg]:w-[100px] [&>svg]:min-w-[100px] [&>svg]:h-[100px]',
+              'rounded-full drop-shadow cursor-pointer [&>svg]:rounded-full [&>svg]:drop-shadow [&>svg]:w-[100px] [&>svg]:min-w-[100px] [&>svg]:h-[100px]',
               {
-                'shadow-sm shadow-[0_0_0_5px_var(--color-green-40)]':
-                  selectedAvatar === name,
+                'shadow-green': selectedAvatar === name,
               },
             )}
           >

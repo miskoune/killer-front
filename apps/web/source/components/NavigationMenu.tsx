@@ -16,7 +16,6 @@ const NavigationMenuViewport = React.forwardRef<
         origin-top-center relative mt-1.5 
         h-[var(--radix-navigation-menu-viewport-height)] 
         w-full rounded-md 
-        bg-hover text-white
         data-[state=open]:animate-in 
         data-[state=closed]:animate-out 
         md:w-[var(--radix-navigation-menu-viewport-width)]
@@ -58,7 +57,7 @@ const NavigationMenuList = React.forwardRef<
   <NavigationMenuPrimitive.List
     ref={ref}
     className={classNames(
-      `group flex flex-1 list-none bg-brand
+      `group flex flex-1 list-none 
       items-center justify-center space-x-1`,
       className,
     )}
@@ -76,7 +75,7 @@ const navigationMenuTriggerStyle = cva(`
   text-sm font-medium 
   transition-colors 
   text-white 
-  hover:bg-white/5
+  hover:bg-white/10
   focus:outline-none
 `);
 
@@ -109,9 +108,8 @@ const NavigationMenuContent = React.forwardRef<
   <NavigationMenuPrimitive.Content
     ref={ref}
     className={classNames(
-      `
-      left-0 top-0 w-full 
-      md:absolute md:w-auto
+      `left-0 top-0 w-full rounded-md
+      bg-white/10
     `,
       className,
     )}
@@ -168,8 +166,7 @@ const ListItem = React.forwardRef<
             space-y-1 rounded-md p-2 
             leading-none no-underline 
             outline-none transition-colors
-            hover:bg-accent hover:text-accent-foreground 
-            focus:bg-accent focus:text-accent-foreground
+           hover:bg-white/10
           `,
             className,
           )}

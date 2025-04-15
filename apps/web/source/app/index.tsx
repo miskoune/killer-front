@@ -9,7 +9,6 @@ import { SidebarProvider } from '@/context/sidebar';
 
 import { Routes } from './routes';
 
-import '@/assets/styles/app.module.css';
 import '@/assets/styles/index.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
