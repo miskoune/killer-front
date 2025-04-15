@@ -19,14 +19,6 @@ input {
   }
 }
 
-h1 {
-  font-size: 24px;
-
-  @media (width >= 720px) {
-    font-size: 38px;
-  }
-}
-
 h2 {
   font-size: var(--text-large);
   font-weight: 400;

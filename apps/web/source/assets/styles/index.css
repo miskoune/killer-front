@@ -1,6 +1,23 @@
 @import 'tailwindcss';
 
+@import url('./fonts.module.css');
+
+h1 {
+  @apply text-4xl md:text-6xl;
+}
+
+body {
+  @apply bg-body text-white font-inter;
+}
+
+p,
+input {
+  @apply text-medium md:text-lg;
+}
+
 @theme {
+  --font-inter: Inter, sans-serif;
+
   --color-body: hsl(200deg 13% 9%);
   --color-body-secondary: hsl(28deg 89% 96%);
   --color-loader: hsl(27deg 65% 90%);
