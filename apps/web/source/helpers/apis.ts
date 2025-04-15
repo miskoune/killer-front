@@ -1,7 +1,7 @@
-import { type TranslationKey, t } from '@killerparty/intl';
 import { toast } from 'sonner';
 
 import { ErrorCode } from '@/constants/errors';
+import { type TranslationKey, t } from '@/translations';
 
 import { RequestError } from './errors';
 import { type RequestParams } from './types';
