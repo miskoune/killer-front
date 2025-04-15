@@ -17,9 +17,9 @@
   --shadow-green: var(--color-green) 0 0 0 6px;
 }
 
+/** Toaster */
 :where([data-sonner-toaster][dir='ltr']),
-[data-sonner-toast][data-styled='true'][data-close-button] {
-  /** Toaster */
+[data-sonner-toast][data-styled='true'] [data-close-button] {
   --toast-close-button-start: unset;
   --toast-close-button-end: 0;
   --toast-close-button-transform: translate(40%, -40%);
