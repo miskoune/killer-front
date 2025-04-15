@@ -1,9 +1,10 @@
 import { CircleCheck, CircleX } from 'lucide-react';
+import { type ComponentProps } from 'react';
 import { Toaster as Sonner } from 'sonner';
 
-type ToasterProps = React.ComponentProps<typeof Sonner>;
+interface ToasterProps extends ComponentProps<typeof Sonner> {}
 
-function Toaster({ ...props }: ToasterProps) {
+export function Toaster({ ...props }: ToasterProps) {
   return (
     <Sonner
       className="bg-"
@@ -25,5 +26,3 @@ function Toaster({ ...props }: ToasterProps) {
     />
   );
 }
-
-export { Toaster };
