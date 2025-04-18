@@ -1,25 +1,30 @@
-import { type RestHandler, rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 import { MISSION_ENDPOINT } from '@/constants/endpoints';
 import { ErrorCode } from '@/constants/errors';
 
-export function createMission(): RestHandler {
-  return rest.post(MISSION_ENDPOINT, async (request, response, context) => {
-    const { content } = await request.json();
+export function createMission() {
+  return http.post(MISSION_ENDPOINT, async ({ request }) => {
+    const body = (await request.json()) as { content: string };
 
-    if (content.length < 5) {
-      return response(
-        context.status(400),
-        context.json({ detail: ErrorCode.MISSION_TOO_SHORT_CONTENT }),
+    if (body?.content?.length < 5) {
+      return HttpResponse.json(
+        { detail: ErrorCode.MISSION_TOO_SHORT_CONTENT },
+        { status: 400 },
       );
     }
 
-    return response(context.status(200), context.json({}));
+    return HttpResponse.json({});
   });
 }
 
-export function deleteMission(missionId: string): RestHandler {
-  return rest.delete(`${MISSION_ENDPOINT}/${missionId}`, (_, res, ctx) =>
-    res(ctx.status(200), ctx.json({})),
+export function deleteMission(missionId: string) {
+  return http.delete(
+    `${MISSION_ENDPOINT}/${missionId}`,
+    async ({ request }) => {
+      await request.json();
+
+      return HttpResponse.json();
+    },
   );
 }

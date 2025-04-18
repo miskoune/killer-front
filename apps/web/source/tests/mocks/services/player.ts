@@ -1,40 +1,43 @@
-import { type RestHandler, rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
 import { ErrorCode } from '@/constants/errors';
 import { type Session } from '@/services/player/types';
 
-export function getPlayerSession(session: Session | null): RestHandler {
-  return rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-    res(ctx.status(200), ctx.json(session)),
-  );
+export function getPlayerSession(session: Session | null) {
+  return http.get(SESSION_ENDPOINT, async ({ request }) => {
+    await request.json();
+
+    return HttpResponse.json(session);
+  });
 }
 
-export function createPlayer(): RestHandler {
-  return rest.post(PLAYER_ENDPOINT, (_, res, ctx) =>
-    res(ctx.status(200), ctx.json({})),
-  );
+export function createPlayer() {
+  return http.post(PLAYER_ENDPOINT, async ({ request }) => {
+    await request.json();
+
+    return HttpResponse.json({});
+  });
 }
 
-export function updatePlayer(playerId: string): RestHandler {
-  return rest.patch(
-    `${PLAYER_ENDPOINT}/${playerId}`,
-    (_, response, context) => {
-      const pageParams = new URLSearchParams(window.location.search);
-      const scenario = pageParams.get('scenario');
+export function updatePlayer(playerId: string) {
+  return http.patch(`${PLAYER_ENDPOINT}/${playerId}`, async ({ request }) => {
+    await request.json();
 
-      if (scenario === 'room-not-found') {
-        return response(context.status(404));
-      }
+    const pageParams = new URLSearchParams(window.location.search);
+    const scenario = pageParams.get('scenario');
 
-      if (scenario === 'pseudo-already-used') {
-        return response(
-          context.status(400),
-          context.json({ detail: ErrorCode.ALREADY_EXIST }),
-        );
-      }
+    if (scenario === 'room-not-found') {
+      return HttpResponse.json(null, { status: 404 });
+    }
 
-      return response(context.status(200), context.json({}));
-    },
-  );
+    if (scenario === 'pseudo-already-used') {
+      return HttpResponse.json(
+        { detail: ErrorCode.ALREADY_EXIST },
+        { status: 400 },
+      );
+    }
+
+    return HttpResponse.json({});
+  });
 }

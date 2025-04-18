@@ -31,7 +31,7 @@ jobs:
         run: pnpm build
 
       - name: Type checking
-        run: pnpm tsc
+        run: pnpm tsc --filter=./apps/web
 
       - name: Lint code
         run: pnpm lint
