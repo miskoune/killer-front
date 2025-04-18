@@ -2,7 +2,7 @@ import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
-import AppleStore from '@/assets/images/apple-store.svg';
+import AppleStore from '@/assets/images/apple-store.svg?react';
 import GooglePlayStore from '@/assets/images/google-play-store.png';
 import HomeLottie from '@/assets/lotties/home.json';
 import { Gallery } from '@/components/Gallery';
@@ -18,7 +18,7 @@ import { useTranslation } from '@/translations';
 
 import { Rules } from './Rules';
 
-export function HomePage(): JSX.Element {
+export function HomePage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { session } = useOutletContext<SessionQuery>();

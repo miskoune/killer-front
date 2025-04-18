@@ -6,7 +6,7 @@ import { HomePage } from '@/pages/Home';
 import { NotFoundPage } from '@/pages/NotFound';
 import { PrivacyPage } from '@/pages/Privacy';
 
-export function Routes(): JSX.Element {
+export function Routes() {
   return (
     <RouterProvider
       router={createBrowserRouter([

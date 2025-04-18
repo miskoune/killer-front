@@ -1,4 +1,4 @@
-import Spinner from '@/assets/icons/spinner.svg';
+import Spinner from '@/assets/icons/spinner.svg?react';
 import { classNames, isPromise } from '@/helpers/utils';
 import { useSafeState } from '@/hooks/useSafeState';
 
@@ -42,7 +42,7 @@ export function Button({
   color,
   disabled = false,
   ...props
-}: Props): JSX.Element {
+}: Props) {
   const [isLoading, setLoading] = useSafeState(false);
 
   const handleClick = async (): Promise<void> => {

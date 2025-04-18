@@ -19,8 +19,8 @@ export default defineConfig({
     react(),
     mkcert({ hosts: ['localhost'] }),
     svgr({
-      exportAsDefault: true,
       svgrOptions: { titleProp: true },
+      include: '**/*.svg?react',
     }),
     tailwindcss(),
   ],

@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import Close from '@/assets/icons/close.svg';
+import Close from '@/assets/icons/close.svg?react';
 import { useTranslation } from '@/translations';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   closeModal: () => void;
 }
 
-export function Modal({ children, closeModal }: Props): JSX.Element {
+export function Modal({ children, closeModal }: Props) {
   const { t } = useTranslation();
 
   return (

@@ -5,7 +5,7 @@ import { useScroll } from '@/hooks/useScroll';
 
 import { LanguageSelector } from './LanguageSelector';
 
-export function Header(): JSX.Element {
+export function Header() {
   const navigate = useNavigate();
   const isScrolled = useScroll();
 

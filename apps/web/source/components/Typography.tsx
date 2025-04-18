@@ -1,7 +1,8 @@
+import { type PropsWithChildren } from 'react';
+
 import { classNames } from '@/helpers/utils';
 
-interface HeadingProps {
-  children: JSX.Element | string;
+interface HeadingProps extends PropsWithChildren {
   className?: string;
 }
 

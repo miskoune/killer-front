@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import Active from '@/assets/icons/active.svg';
-import Expand from '@/assets/icons/expand.svg';
+import Active from '@/assets/icons/active.svg?react';
+import Expand from '@/assets/icons/expand.svg?react';
 import { onEnter } from '@/helpers/keys';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   onClick: (item: string) => void;
 }
 
-export function Dropdown({ items, activeItem, onClick }: Props): JSX.Element {
+export function Dropdown({ items, activeItem, onClick }: Props) {
   const [showList, setShowList] = useState(false);
 
   const handleShowList = (): void => {

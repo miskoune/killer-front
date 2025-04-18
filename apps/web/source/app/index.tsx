@@ -14,7 +14,7 @@ const root = createRoot(document.getElementById('root') as HTMLElement);
 
 setupIntl(localStorage.getItem('locale'));
 
-function App(): JSX.Element {
+function App() {
   const queryClient = new QueryClient(QueryConfig);
 
   return (

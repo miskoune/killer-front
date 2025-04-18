@@ -1,6 +1,6 @@
 import { useTranslation } from '@/translations';
 
-export function PrivacyPage(): JSX.Element {
+export function PrivacyPage() {
   const { t } = useTranslation();
 
   return (

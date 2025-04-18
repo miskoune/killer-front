@@ -1,7 +1,7 @@
 import { Typography } from '@/components/Typography';
 import { useTranslation } from '@/translations';
 
-export function ContactPage(): JSX.Element {
+export function ContactPage() {
   const { t } = useTranslation();
 
   return (

@@ -1,22 +1,22 @@
 import { useMemo } from 'react';
 import { toast } from 'sonner';
 
-import Checked from '@/assets/icons/checked.svg';
-import Avenger from '@/assets/images/avatars/avenger.svg';
-import Beach from '@/assets/images/avatars/beach.svg';
-import Captain from '@/assets/images/avatars/captain.svg';
-import Football from '@/assets/images/avatars/football.svg';
-import Gladiator from '@/assets/images/avatars/gladiator.svg';
-import Jedi from '@/assets/images/avatars/jedi.svg';
-import Milk from '@/assets/images/avatars/milk.svg';
-import Pirate from '@/assets/images/avatars/pirate.svg';
-import Samurai from '@/assets/images/avatars/samurai.svg';
+import Checked from '@/assets/icons/checked.svg?react';
+import Avenger from '@/assets/images/avatars/avenger.svg?react';
+import Beach from '@/assets/images/avatars/beach.svg?react';
+import Captain from '@/assets/images/avatars/captain.svg?react';
+import Football from '@/assets/images/avatars/football.svg?react';
+import Gladiator from '@/assets/images/avatars/gladiator.svg?react';
+import Jedi from '@/assets/images/avatars/jedi.svg?react';
+import Milk from '@/assets/images/avatars/milk.svg?react';
+import Pirate from '@/assets/images/avatars/pirate.svg?react';
+import Samurai from '@/assets/images/avatars/samurai.svg?react';
 import { onEnter } from '@/helpers/keys';
 import { classNames } from '@/helpers/utils';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
-export const avatarList: Record<string, JSX.Element> = {
+export const avatarList = {
   avenger: <Avenger />,
   beach: <Beach />,
   captain: <Captain />,
@@ -34,11 +34,7 @@ interface Props {
   setCurrentAvatar?: (avatar: string) => void;
 }
 
-export function Gallery({
-  playerId,
-  currentAvatar,
-  setCurrentAvatar,
-}: Props): JSX.Element {
+export function Gallery({ playerId, currentAvatar, setCurrentAvatar }: Props) {
   const { session } = useSession();
   const { updatePlayer } = useUpdatePlayer();
 

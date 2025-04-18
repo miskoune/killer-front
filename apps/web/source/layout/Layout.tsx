@@ -8,7 +8,7 @@ import { useSession } from '@/services/player/queries';
 
 import { Header } from './Header';
 
-export function Layout(): JSX.Element {
+export function Layout() {
   const { modal, closeModal } = useContext(ModalContext);
   const { isLoading, session, refetchSession } = useSession();
 

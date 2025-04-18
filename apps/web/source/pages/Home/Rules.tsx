@@ -1,7 +1,7 @@
 import { Typography } from '@/components/Typography';
 import { useTranslation } from '@/translations';
 
-export function Rules(): JSX.Element {
+export function Rules() {
   const { t } = useTranslation();
 
   return (
