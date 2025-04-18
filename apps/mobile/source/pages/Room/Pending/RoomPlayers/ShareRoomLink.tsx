@@ -1,7 +1,8 @@
-import { useTranslation } from '@killerparty/intl';
+import * as React from 'react';
 import { Text, Pressable, Share, View } from 'react-native';
 
 import ShareIcon from '../../../../assets/icons/share.svg';
+import { useTranslation } from '../../../../translations';
 
 import styles from './styles/ShareRoomLink.module.css';
 

@@ -1,8 +1,8 @@
-import { useTranslation } from '@killerparty/intl';
 import { type Dispatch, type SetStateAction } from 'react';
 import { View } from 'react-native';
 
 import { avatarsList, getRandomAvatar } from '../helpers/avatars';
+import { useTranslation } from '../translations';
 
 import { Button } from './Button';
 import styles from './styles/CurrentAvatar.module.css';

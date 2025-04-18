@@ -1,4 +1,3 @@
-import { setupIntl } from '@killerparty/intl';
 import {
   WebServicesProvider,
   getSessionRequest,
@@ -8,7 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+
+import { setupIntl } from '../translations';
 
 import { Routes } from './routes';
 

@@ -1,7 +1,8 @@
-import { useTranslation } from '@killerparty/intl';
 import { useRoom, useStartParty } from '@killerparty/webservices';
+import * as React from 'react';
 
 import { Button } from '../../../../components/Button';
+import { useTranslation } from '../../../../translations';
 
 interface Props {
   roomCode: string;

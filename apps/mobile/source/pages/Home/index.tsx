@@ -1,11 +1,12 @@
-import { useTranslation } from '@killerparty/intl';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
 import { Text, View, Pressable } from 'react-native';
 
 import InfosIcon from '../../assets/icons/infos.svg';
 import KillerParty from '../../assets/images/killerparty.svg';
 import { Button } from '../../components/Button';
 import { FadeInView } from '../../components/FadeInView';
+import { useTranslation } from '../../translations';
 import { type StackNavigation } from '../../types/navigation';
 
 import styles from './styles/index.module.css';

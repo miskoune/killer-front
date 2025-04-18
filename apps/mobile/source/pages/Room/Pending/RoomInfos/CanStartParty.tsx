@@ -1,9 +1,10 @@
-import { useTranslation } from '@killerparty/intl';
 import { useRoom } from '@killerparty/webservices';
+import React from 'react';
 import { View, Text } from 'react-native';
 
 import Checked from '../../../../assets/icons/checked.svg';
 import Unchecked from '../../../../assets/icons/unchecked.svg';
+import { useTranslation } from '../../../../translations';
 
 import styles from './styles/CanStartParty.module.css';
 

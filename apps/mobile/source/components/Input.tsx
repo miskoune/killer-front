@@ -1,4 +1,4 @@
-import { type RefObject, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { Animated, TextInput, View } from 'react-native';
 
 import styles from './styles/Input.module.css';
@@ -7,7 +7,7 @@ interface Props {
   value: string;
   setValue: (value: string) => void;
   label: string;
-  innerRef?: RefObject<TextInput>;
+  innerRef?: React.RefObject<TextInput | null>;
 }
 
 export function Input({
@@ -16,10 +16,10 @@ export function Input({
   label,
   innerRef,
 }: Props): JSX.Element {
-  const focusAnim = useRef(new Animated.Value(0)).current;
-  const [isFocused, setFocused] = useState(false);
+  const focusAnim = React.useRef(new Animated.Value(0)).current;
+  const [isFocused, setFocused] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     Animated.timing(focusAnim, {
       toValue: isFocused || value ? 1 : 0,
       duration: 250,

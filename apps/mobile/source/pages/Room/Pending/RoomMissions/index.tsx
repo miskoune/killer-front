@@ -1,10 +1,12 @@
-import { type TranslationKey, useTranslation } from '@killerparty/intl';
 import { useRoom } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import LottieView from 'lottie-react-native';
+import * as React from 'react';
 import { Text, ScrollView, View } from 'react-native';
 
 import { RoomGuard } from '../../../../components/RoomGuard';
+import { useTranslation } from '../../../../translations';
+import { type TranslationKey } from '../../../../translations';
 import { type RootStackParamList } from '../../../../types/navigation';
 
 import { CreateMission } from './CreateMission';

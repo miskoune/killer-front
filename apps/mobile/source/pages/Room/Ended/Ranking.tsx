@@ -1,8 +1,9 @@
-import { useTranslation } from '@killerparty/intl';
 import { type Room } from '@killerparty/webservices';
+import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 import { avatarsList } from '../../../helpers/avatars';
+import { useTranslation } from '../../../translations';
 
 import styles from './styles/Ranking.module.css';
 

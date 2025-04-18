@@ -1,12 +1,13 @@
-import { useTranslation } from '@killerparty/intl';
 import { useSession } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
+import * as React from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import InfosIcon from '../../../../assets/icons/infos.svg';
 import KillerParty from '../../../../assets/images/killerparty.svg';
 import { Player } from '../../../../components/Player';
 import { RoomGuard } from '../../../../components/RoomGuard';
+import { useTranslation } from '../../../../translations';
 import { type RootStackParamList } from '../../../../types/navigation';
 
 import { CanStartParty } from './CanStartParty';

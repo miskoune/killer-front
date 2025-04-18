@@ -1,16 +1,16 @@
-import { useTranslation } from '@killerparty/intl';
 import { useCreateMission } from '@killerparty/webservices';
-import { useState } from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 
 import { Button } from '../../../../components/Button';
 import { Input } from '../../../../components/Input';
+import { useTranslation } from '../../../../translations';
 
 import { PlayerMissions } from './PlayerMissions';
 import styles from './styles/CreateMission.module.css';
 
 export function CreateMission(): JSX.Element {
-  const [mission, setMission] = useState('');
+  const [mission, setMission] = React.useState('');
   const { t } = useTranslation();
   const { createMission } = useCreateMission();
 
