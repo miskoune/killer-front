@@ -28,7 +28,6 @@ export function Routes({ session }: Props): JSX.Element {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerBackTitleVisible: false,
         headerStyle: { backgroundColor: '#fdf7f2' },
         contentStyle: { backgroundColor: '#fdf7f2' },
         headerShown: false,

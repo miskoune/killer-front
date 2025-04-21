@@ -21,10 +21,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "target": "ESNext",
-    "module": "ESNext",
-    "paths": {
-      "@/*": ["source/*"]
-    }
+    "module": "ESNext"
   },
   "include": ["source"],
   "exclude": ["node_modules"]

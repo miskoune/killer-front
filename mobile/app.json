@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./source/assets/icon.png",
     "userInterfaceStyle": "light",
-    "jsEngine": "jsc",
+    "newArchEnabled": true,
     "splash": {
       "image": "./source/assets/splash.png",
       "resizeMode": "contain",
@@ -38,6 +38,12 @@
       "eas": {
         "projectId": "2e54ce18-54e1-4a6b-8fd4-46c1931ee97d"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-asset",
+        { "assets": ["./source/assets/images/work-in-progress.png"] }
+      ]
+    ]
   }
 }

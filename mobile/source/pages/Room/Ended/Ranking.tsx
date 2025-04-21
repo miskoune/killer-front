@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 import { Room } from '../../../apis/room/types';
-
 import { avatarsList } from '../../../helpers/avatars';
 import { useTranslation } from '../../../translations';
 
@@ -30,7 +29,7 @@ export function Ranking({ room }: Props): JSX.Element {
             </View>
             <Text>{name}</Text>
             <Image
-              source={require('../../../assets/images/work-in-progress.png')}
+              source={{ uri: 'work-in-progress' }}
               style={styles.rankingIcon}
             />
           </View>

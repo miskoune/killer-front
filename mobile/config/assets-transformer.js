@@ -1,4 +1,4 @@
-var upstreamTransformer = require('metro-react-native-babel-transformer');
+var upstreamTransformer = require('@expo/metro-config/babel-transformer');
 var postcssTransformer = require('react-native-postcss-transformer');
 var svgTransformer = require('react-native-svg-transformer');
 

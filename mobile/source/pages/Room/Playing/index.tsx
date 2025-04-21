@@ -36,7 +36,6 @@ export function PlayingRoomTabs({ route }: Props): JSX.Element {
         tabBarHideOnKeyboard: true,
       }}
       initialRouteName="RoomInfos"
-      sceneContainerStyle={{ backgroundColor: '#fdf7f2' }}
     >
       {session && session.status === 'ALIVE' && (
         <Tab.Screen
