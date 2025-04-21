@@ -1,8 +1,6 @@
-@import '../../../assets/styles/variables.module.css';
-
 .view {
-  padding: var(--spacing-large);
-  background-color: var(--color-body);
+  padding: 20px;
+  background-color: hsl(200, 13%, 9%);
   display: flex;
   flex: 1;
 }

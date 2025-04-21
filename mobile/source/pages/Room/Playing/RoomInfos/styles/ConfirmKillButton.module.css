@@ -1,12 +1,10 @@
-@import '../../../../../assets/styles/variables.module.css';  
-
 .title {
-  font-size: var(--text-large);
-  margin-bottom: var(--spacing-small);
+  font-size: 20px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
 .subtitle {
-  margin-bottom: var(--spacing-large);
+  margin-bottom: 20px;
   text-align: center;
 }

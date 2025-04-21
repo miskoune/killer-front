@@ -1,7 +1,5 @@
-@import '../../../../../assets/styles/variables.module.css';  
-
 .content {
-  margin: var(--spacing-large);
+  margin: 20px;
   margin-top: 40px;
   flex: 1;
 }

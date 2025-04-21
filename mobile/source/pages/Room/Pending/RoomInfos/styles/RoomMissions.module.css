@@ -1,10 +1,8 @@
-@import '../../../../../assets/styles/variables.module.css';
-
 .missions {
-  padding: var(--spacing-medium);
-  margin-bottom: var(--spacing-small);
-  border: 1px solid var(--color-black-90);
-  background-color: var(--color-body-secondary);
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid hsl(210deg 7% 90%);
+  background-color: hsl(28deg 89% 96%);
 }
 
 .text {

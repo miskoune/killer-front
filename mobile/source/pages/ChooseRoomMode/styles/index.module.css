@@ -1,21 +1,19 @@
-@import '../../../assets/styles/variables.module.css';
-
 .view {
-  padding: var(--spacing-large);
-  background-color: var(--color-body);
+  padding: 20px;
+  background-color: hsl(200, 13%, 9%);
   display: flex;
   flex: 1;
 }
 
 .modeTitle {
-  margin-bottom: var(--spacing-large);
+  margin-bottom: 20px;
   text-align: center;
   font-size: 22px;
   font-weight: 500;
 }
 
 .modeDescription {
-  margin-bottom: var(--spacing-large);
+  margin-bottom: 20px;
   text-align: center;
 }
 

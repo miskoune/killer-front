@@ -1,12 +1,10 @@
-@import '../../assets/styles/variables.module.css';
-
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom-width: 1px;
-  border-bottom-color: var(--color-black-90);
+  border-bottom-color: hsl(210deg 7% 90%);
 }
 
 .title {
@@ -21,7 +19,7 @@
 }
 
 .iconPressed {
-  background-color: var(--color-black-80);
+  background-color: hsl(210deg 7% 80%);
 }
 
 .deactivateIcon {

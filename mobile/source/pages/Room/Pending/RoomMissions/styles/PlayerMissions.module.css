@@ -1,41 +1,39 @@
-@import '../../../../../assets/styles/variables.module.css';  
-
 .missions {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-top: var(--spacing-medium);
-  padding-bottom: var(--spacing-medium);
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .image {
   height: 70px;
   width: 70px;
-  margin-right: var(--spacing-small);
+  margin-right: 10px;
 }
 
 .title {
-  font-size: var(--text-large);
-  margin-bottom: var(--spacing-small);
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .cards {
   display: flex;
   flex-direction: row;
-  margin-bottom: var(--spacing-small);
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
 .card {
   position: relative;
-  padding: var(--spacing-small);
-  border: 1px solid var(--color-black-60);
-  border-radius: var(--radius-small);
-  margin-top: var(--spacing-small);
-  margin-right: var(--spacing-small);
-  background-color: var(--button-secondary);
-  box-shadow: var(--shadow-small);
-  font-size: var(--text-medium);
+  padding: 10px;
+  border: 1px solid hsl(210deg 7% 90%);
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
+  background-color: hsl(231deg 15% 50%);
+  box-shadow: hsl(210deg 7% 40%) 0 2px 4px;
+  font-size: 18px;
 }
 
 .loading {
@@ -45,13 +43,13 @@
 }
 
 .text {
-  color: var(--color-white);
+  color: hsl(0, 0%, 100%);
   margin: 0 10px;
   font-size: 16px;
 }
 
 .deleteMission {
-  background-color: var(--color-red-70);
+  background-color: hsl(360deg 100% 70%);
   position: absolute;
   top: -5px;
   right: -5px;

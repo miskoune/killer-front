@@ -1,5 +1,3 @@
-@import '../../assets/styles/variables.module.css';
-
 .content {
   display: flex;
   justify-content: space-between;
@@ -8,10 +6,9 @@
 .avatar {
   align-items: center;
   border-width: 2px;
-  border-color: var(--color-black-80);
-
-  box-shadow: var(--shadow-small);
+  border-color: hsl(210deg 7% 80%);
+  box-shadow: hsl(210deg 7% 40%) 0 2px 4px;
   padding: 30px;
   background-color: bisque;
-  margin-bottom: var(--spacing-medium);
+  margin-bottom: 15px;
 }

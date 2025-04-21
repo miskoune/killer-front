@@ -1,7 +1,5 @@
-@import '../../../../../assets/styles/variables.module.css';  
-
 .content {
-  margin: var(--spacing-large);
+  margin: 20px;
   justify-content: center;
 }
 
@@ -16,8 +14,8 @@
   font-size: 20px;
   font-weight: 500;
   text-align: center;
-  margin-bottom: var(--spacing-small);
-  color: var(--color-black-40);
+  margin-bottom: 10px;
+  color: hsl(210deg 7% 40%);
 }
 
 .player {
@@ -25,10 +23,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-small);
-  border: 1px solid var(--color-black-90);
-  margin-bottom: var(--spacing-small);
-  background-color: var(--color-body-secondary);
+  padding: 10px;
+  border: 1px solid hsl(210deg 7% 90%);
+  margin-bottom: 10px;
+  background-color: hsl(28deg 89% 96%);
   text-align: center;
 }
 

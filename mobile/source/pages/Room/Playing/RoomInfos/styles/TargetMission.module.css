@@ -1,15 +1,13 @@
-@import '../../../../../assets/styles/variables.module.css';  
-
 .mission {
   align-items: center;
   width: 100%;
-  padding: var(--spacing-small);
-  border: 1px solid var(--color-black-90);
-  margin-bottom: var(--spacing-large);
-  background-color: var(--color-body-secondary);
+  padding: 10px;
+  border: 1px solid hsl(210deg 7% 90%);
+  margin-bottom: 20px;
+  background-color: hsl(28deg 89% 96%);
 }
 
 .targetMission {
-  font-size: var(--text-large);
+  font-size: 20px;
   font-weight: 500;
 }

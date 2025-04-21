@@ -1,16 +1,14 @@
-@import '../../../../../assets/styles/variables.module.css';
-
 .content {
   margin-top: 40px;
-  background-color: var(--color-body);
-  padding-left: var(--spacing-large);
-  padding-right: var(--spacing-large);
+  background-color: hsl(200, 13%, 9%);
+  padding-left: 20px;
+  padding-right: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: var(--spacing-medium);
-  border-bottom: 1px solid var(--color-black-90);
-  margin-bottom: var(--spacing-medium);
+  padding-bottom: 15px;
+  border-bottom: 1px solid hsl(210deg 7% 90%);
+  margin-bottom: 15px;
 }
 
 .howToPlayView {
@@ -23,9 +21,9 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: var(--spacing-large) 0;
-  background-color: var(--button-primary);
-  box-shadow: var(--shadow-large);
+  margin: 20px 0;
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: hsl(210deg 7% 40%) 0 2px 4px;
   border-radius: 50px;
   padding: 10px 15px;
 }
@@ -34,22 +32,22 @@
   margin-left: 5px;
   text-align: center;
   font-size: 12px;
-  color: var(--color-white);
+  color: hsl(210deg 7% 30%);
 }
 
 .howToPlayPressed {
-  background-color: var(--button-primary-pressed);
+  background-color: hsl(210deg 7% 20%);
 }
 
 .title {
   font-size: 26px;
   text-align: center;
-  margin-bottom: var(--spacing-medium);
+  margin-bottom: 15px;
 }
 
 .joinRoomCode {
   text-align: center;
-  margin-bottom: var(--spacing-small);
+  margin-bottom: 10px;
 }
 
 .image {

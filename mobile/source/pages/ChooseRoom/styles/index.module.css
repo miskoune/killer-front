@@ -1,17 +1,15 @@
-@import '../../../assets/styles/variables.module.css';
-
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom-width: 1px;
-  border-bottom-color: var(--color-black-90);
+  border-bottom-color: hsl(210, 7%, 10%);
 }
 
 .view {
-  margin: var(--spacing-large);
-  background-color: var(--color-body);
+  margin: 20px;
+  background-color: hsl(200, 13%, 9%);
   display: flex;
   flex: 1;
 }
@@ -33,7 +31,7 @@
 }
 
 .iconPressed {
-  background-color: var(--color-black-80);
+  background-color: hsl(210, 7%, 10%);
 }
 
 .lottie {
