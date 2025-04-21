@@ -129,9 +129,6 @@ importers:
       to-fast-properties:
         specifier: ^4.0.0
         version: 4.0.0
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -250,15 +247,15 @@ importers:
       tailwindcss:
         specifier: ^4.1.4
         version: 4.1.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
       typescript-eslint:
         specifier: ^8.30.1
         version: 8.30.1(eslint@9.25.0(jiti@2.4.2))(typescript@5.8.3)
+      vercel:
+        specifier: ^41.6.0
+        version: 41.6.1(rollup@4.40.0)
       vite:
         specifier: ^6.3.2
         version: 6.3.2(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1)
