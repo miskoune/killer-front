@@ -11,8 +11,6 @@
     "build": "turbo run build"
   },
   "devDependencies": {
-    "prettier": "3.2.5",
-    "turbo": "1.13.0",
     "vercel": "^41.6.0"
   }
 }
