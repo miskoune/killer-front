@@ -1,8 +1,8 @@
-import { useTranslation } from '@killerparty/intl';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Pressable, Text, View } from 'react-native';
 
 import CloseIcon from '../../assets/icons/close.svg';
+import { useTranslation } from '../../translations';
 import { type RootStackParamList } from '../../types/navigation';
 
 import styles from './styles/index.module.css';
