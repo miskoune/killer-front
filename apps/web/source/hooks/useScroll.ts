@@ -4,7 +4,7 @@ export function useScroll(): boolean {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = (): void => {
+    const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
     };

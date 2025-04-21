@@ -1,3 +1,5 @@
+import { type ButtonHTMLAttributes } from 'react';
+
 import Spinner from '@/assets/icons/spinner.svg?react';
 import { classNames, isPromise } from '@/helpers/utils';
 import { useSafeState } from '@/hooks/useSafeState';
@@ -29,7 +31,7 @@ const COLOR_CLASSES = {
   ].join(' '),
 };
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick: () => void | Promise<void>;
   children: string;
   color: 'primary' | 'secondary';

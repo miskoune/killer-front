@@ -45,9 +45,7 @@ function H3({ children, className }: HeadingProps) {
   );
 }
 
-interface BlockquoteProps extends HeadingProps {}
-
-function Blockquote({ children, className }: BlockquoteProps) {
+function Blockquote({ children, className }: HeadingProps) {
   return (
     <blockquote
       className={classNames('italic border-zinc-400 text-slate-400', className)}

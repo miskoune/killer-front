@@ -2,9 +2,7 @@ import { CircleCheck, CircleX } from 'lucide-react';
 import { type ComponentProps } from 'react';
 import { Toaster as Sonner } from 'sonner';
 
-interface ToasterProps extends ComponentProps<typeof Sonner> {}
-
-export function Toaster({ ...props }: ToasterProps) {
+export function Toaster({ ...props }: ComponentProps<typeof Sonner>) {
   return (
     <Sonner
       closeButton
