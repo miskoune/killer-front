@@ -3,12 +3,15 @@ name: Deploying web app
 on:
   push:
     paths:
-      - 'apps/web/**'
+      - 'web/**'
     branches: [main]
 
 jobs:
   web:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web
 
     steps:
       - name: Copy Repository
@@ -23,13 +26,13 @@ jobs:
         run: npm install
 
       - name: Build packages
-        run: npm build
+        run: npm run build
 
       - name: Type checking
-        run: npm tsc --filter=./apps/web
+        run: npm run typecheck
 
       - name: Lint code
-        run: npm lint
+        run: npm run lint
 
       - name: Deploy to production
         run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}

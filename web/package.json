@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "npm lint:js",
     "lint:js": "eslint . --ext .ts,.tsx",
-    "tsc": "tsc",
+    "typecheck": "tsc",
     "clean": "rm -rf node_modules"
   },
   "scripts-info": {
@@ -17,7 +17,7 @@
     "build": "Build the application on production environment",
     "lint": "Run linters",
     "lint:js": "Run JavaScript linter",
-    "tsc": "Run typescript linting on all files",
+    "typecheck": "Run typescript typechecking on all files",
     "clean": "Remove node_modules folder"
   },
   "dependencies": {
