@@ -34,4 +34,4 @@ jobs:
       - name: Deploy to production
         run: |
           npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
-          npx vercel link --yes --token=${{ secrets.VERCEL_TOKEN }} --project killer-front
+          npx vercel link --yes --project killer-front --token=${{ secrets.VERCEL_TOKEN }}
