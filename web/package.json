@@ -6,8 +6,8 @@
   "scripts": {
     "start": "vite serve",
     "build": "vite build",
-    "lint": "npm lint:js",
-    "lint:js": "eslint . --ext .ts,.tsx",
+    "lint": "npm run eslint && npm run typecheck",
+    "eslint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc",
     "clean": "rm -rf node_modules"
   },
@@ -16,7 +16,7 @@
     "start": "Start the application on development environment",
     "build": "Build the application on production environment",
     "lint": "Run linters",
-    "lint:js": "Run JavaScript linter",
+    "eslint": "Run eslint",
     "typecheck": "Run typescript typechecking on all files",
     "clean": "Remove node_modules folder"
   },

@@ -1,6 +1,6 @@
 import eslint from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
-import { defineConfig } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
@@ -8,12 +8,12 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
+  globalIgnores(['**/node_modules/**', '**/dist/**', '**/build/**']),
   eslint.configs.recommended,
   tseslint.configs.recommended,
   importPlugin.flatConfigs.recommended,
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    ignores: ['**/node_modules/**', '**/dist/**', '**/build/**'],
     plugins: { react, prettier },
     languageOptions: {
       globals: globals.browser,
