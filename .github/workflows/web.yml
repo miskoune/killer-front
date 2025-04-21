@@ -19,22 +19,17 @@ jobs:
         with:
           node-version: 22
 
-      - name: Installs pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10.x.x
-
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Build packages
-        run: pnpm build
+        run: npm build
 
       - name: Type checking
-        run: pnpm tsc --filter=./apps/web
+        run: npm tsc --filter=./apps/web
 
       - name: Lint code
-        run: pnpm lint
+        run: npm lint
 
       - name: Deploy to production
         run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}

@@ -13,7 +13,7 @@ Install dependencies by using pnpm:
 _(Be sure to be in a correct node version (at least >= 18.18.0) before using pnpm)_
 
 ```bash
-pnpm install
+npm install
 ```
 
 ## How to configure it
@@ -33,7 +33,7 @@ The **STAGING API URL** to use inside your **.env** file is: https://killer-api-
 Launch the Web Application by using the following command:
 
 ```bash
-pnpm start
+npm start
 ```
 
 And voilà!
