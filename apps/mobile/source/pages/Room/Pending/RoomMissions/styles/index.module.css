@@ -1,4 +1,4 @@
-@import '@killerparty/ui/assets/styles/variables.module.css';
+@import '../../../../../assets/styles/variables.module.css';    
 
 .container {
   margin: 50px 20px;

@@ -1,7 +1,0 @@
-{
-  "name": "@killerparty/ui",
-  "description": "UI Kit for Killer Party",
-  "scripts": {
-    "clean": "rm -rf dist"
-  }
-}

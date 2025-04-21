@@ -1,4 +1,5 @@
-import { API_URL, MERCURE_URL } from '@killerparty/config';
+const API_URL = 'https://api.killerparty.app';
+const MERCURE_URL = 'https://api.killerparty.app/.well-known/mercure';
 
 /**
  * --- ENDPOINTS ---
