@@ -1,8 +1,10 @@
-import { useSession, useUpdatePlayer } from '@killerparty/webservices';
 import { useNavigation } from '@react-navigation/native';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import LottieView from 'lottie-react-native';
 import { View } from 'react-native';
+
+import { useSession } from '../../../../apis/player/queries';
+import { useUpdatePlayer } from '../../../../apis/player/mutations';
 
 import { Button } from '../../../../components/Button';
 import { Header } from '../../../../components/Header';

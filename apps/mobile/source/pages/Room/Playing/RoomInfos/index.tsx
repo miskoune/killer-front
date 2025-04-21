@@ -1,6 +1,7 @@
-import { useSession } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ScrollView, Text, View } from 'react-native';
+
+import { useSession } from '../../../../apis/player/queries';
 
 import { CurrentAvatar } from '../../../../components/CurrentAvatar';
 import { RoomGuard } from '../../../../components/RoomGuard';

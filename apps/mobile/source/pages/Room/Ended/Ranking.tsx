@@ -1,6 +1,7 @@
-import { type Room } from '@killerparty/webservices';
 import React from 'react';
 import { View, Text, Image } from 'react-native';
+
+import { Room } from '../../../apis/room/types';
 
 import { avatarsList } from '../../../helpers/avatars';
 import { useTranslation } from '../../../translations';

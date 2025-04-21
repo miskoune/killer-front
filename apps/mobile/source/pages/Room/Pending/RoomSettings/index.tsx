@@ -1,8 +1,10 @@
-import { useSession, useUpdatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import LottieView from 'lottie-react-native';
 import * as React from 'react';
 import { type TextInput, View, ScrollView } from 'react-native';
+
+import { useSession } from '../../../../apis/player/queries';
+import { useUpdatePlayer } from '../../../../apis/player/mutations';
 
 import { Button } from '../../../../components/Button';
 import { Input } from '../../../../components/Input';

@@ -1,5 +1,6 @@
-import { type Session } from '@killerparty/webservices';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { type Session } from '../apis/player/types';
 
 import { ROOM_PAGE_NAME } from '../constants/routes';
 import { ChooseAvatar } from '../pages/ChooseAvatar';

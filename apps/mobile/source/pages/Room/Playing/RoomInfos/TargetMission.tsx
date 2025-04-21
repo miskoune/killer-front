@@ -1,5 +1,6 @@
-import { useTranslation } from '@killerparty/intl';
-import { useSession } from '@killerparty/webservices';
+import { useSession } from '../../../../apis/player/queries';
+import { useTranslation } from '../../../../translations';
+
 import { View, Text } from 'react-native';
 
 import styles from './styles/TargetMission.module.css';

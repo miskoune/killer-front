@@ -1,4 +1,3 @@
-import { useUpdatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { View } from 'react-native';
@@ -10,6 +9,7 @@ import { getRandomAvatar } from '../../helpers/avatars';
 import { type RootStackParamList } from '../../types/navigation';
 
 import styles from './styles/index.module.css';
+import { useUpdatePlayer } from '../../apis/player/mutations';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ChooseAvatar'>;
 

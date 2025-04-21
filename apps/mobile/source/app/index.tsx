@@ -1,14 +1,12 @@
-import {
-  WebServicesProvider,
-  getSessionRequest,
-  type Session,
-} from '@killerparty/webservices';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { getSessionRequest } from '../apis/player/requests';
+import { type Session } from '../apis/player/types';
+import { WebServicesProvider } from '../apis/provider';
 import { setupIntl } from '../translations';
 
 import { Routes } from './routes';

@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./source/assets/icon.png",
     "userInterfaceStyle": "light",
+    "jsEngine": "jsc",
     "splash": {
       "image": "./source/assets/splash.png",
       "resizeMode": "contain",

@@ -1,7 +1,9 @@
-import { useRoom, useSession } from '@killerparty/webservices';
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+
+import { useRoom } from '../../../../apis/room/queries';
+import { useSession } from '../../../../apis/player/queries';
 
 import { type TranslationKey, useTranslation } from '../../../../translations';
 import { type StackNavigation } from '../../../../types/navigation';

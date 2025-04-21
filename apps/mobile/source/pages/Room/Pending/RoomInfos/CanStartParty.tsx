@@ -1,6 +1,7 @@
-import { useRoom } from '@killerparty/webservices';
 import React from 'react';
 import { View, Text } from 'react-native';
+
+import { useRoom } from '../../../../apis/room/queries';
 
 import Checked from '../../../../assets/icons/checked.svg';
 import Unchecked from '../../../../assets/icons/unchecked.svg';

@@ -1,4 +1,4 @@
-import { useRoom } from '@killerparty/webservices';
+import { useRoom } from '../apis/room/queries';
 import { useNavigation } from '@react-navigation/native';
 import { Text, TouchableOpacity } from 'react-native';
 

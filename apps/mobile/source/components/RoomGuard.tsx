@@ -1,9 +1,3 @@
-import {
-  type Room,
-  useRoom,
-  useSession,
-  ROOM_TOPIC,
-} from '@killerparty/webservices';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import EventSource from 'react-native-sse';
@@ -13,6 +7,10 @@ import {
   type RootStackParamList,
   type StackNavigation,
 } from '../types/navigation';
+import { useRoom } from '../apis/room/queries';
+import { useSession } from '../apis/player/queries';
+import { ROOM_TOPIC } from '../apis/constants';
+import { Room } from '../apis/room/types';
 
 interface Props {
   children: JSX.Element;

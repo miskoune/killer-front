@@ -1,10 +1,12 @@
-import { useTranslation } from '@killerparty/intl';
-import { useSession, useUpdatePlayer } from '@killerparty/webservices';
+import { useSession } from '../../../../apis/player/queries';
+import { useUpdatePlayer } from '../../../../apis/player/mutations';
+
 import { View, Text } from 'react-native';
 
 import { Button } from '../../../../components/Button';
 
 import styles from './styles/ConfirmKillButton.module.css';
+import { useTranslation } from '../../../../translations';
 
 export function ConfirmKillButton(): JSX.Element {
   const { t } = useTranslation();

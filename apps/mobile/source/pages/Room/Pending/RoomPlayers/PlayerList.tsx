@@ -1,8 +1,10 @@
-import { useRoom, useSession } from '@killerparty/webservices';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import { useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+
+import { useRoom } from '../../../../apis/room/queries';
+import { useSession } from '../../../../apis/player/queries';
 
 import Checked from '../../../../assets/icons/checked.svg';
 import Dead from '../../../../assets/icons/dead.svg';

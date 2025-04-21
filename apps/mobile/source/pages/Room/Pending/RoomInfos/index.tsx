@@ -1,7 +1,8 @@
-import { useSession } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
+
+import { useSession } from '../../../../apis/player/queries';
 
 import InfosIcon from '../../../../assets/icons/infos.svg';
 import KillerParty from '../../../../assets/images/killerparty.svg';

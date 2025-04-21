@@ -1,7 +1,9 @@
-import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
+
+import { useRoom } from '../../../apis/room/queries';
+import { useUpdatePlayer } from '../../../apis/player/mutations';
 
 import { Button } from '../../../components/Button';
 import { CurrentAvatar } from '../../../components/CurrentAvatar';
@@ -11,6 +13,7 @@ import { type RootStackParamList } from '../../../types/navigation';
 
 import { Ranking } from './Ranking';
 import styles from './styles/index.module.css';
+import { useSession } from '../../../apis/player/queries';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'EndedRoom'>;
 

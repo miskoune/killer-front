@@ -1,5 +1,7 @@
-import { useRoom, useStartParty } from '@killerparty/webservices';
 import * as React from 'react';
+
+import { useRoom } from '../../../../apis/room/queries';
+import { useStartParty } from '../../../../apis/room/mutations';
 
 import { Button } from '../../../../components/Button';
 import { useTranslation } from '../../../../translations';

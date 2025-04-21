@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { useRoom, useSession } from '@killerparty/webservices';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { useRoom } from '../../../apis/room/queries';
+import { useSession } from '../../../apis/player/queries';
 
 import InfosIcon from '../../../assets/icons/infos.svg';
 import MissionIcon from '../../../assets/icons/mission.svg';

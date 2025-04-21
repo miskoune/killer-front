@@ -1,6 +1,8 @@
-import { useDeleteMission, useSession } from '@killerparty/webservices';
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+
+import { useSession } from '../../../../apis/player/queries';
+import { useDeleteMission } from '../../../../apis/mission/mutations';
 
 import Delete from '../../../../assets/icons/close-small.svg';
 

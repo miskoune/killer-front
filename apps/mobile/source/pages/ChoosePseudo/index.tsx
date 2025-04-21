@@ -1,9 +1,9 @@
-import { useCreatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import LottieView from 'lottie-react-native';
 import { createRef, useState } from 'react';
 import { View, type TextInput, TouchableWithoutFeedback } from 'react-native';
 
+import { useCreatePlayer } from '../../apis/player/mutations';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';

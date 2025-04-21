@@ -1,8 +1,9 @@
-import { useRoom } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import LottieView from 'lottie-react-native';
 import * as React from 'react';
 import { Text, ScrollView, View } from 'react-native';
+
+import { useRoom } from '../../../../apis/room/queries';
 
 import { RoomGuard } from '../../../../components/RoomGuard';
 import { useTranslation } from '../../../../translations';
