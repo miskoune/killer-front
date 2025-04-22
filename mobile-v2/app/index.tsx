@@ -3,8 +3,10 @@ import { Button } from '@/components/Button';
 import { useTranslation } from '@/translations';
 import React from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
+import InfosIcon from '@/assets/icons/infos.svg';
+import KillerParty from '@/assets/images/killerparty.svg';
 
-export default function Home(): JSX.Element {
+export default function Index(): JSX.Element {
   const { t } = useTranslation();
 
   return (
@@ -12,12 +14,14 @@ export default function Home(): JSX.Element {
       <FadeInView style={styles.fadeInView}>
         <View>
           <Pressable onPress={() => {}}>
-            {/* <InfosIcon height={14} width={14} /> */}
+            <InfosIcon height={14} width={14} />
             <Text>Régles du jeu</Text>
           </Pressable>
         </View>
         <View>
-          <View>{/* <KillerParty height={200} width={200} /> */}</View>
+          <View>
+            <KillerParty height={200} width={200} />
+          </View>
           <View>
             <Text>KILLER PARTY</Text>
           </View>
