@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 
 import InfosIcon from '@/assets/icons/infos.svg';
@@ -9,12 +10,14 @@ import { useTranslation } from '@/translations';
 export default function Index(): JSX.Element {
   const { t } = useTranslation();
 
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <FadeInView style={styles.fadeInView}>
         <View style={styles.howToPlayView}>
           <Pressable
-            onPress={() => {}}
+            onPress={() => router.push('/rules')}
             style={({ pressed }) => [
               styles.howToPlay,
               pressed && styles.howToPlayPressed,
@@ -33,9 +36,7 @@ export default function Index(): JSX.Element {
             <KillerParty height={200} width={200} />
           </View>
           <Text style={styles.title}>KILLER PARTY</Text>
-          <Text style={styles.headline}>
-            Ça vous tente un petit meurtre.. entre amis ?
-          </Text>
+          <Text style={styles.headline}>{t('home.title')}</Text>
         </View>
         <View style={styles.actions}>
           <Button

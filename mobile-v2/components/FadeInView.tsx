@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { type PropsWithChildren, useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 
 interface Props extends PropsWithChildren {
@@ -11,7 +11,7 @@ export function FadeInView({ style, children }: Props) {
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 2000,
+      duration: 500,
       useNativeDriver: true,
     }).start();
   }, [fadeAnim]);

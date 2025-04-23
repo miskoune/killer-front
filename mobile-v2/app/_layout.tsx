@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 
 import { setupIntl } from '@/translations';
 
-import 'react-native-reanimated';
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -17,5 +15,10 @@ export default function RootLayout() {
     SplashScreen.hideAsync();
   }, []);
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="rules" options={{ presentation: 'modal' }} />
+    </Stack>
+  );
 }
