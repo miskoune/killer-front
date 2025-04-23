@@ -1,7 +1,11 @@
 import { useRef, useState } from 'react';
-import { ActivityIndicator, Animated, Pressable, Text } from 'react-native';
-
-/* import styles from './styles/Button.module.css'; */
+import {
+  ActivityIndicator,
+  Animated,
+  Pressable,
+  StyleSheet,
+  Text,
+} from 'react-native';
 
 interface Props {
   onPress: () => void | Promise<void>;
@@ -21,7 +25,7 @@ export function Button({
   const [isLoading, setLoading] = useState(false);
   const focusAnim = useRef(new Animated.Value(0)).current;
 
-  const handlePress = async (): Promise<void> => {
+  const handlePress = async () => {
     if (isAsyncAction) {
       setLoading(true);
       return (onPress() as Promise<void>)?.finally(() => setLoading(false));
@@ -30,7 +34,7 @@ export function Button({
     return onPress();
   };
 
-  const handlePressIn = (): void => {
+  const handlePressIn = () => {
     Animated.timing(focusAnim, {
       toValue: 1,
       duration: 300,
@@ -38,7 +42,7 @@ export function Button({
     }).start();
   };
 
-  const handlePressOut = (): void => {
+  const handlePressOut = () => {
     Animated.timing(focusAnim, {
       toValue: 0,
       duration: 300,
@@ -53,8 +57,15 @@ export function Button({
   });
 
   return (
-    <Animated.View>
+    <Animated.View
+      style={[
+        styles.content,
+        (disabled || isLoading) && styles.disabled,
+        { backgroundColor },
+      ]}
+    >
       <Pressable
+        style={styles.button}
         onPress={handlePress}
         disabled={disabled || isLoading}
         onPressIn={handlePressIn}
@@ -62,12 +73,39 @@ export function Button({
       >
         {isLoading ? (
           <Animated.View>
-            <ActivityIndicator />
+            <ActivityIndicator color={styles.text.color} />
           </Animated.View>
         ) : (
-          <Text>{text}</Text>
+          <Text style={styles.text}>{text}</Text>
         )}
       </Pressable>
     </Animated.View>
   );
 }
+
+const styles = StyleSheet.create({
+  content: {
+    padding: 15,
+    borderRadius: 5,
+    shadowColor: 'hsl(210, 7%, 40%)',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 5,
+    marginBottom: 10,
+  },
+  button: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'hsl(255, 100%, 100%)',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+});

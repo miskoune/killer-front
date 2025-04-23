@@ -12,22 +12,32 @@ export default function Index(): JSX.Element {
   return (
     <View style={styles.container}>
       <FadeInView style={styles.fadeInView}>
-        <View>
-          <Pressable onPress={() => {}}>
-            <InfosIcon height={14} width={14} />
-            <Text>Régles du jeu</Text>
+        <View style={styles.howToPlayView}>
+          <Pressable
+            onPress={() => {}}
+            style={({ pressed }) => [
+              styles.howToPlay,
+              pressed && styles.howToPlayPressed,
+            ]}
+          >
+            <InfosIcon
+              height={14}
+              width={14}
+              color={styles.howToPlayText.color}
+            />
+            <Text style={styles.howToPlayText}>Règles du jeu</Text>
           </Pressable>
         </View>
-        <View>
-          <View>
+        <View style={styles.header}>
+          <View style={styles.image}>
             <KillerParty height={200} width={200} />
           </View>
-          <View>
-            <Text>KILLER PARTY</Text>
-          </View>
-          <Text>Ça vous tente un petit meurtre.. entre amis ?</Text>
+          <Text style={styles.title}>KILLER PARTY</Text>
+          <Text style={styles.headline}>
+            Ça vous tente un petit meurtre.. entre amis ?
+          </Text>
         </View>
-        <View>
+        <View style={styles.actions}>
           <Button
             color="primary"
             onPress={() => {}}
@@ -45,6 +55,75 @@ export default function Index(): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  fadeInView: { flex: 1 },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  fadeInView: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  howToPlayView: {
+    alignItems: 'flex-end',
+  },
+  howToPlay: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 70,
+    marginRight: 20,
+    backgroundColor: 'hsl(210, 7%, 20%)',
+    shadowColor: 'hsl(210, 7%, 40%)',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5,
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  howToPlayPressed: {
+    backgroundColor: 'hsl(210, 7%, 40%)',
+  },
+  howToPlayText: {
+    marginLeft: 5,
+    textAlign: 'center',
+    fontSize: 12,
+    color: 'hsl(255, 100%, 100%)',
+  },
+  header: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  image: {
+    marginBottom: -30,
+  },
+  banner: {
+    alignSelf: 'center',
+    marginBottom: 10,
+    backgroundColor: 'bisque',
+    shadowColor: 'hsl(210, 7%, 40%)',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 5,
+    padding: 10,
+    borderRadius: 5,
+  },
+  title: {
+    fontSize: 35,
+    fontWeight: '600',
+    color: 'hsl(210, 7%, 30%)',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  headline: {
+    textAlign: 'center',
+    color: 'hsl(210, 7%, 40%)',
+    marginTop: 5,
+  },
+  actions: {
+    margin: 20,
+  },
 });
