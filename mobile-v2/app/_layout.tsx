@@ -1,7 +1,9 @@
-import { setupIntl } from '@/translations';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
+
+import { setupIntl } from '@/translations';
+
 import 'react-native-reanimated';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -15,9 +17,5 @@ export default function RootLayout() {
     SplashScreen.hideAsync();
   }, []);
 
-  return (
-    <Fragment>
-      <Stack screenOptions={{ headerShown: false }} />
-    </Fragment>
-  );
+  return <Stack screenOptions={{ headerShown: false }} />;
 }

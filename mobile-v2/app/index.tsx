@@ -1,10 +1,10 @@
-import { FadeInView } from '@/components/FadeInView';
-import { Button } from '@/components/Button';
-import { useTranslation } from '@/translations';
-import React from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
+
 import InfosIcon from '@/assets/icons/infos.svg';
 import KillerParty from '@/assets/images/killerparty.svg';
+import { Button } from '@/components/Button';
+import { FadeInView } from '@/components/FadeInView';
+import { useTranslation } from '@/translations';
 
 export default function Index(): JSX.Element {
   const { t } = useTranslation();
