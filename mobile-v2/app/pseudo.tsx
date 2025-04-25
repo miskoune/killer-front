@@ -1,5 +1,5 @@
 import LottieView from 'lottie-react-native';
-import { createRef, useState } from 'react';
+import { createRef } from 'react';
 import {
   View,
   type TextInput,
@@ -13,10 +13,12 @@ import {
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { Input } from '@/components/Input';
+import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
+import { usePlayerStore } from '@/store/player';
 
 export default function Pseudo() {
-  const [pseudo, setPseudo] = useState('');
-
+  const player = usePlayerStore(selectPlayer);
+  const updatePlayer = usePlayerStore(selectUpdatePlayer);
   const inputRef = createRef<TextInput>();
 
   const handleNextPage = async (): Promise<void> => {
@@ -48,11 +50,11 @@ export default function Pseudo() {
             <Input
               innerRef={inputRef}
               label="Pseudo"
-              value={pseudo}
-              setValue={setPseudo}
+              value={player?.name ?? ''}
+              setValue={(name) => updatePlayer({ name })}
             />
             <Button
-              disabled={!pseudo}
+              disabled={!player?.name}
               color="primary"
               onPress={handleNextPage}
               text="Suivant"

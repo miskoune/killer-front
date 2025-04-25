@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, TextInput, View, StyleSheet, Pressable } from 'react-native';
+import { Animated, TextInput, StyleSheet, Pressable } from 'react-native';
 
 interface Props {
   value: string;
