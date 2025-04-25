@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, TextInput, View, StyleSheet } from 'react-native';
+import { Animated, TextInput, View, StyleSheet, Pressable } from 'react-native';
 
 interface Props {
   value: string;
@@ -16,6 +16,20 @@ export function Input({
 }: Props): JSX.Element {
   const focusAnim = React.useRef(new Animated.Value(0)).current;
   const [isFocused, setFocused] = React.useState(false);
+  const textInputRef = React.useRef<TextInput>(null);
+
+  const handleFocus = () => {
+    setFocused(true);
+
+    // Ensure the input is focused with a slight delay to make sure the animation has started
+    setTimeout(() => {
+      if (innerRef?.current) {
+        innerRef.current.focus();
+      } else if (textInputRef.current) {
+        textInputRef.current.focus();
+      }
+    }, 50);
+  };
 
   React.useEffect(() => {
     Animated.timing(focusAnim, {
@@ -26,18 +40,21 @@ export function Input({
   }, [focusAnim, isFocused, value]);
 
   return (
-    <View style={styles.content}>
+    <Pressable style={styles.content} onPress={handleFocus}>
       <Animated.View
-        style={{
-          transform: [
-            {
-              translateY: focusAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [30, 0],
-              }),
-            },
-          ],
-        }}
+        style={[
+          styles.labelContainer,
+          {
+            transform: [
+              {
+                translateY: focusAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [20, 5],
+                }),
+              },
+            ],
+          },
+        ]}
       >
         <Animated.Text
           style={[
@@ -45,25 +62,20 @@ export function Input({
             {
               fontSize: focusAnim.interpolate({
                 inputRange: [0, 1],
-                outputRange: [16, 14],
-              }),
-              color: focusAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['#8A8EA8', '#C5C7D5'],
+                outputRange: [16, 12],
               }),
             },
+            isFocused && { visibility: 'hidden' },
           ]}
         >
           {label}
         </Animated.Text>
       </Animated.View>
       <TextInput
-        ref={innerRef as React.LegacyRef<TextInput>}
+        ref={textInputRef}
         style={[
           styles.input,
-          {
-            borderBottomColor: isFocused || value ? '#8A8EA8' : '#C5C7D5',
-          },
+          (isFocused || value) && { borderColor: '#ECE9FE', borderWidth: 2 },
         ]}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
@@ -72,27 +84,31 @@ export function Input({
         clearButtonMode="always"
         enterKeyHint="done"
         keyboardAppearance="dark"
-        autoCorrect={false}
-        spellCheck={false}
+        spellCheck={true}
       />
-    </View>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    display: 'flex',
     flex: 1,
+    position: 'relative',
+  },
+  labelContainer: {
+    left: 20,
+    zIndex: 1,
+    position: 'absolute',
   },
   label: {
-    fontWeight: '600',
+    fontWeight: '400',
+    color: '#8E8C92',
+    backgroundColor: 'transparent',
   },
   input: {
-    paddingVertical: 10,
-    paddingHorizontal: 0,
-    marginBottom: 15,
-    borderBottomWidth: 2,
-    fontWeight: '500',
-    fontSize: 16,
+    backgroundColor: '#F9F8FE',
+    borderRadius: 10,
+    fontSize: 14,
+    padding: 20,
   },
 });

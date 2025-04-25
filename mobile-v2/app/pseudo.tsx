@@ -5,24 +5,25 @@ import {
   type TextInput,
   TouchableWithoutFeedback,
   StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { Input } from '@/components/Input';
-import { useCreatePlayer } from '@/requests/mutations';
 
 export default function Pseudo() {
   const [pseudo, setPseudo] = useState('');
-  const { mutateAsync: createPlayer } = useCreatePlayer();
+
   const inputRef = createRef<TextInput>();
 
   const handleNextPage = async (): Promise<void> => {
-    const { id: playerId } = await createPlayer({
+    /* const { id: playerId } = await createPlayer({
       name: pseudo,
-      avatar: 'avenger',
-    });
-
+      avatar: 'pirate',
+    }); */
     /*  navigation.navigate('ChooseAvatar', {
       playerId,
       shouldCreateRoom: route.params?.shouldCreateRoom ?? false,
@@ -30,49 +31,62 @@ export default function Pseudo() {
   };
 
   return (
-    <View style={styles.content}>
-      <Header shouldHandlePreviousPage={false} title="Choisir un pseudo" />
-      <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
-        <View style={styles.view}>
-          <LottieView
-            source={require('../assets/lotties/players.json')}
-            autoPlay
-            style={styles.lottie}
-            loop
-          />
-          <Input
-            innerRef={inputRef}
-            label="Saisissez le pseudo de votre joueur"
-            value={pseudo}
-            setValue={setPseudo}
-          />
-          <Button
-            disabled={!pseudo}
-            color="primary"
-            onPress={handleNextPage}
-            text="Suivant"
-            isAsyncAction
-          />
-        </View>
-      </TouchableWithoutFeedback>
-    </View>
+    <KeyboardAvoidingView
+      style={styles.content}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
+        <Header shouldHandlePreviousPage={false} title="Choisir un pseudo" />
+        <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
+          <View style={styles.view}>
+            <LottieView
+              source={require('@/assets/lotties/players.json')}
+              autoPlay
+              style={styles.lottie}
+              loop
+            />
+            <Input
+              innerRef={inputRef}
+              label="Pseudo"
+              value={pseudo}
+              setValue={setPseudo}
+            />
+            <Button
+              disabled={!pseudo}
+              color="primary"
+              onPress={handleNextPage}
+              text="Suivant"
+              isAsyncAction
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   view: {
-    margin: 20,
     display: 'flex',
     flex: 1,
+    backgroundColor: '#fff',
   },
-  content: {
-    marginTop: 40,
-    flex: 1,
+  scrollViewContent: {
+    flexGrow: 1,
+    padding: 20,
+    marginBottom: 40,
+  },
+  scrollViewContentKeyboardShown: {
+    marginBottom: 100,
   },
   lottie: {
-    width: 300,
-    height: 300,
-    margin: 0,
-    marginTop: -20,
+    marginTop: 20,
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
   },
 });

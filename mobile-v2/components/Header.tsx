@@ -32,7 +32,7 @@ export function Header({
 
       <Text style={styles.title}>{title}</Text>
       <Pressable
-        onPress={() => router.push('/')}
+        onPress={() => router.dismiss()}
         style={({ pressed }) => [styles.icon, pressed && styles.iconPressed]}
       >
         <CloseIcon />
@@ -46,15 +46,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   title: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: 20,
+    fontWeight: '600',
   },
   icon: {
-    margin: 10,
-    padding: 10,
     borderRadius: 10,
   },
   iconPressed: {

@@ -91,5 +91,6 @@ module.exports = {
         variables: false, // ✅ allow variables (styles) to be “hoisted”
       },
     ],
+    '@typescript-eslint/no-require-imports': 'off',
   },
 };
