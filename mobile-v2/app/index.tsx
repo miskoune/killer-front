@@ -41,12 +41,12 @@ export default function Index(): JSX.Element {
         <View style={styles.actions}>
           <Button
             color="primary"
-            onPress={() => {}}
+            onPress={() => router.push('/pseudo')}
             text={t('home.create.room.button')}
           />
           <Button
             color="secondary"
-            onPress={() => {}}
+            onPress={() => router.push('/pseudo')}
             text={t('home.join.room')}
           />
         </View>

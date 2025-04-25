@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 import { setupIntl } from '@/translations';
 
+import { Providers } from './providers';
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -16,9 +18,12 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="rules" options={{ presentation: 'modal' }} />
-    </Stack>
+    <Providers>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="rules" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="pseudo" />
+      </Stack>
+    </Providers>
   );
 }

@@ -1,0 +1,9 @@
+export type ErrorCode =
+  | 'SERVER_ERROR'
+  | 'FORBIDDEN'
+  | 'NOT_FOUND'
+  | 'INVALID_TOKEN'
+  | 'EXPIRED_TOKEN'
+  | 'TOKEN_NOT_FOUND'
+  | 'ALREADY_EXIST'
+  | 'MISSION_TOO_SHORT_CONTENT';
