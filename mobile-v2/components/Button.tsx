@@ -26,18 +26,28 @@ export function Button({
   const focusAnim = useRef(new Animated.Value(0)).current;
 
   const handlePress = async () => {
-    if (isAsyncAction) {
-      setLoading(true);
-      return (onPress() as Promise<void>)?.finally(() => setLoading(false));
-    }
+    // Prevent multiple presses
 
-    return onPress();
+    try {
+      if (isAsyncAction) {
+        setLoading(true);
+        await onPress();
+      } else {
+        onPress();
+      }
+    } catch (error) {
+      console.error('Button press error:', error);
+    } finally {
+      if (isAsyncAction) {
+        setLoading(false);
+      }
+    }
   };
 
   const handlePressIn = () => {
     Animated.timing(focusAnim, {
       toValue: 1,
-      duration: 300,
+      duration: 150,
       useNativeDriver: false,
     }).start();
   };
@@ -45,7 +55,7 @@ export function Button({
   const handlePressOut = () => {
     Animated.timing(focusAnim, {
       toValue: 0,
-      duration: 300,
+      duration: 150,
       useNativeDriver: false,
     }).start();
   };
@@ -70,6 +80,8 @@ export function Button({
         disabled={disabled || isLoading}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} // Increase touch area
+        pressRetentionOffset={{ top: 10, bottom: 10, left: 10, right: 10 }}
       >
         {isLoading ? (
           <Animated.View>

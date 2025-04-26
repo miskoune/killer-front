@@ -41,12 +41,12 @@ export default function Index(): JSX.Element {
         <View style={styles.actions}>
           <Button
             color="primary"
-            onPress={() => router.push('/pseudo')}
+            onPress={() => router.push('/onboarding/pseudo')}
             text={t('home.create.room.button')}
           />
           <Button
             color="secondary"
-            onPress={() => router.push('/pseudo')}
+            onPress={() => router.push('/onboarding/pseudo')}
             text={t('home.join.room')}
           />
         </View>
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 70,
     marginRight: 20,
     backgroundColor: 'hsl(210, 7%, 20%)',
     shadowColor: 'hsl(210, 7%, 40%)',

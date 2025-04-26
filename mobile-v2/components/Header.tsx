@@ -5,35 +5,33 @@ import ArrowLeft from '../assets/icons/arrowLeft.svg';
 import CloseIcon from '../assets/icons/close.svg';
 
 interface Props {
-  shouldHandlePreviousPage: boolean;
   title: string;
 }
 
-export function Header({
-  shouldHandlePreviousPage,
-  title,
-}: Props): JSX.Element {
+export function Header({ title }: Props) {
   const router = useRouter();
 
   return (
     <View style={styles.header}>
       <Pressable
-        onPress={() => {
-          if (shouldHandlePreviousPage) router.back();
-        }}
+        onPress={() => router.back()}
         style={({ pressed }) => [
           styles.icon,
+          styles.iconBackground,
           pressed && styles.iconPressed,
-          !shouldHandlePreviousPage && styles.deactivateIcon,
         ]}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
       >
         <ArrowLeft />
       </Pressable>
-
       <Text style={styles.title}>{title}</Text>
       <Pressable
         onPress={() => router.dismiss()}
-        style={({ pressed }) => [styles.icon, pressed && styles.iconPressed]}
+        style={({ pressed }) => [
+          styles.icon,
+          styles.crossOut,
+          pressed && styles.iconPressed,
+        ]}
       >
         <CloseIcon />
       </Pressable>
@@ -46,6 +44,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   title: {
     fontSize: 20,
@@ -54,8 +53,15 @@ const styles = StyleSheet.create({
   icon: {
     borderRadius: 10,
   },
+  crossOut: {
+    opacity: 0,
+  },
   iconPressed: {
-    backgroundColor: 'hsl(210deg 7% 80%)',
+    backgroundColor: '#DCD9E2',
+  },
+  iconBackground: {
+    backgroundColor: '#F8F5FF',
+    padding: 10,
   },
   deactivateIcon: {
     opacity: 0,

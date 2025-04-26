@@ -84,7 +84,6 @@ export function Input({
         clearButtonMode="always"
         enterKeyHint="done"
         keyboardAppearance="dark"
-        spellCheck={true}
       />
     </Pressable>
   );
@@ -110,5 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 14,
     padding: 20,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
 });

@@ -1,3 +1,5 @@
+import { useKeyboard } from '@react-native-community/hooks';
+import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import { createRef } from 'react';
 import {
@@ -20,27 +22,18 @@ export default function Pseudo() {
   const player = usePlayerStore(selectPlayer);
   const updatePlayer = usePlayerStore(selectUpdatePlayer);
   const inputRef = createRef<TextInput>();
-
-  const handleNextPage = async (): Promise<void> => {
-    /* const { id: playerId } = await createPlayer({
-      name: pseudo,
-      avatar: 'pirate',
-    }); */
-    /*  navigation.navigate('ChooseAvatar', {
-      playerId,
-      shouldCreateRoom: route.params?.shouldCreateRoom ?? false,
-    }); */
-  };
+  const router = useRouter();
+  const { keyboardShown } = useKeyboard();
 
   return (
     <KeyboardAvoidingView
-      style={styles.content}
+      style={[styles.content]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
-        <Header shouldHandlePreviousPage={false} title="Choisir un pseudo" />
+        <Header title="Choisir un pseudo" />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
-          <View style={styles.view}>
+          <View style={[styles.view]}>
             <LottieView
               source={require('@/assets/lotties/players.json')}
               autoPlay
@@ -56,9 +49,8 @@ export default function Pseudo() {
             <Button
               disabled={!player?.name}
               color="primary"
-              onPress={handleNextPage}
+              onPress={() => router.push('/onboarding/avatar')}
               text="Suivant"
-              isAsyncAction
             />
           </View>
         </TouchableWithoutFeedback>
@@ -79,11 +71,10 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 1,
-    padding: 20,
-    marginBottom: 40,
+    paddingTop: 0,
   },
-  scrollViewContentKeyboardShown: {
-    marginBottom: 100,
+  inputContainer: {
+    gap: 20,
   },
   lottie: {
     marginTop: 20,
