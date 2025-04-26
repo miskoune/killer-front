@@ -98,13 +98,11 @@ export function Button({
 const styles = StyleSheet.create({
   content: {
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 20,
     shadowColor: 'hsl(210, 7%, 40%)',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 2 },
+    shadowRadius: 6,
     elevation: 5,
-    marginBottom: 10,
   },
   button: {
     width: '100%',
@@ -113,8 +111,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: 'hsl(255, 100%, 100%)',
+    color: '#fff',
     fontSize: 16,
+    fontWeight: '600',
     textAlign: 'center',
   },
   disabled: {

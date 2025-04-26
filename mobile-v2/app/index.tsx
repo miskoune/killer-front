@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import InfosIcon from '@/assets/icons/infos.svg';
 import KillerParty from '@/assets/images/killerparty.svg';
@@ -13,7 +14,7 @@ export default function Index(): JSX.Element {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FadeInView style={styles.fadeInView}>
         <View style={styles.howToPlayView}>
           <Pressable
@@ -51,7 +52,7 @@ export default function Index(): JSX.Element {
           />
         </View>
       </FadeInView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: 20,
   },
   fadeInView: {
     flex: 1,
@@ -125,5 +127,6 @@ const styles = StyleSheet.create({
   },
   actions: {
     margin: 20,
+    gap: 10,
   },
 });

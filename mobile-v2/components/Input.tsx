@@ -101,11 +101,11 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: '400',
-    color: '#8E8C92',
+    opacity: 0.6,
     backgroundColor: 'transparent',
   },
   input: {
-    backgroundColor: '#F9F8FE',
+    backgroundColor: '#F1EEFE',
     borderRadius: 10,
     fontSize: 14,
     padding: 20,

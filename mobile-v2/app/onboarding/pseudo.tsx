@@ -11,6 +11,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
@@ -23,12 +24,13 @@ export default function Pseudo() {
   const updatePlayer = usePlayerStore(selectUpdatePlayer);
   const inputRef = createRef<TextInput>();
   const router = useRouter();
-  const { keyboardShown } = useKeyboard();
+  const insets = useSafeAreaInsets();
 
   return (
     <KeyboardAvoidingView
       style={[styles.content]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}
     >
       <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
         <Header title="Choisir un pseudo" />
@@ -46,15 +48,17 @@ export default function Pseudo() {
               value={player?.name ?? ''}
               setValue={(name) => updatePlayer({ name })}
             />
-            <Button
-              disabled={!player?.name}
-              color="primary"
-              onPress={() => router.push('/onboarding/avatar')}
-              text="Suivant"
-            />
           </View>
         </TouchableWithoutFeedback>
       </ScrollView>
+      <View style={[styles.buttonContainer]}>
+        <Button
+          disabled={!player?.name}
+          color="primary"
+          onPress={() => router.push('/onboarding/avatar')}
+          text="Suivant"
+        />
+      </View>
     </KeyboardAvoidingView>
   );
 }
@@ -62,19 +66,26 @@ export default function Pseudo() {
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F9F9F9',
   },
   view: {
     display: 'flex',
     flex: 1,
-    backgroundColor: '#fff',
+
+    paddingHorizontal: 20,
   },
   scrollViewContent: {
     flexGrow: 1,
-    paddingTop: 0,
   },
   inputContainer: {
     gap: 20,
+  },
+  buttonContainer: {
+    backgroundColor: '#fff',
+    padding: 20,
+    paddingBottom: 20,
+    borderTopWidth: 0.5,
+    borderTopColor: '#DFD9FE',
   },
   lottie: {
     marginTop: 20,

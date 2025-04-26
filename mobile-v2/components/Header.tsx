@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: '#F9F9F9',
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   title: {
     fontSize: 20,
