@@ -39,7 +39,6 @@ export default function Avatar() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleAvatarSelect = (avatarId: string, index: number) => {
-    console.log('handleAvatarSelect', avatarId, index);
     setCurrentIndex(index);
     updatePlayer({ avatar: avatarId });
   };
@@ -65,8 +64,6 @@ export default function Avatar() {
       handleAvatarSelect(AVATARS[prevIndex].id, prevIndex);
     }
   };
-
-  console.log(player);
 
   return (
     <KeyboardAvoidingView
@@ -205,7 +202,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
+
+    shadowColor: '#DFD9FE',
     shadowOffset: {
       width: 0,
       height: 2,
