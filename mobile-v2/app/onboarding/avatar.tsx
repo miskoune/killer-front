@@ -16,13 +16,16 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
-import { Input } from '@/components/Input';
 import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
 
 const AVATARS = [
   { id: 'pumpkin', source: require('@/assets/avatars/pumpkin.png') },
   { id: 'mummy', source: require('@/assets/avatars/mummy.png') },
+  {
+    id: 'frankeinstein',
+    source: require('@/assets/avatars/frankeinstein.png'),
+  },
 ];
 
 const AVATAR_WIDTH = 200;
@@ -98,7 +101,13 @@ export default function Avatar() {
                 {AVATARS.map((avatar, index) => (
                   <Pressable
                     key={avatar.id}
-                    onPress={() => handleAvatarSelect(avatar.id, index)}
+                    onPress={() => {
+                      handleAvatarSelect(avatar.id, index);
+                      scrollViewRef.current?.scrollTo({
+                        x: index * SCROLL_OFFSET,
+                        animated: true,
+                      });
+                    }}
                     style={[
                       styles.avatarWrapper,
                       player?.avatar === avatar.id && styles.selectedAvatar,
