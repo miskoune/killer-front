@@ -11,6 +11,7 @@ import {
   ScrollView,
   Image,
   Pressable,
+  Dimensions,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -28,9 +29,12 @@ const AVATARS = [
   },
 ];
 
-const AVATAR_WIDTH = 200;
-const AVATAR_SPACING = 20;
-const SCROLL_OFFSET = AVATAR_WIDTH + AVATAR_SPACING;
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
+// Calculate the visible width for the ScrollView
+const scrollViewVisibleWidth = SCREEN_WIDTH - 40; // 40 for container padding
+// Calculate padding needed inside the ScrollView to center items
+const SCROLL_OFFSET = scrollViewVisibleWidth;
 
 export default function Avatar() {
   const player = usePlayerStore(selectPlayer);
@@ -79,24 +83,16 @@ export default function Avatar() {
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={[styles.view]}>
             <View style={styles.avatarSliderContainer}>
-              <Pressable
-                onPress={scrollToPrevious}
-                style={[
-                  styles.arrowButton,
-                  currentIndex === 0 && styles.arrowButtonDisabled,
-                ]}
-                disabled={currentIndex === 0}
-              >
-                <Ionicons name="chevron-back" size={24} color="#DFD9FE" />
-              </Pressable>
-
               <ScrollView
                 ref={scrollViewRef}
-                horizontal
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.avatarContainer}
+                contentContainerStyle={[
+                  styles.avatarContainer,
+                  { width: SCROLL_OFFSET * AVATARS.length },
+                ]}
                 snapToInterval={SCROLL_OFFSET}
                 decelerationRate="fast"
+                snapToAlignment="center"
               >
                 {AVATARS.map((avatar, index) => (
                   <Pressable
@@ -108,10 +104,7 @@ export default function Avatar() {
                         animated: true,
                       });
                     }}
-                    style={[
-                      styles.avatarWrapper,
-                      player?.avatar === avatar.id && styles.selectedAvatar,
-                    ]}
+                    style={[styles.avatarWrapper]}
                   >
                     <Image
                       source={avatar.source}
@@ -121,7 +114,22 @@ export default function Avatar() {
                   </Pressable>
                 ))}
               </ScrollView>
-
+            </View>
+            <View style={styles.arrowContainer}>
+              <Pressable
+                onPress={scrollToPrevious}
+                style={[
+                  styles.arrowButton,
+                  currentIndex === 0 && styles.arrowButtonDisabled,
+                ]}
+                disabled={currentIndex === 0}
+              >
+                <Ionicons
+                  name="chevron-back"
+                  size={32}
+                  color={currentIndex === 0 ? '#DFD9FE' : '#A291FE'}
+                />
+              </Pressable>
               <Pressable
                 onPress={scrollToNext}
                 style={[
@@ -131,7 +139,13 @@ export default function Avatar() {
                 ]}
                 disabled={currentIndex === AVATARS.length - 1}
               >
-                <Ionicons name="chevron-forward" size={24} color="#DFD9FE" />
+                <Ionicons
+                  name="chevron-forward"
+                  size={32}
+                  color={
+                    currentIndex === AVATARS.length - 1 ? '#DFD9FE' : '#A291FE'
+                  }
+                />
               </Pressable>
             </View>
           </View>
@@ -172,37 +186,34 @@ const styles = StyleSheet.create({
     borderTopColor: '#DFD9FE',
   },
   avatarSliderContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 20,
   },
   avatarContainer: {
-    padding: 20,
-    gap: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   avatarWrapper: {
-    width: 200,
-    height: 200,
+    width: SCROLL_OFFSET,
+    height: 300,
     borderRadius: 100,
-    padding: 10,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowRadius: 4,
     elevation: 3,
   },
-  selectedAvatar: {
-    borderWidth: 3,
-    borderColor: '#DFD9FE',
-  },
+
   avatar: {
     width: '100%',
     height: '100%',
+  },
+  arrowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
+    marginTop: 10,
   },
   arrowButton: {
     width: 40,
@@ -211,17 +222,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-
+    elevation: 4,
     shadowColor: '#DFD9FE',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 4,
-    elevation: 3,
   },
   arrowButtonDisabled: {
-    opacity: 0.5,
+    opacity: 0.3,
   },
 });
