@@ -9,5 +9,6 @@ export interface PlayerStore {
 
 export const usePlayerStore = create<PlayerStore>((set) => ({
   player: null,
-  updatePlayer: (player: Partial<Player>) => set({ player }),
+  updatePlayer: (player: Partial<Player>) =>
+    set((state) => ({ player: { ...state.player, ...player } })),
 }));

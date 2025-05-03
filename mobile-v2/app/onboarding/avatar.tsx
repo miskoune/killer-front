@@ -36,13 +36,10 @@ export default function Avatar() {
   const scrollViewRef = useRef<ScrollView>(null);
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const [selectedAvatar, setSelectedAvatar] = useState(
-    player?.avatar || 'pumpkin',
-  );
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleAvatarSelect = (avatarId: string, index: number) => {
-    setSelectedAvatar(avatarId);
+    console.log('handleAvatarSelect', avatarId, index);
     setCurrentIndex(index);
     updatePlayer({ avatar: avatarId });
   };
@@ -68,6 +65,8 @@ export default function Avatar() {
       handleAvatarSelect(AVATARS[prevIndex].id, prevIndex);
     }
   };
+
+  console.log(player);
 
   return (
     <KeyboardAvoidingView
@@ -98,13 +97,6 @@ export default function Avatar() {
                 contentContainerStyle={styles.avatarContainer}
                 snapToInterval={SCROLL_OFFSET}
                 decelerationRate="fast"
-                onMomentumScrollEnd={(event) => {
-                  const newIndex = Math.round(
-                    event.nativeEvent.contentOffset.x / SCROLL_OFFSET,
-                  );
-                  setCurrentIndex(newIndex);
-                  handleAvatarSelect(AVATARS[newIndex].id, newIndex);
-                }}
               >
                 {AVATARS.map((avatar, index) => (
                   <Pressable
@@ -112,7 +104,7 @@ export default function Avatar() {
                     onPress={() => handleAvatarSelect(avatar.id, index)}
                     style={[
                       styles.avatarWrapper,
-                      selectedAvatar === avatar.id && styles.selectedAvatar,
+                      player?.avatar === avatar.id && styles.selectedAvatar,
                     ]}
                   >
                     <Image
@@ -143,7 +135,7 @@ export default function Avatar() {
           <Button
             disabled={!player?.avatar}
             color="primary"
-            onPress={() => router.push('/onboarding/avatar')}
+            onPress={() => router.push('/onboarding/create-room')}
             text="Suivant"
             customStyle={{ marginBottom: insets.bottom }}
           />
