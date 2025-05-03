@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import LottieView from 'lottie-react-native';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -33,11 +34,14 @@ export default function Index(): JSX.Element {
           </Pressable>
         </View>
         <View style={styles.header}>
-          <View style={styles.image}>
-            <KillerParty height={200} width={200} />
-          </View>
           <Text style={styles.title}>KILLER PARTY</Text>
           <Text style={styles.headline}>{t('home.title')}</Text>
+          <LottieView
+            source={require('@/assets/lotties/players.json')}
+            autoPlay
+            style={styles.image}
+            loop
+          />
         </View>
         <View style={styles.actions}>
           <Button
@@ -96,10 +100,10 @@ const styles = StyleSheet.create({
   header: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 20,
   },
   image: {
-    marginBottom: -30,
+    width: 300,
+    height: 300,
   },
   banner: {
     alignSelf: 'center',
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   title: {
-    fontSize: 35,
+    fontSize: 40,
     fontWeight: '600',
     color: 'hsl(210, 7%, 30%)',
     textAlign: 'center',
@@ -124,6 +128,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'hsl(210, 7%, 40%)',
     marginTop: 5,
+    fontSize: 16,
+    fontWeight: '300',
   },
   actions: {
     margin: 20,

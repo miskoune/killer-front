@@ -1,6 +1,4 @@
-import { useKeyboard } from '@react-native-community/hooks';
 import { useRouter } from 'expo-router';
-import LottieView from 'lottie-react-native';
 import { createRef } from 'react';
 import {
   View,
@@ -10,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Image,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -30,17 +29,16 @@ export default function Pseudo() {
     <KeyboardAvoidingView
       style={[styles.content]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
     >
       <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
         <Header title="Choisir un pseudo" />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={[styles.view]}>
-            <LottieView
-              source={require('@/assets/lotties/players.json')}
-              autoPlay
+            <Image
+              source={require('@/assets/images/pseudo.png')}
               style={styles.lottie}
-              loop
+              resizeMode="contain"
             />
             <Input
               innerRef={inputRef}
@@ -50,15 +48,17 @@ export default function Pseudo() {
             />
           </View>
         </TouchableWithoutFeedback>
+
+        <View style={[styles.buttonContainer]}>
+          <Button
+            disabled={!player?.name}
+            color="primary"
+            onPress={() => router.push('/onboarding/avatar')}
+            text="Suivant"
+            customStyle={{ marginBottom: insets.bottom }}
+          />
+        </View>
       </ScrollView>
-      <View style={[styles.buttonContainer]}>
-        <Button
-          disabled={!player?.name}
-          color="primary"
-          onPress={() => router.push('/onboarding/avatar')}
-          text="Suivant"
-        />
-      </View>
     </KeyboardAvoidingView>
   );
 }
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
   view: {
     display: 'flex',
     flex: 1,
-
     paddingHorizontal: 20,
   },
   scrollViewContent: {
@@ -84,13 +83,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
     paddingBottom: 20,
-    borderTopWidth: 0.5,
+    borderTopWidth: 0.2,
     borderTopColor: '#DFD9FE',
   },
   lottie: {
-    marginTop: 20,
-    width: 200,
-    height: 200,
+    width: 220,
+    height: 220,
+    marginTop: -20,
+    marginBottom: 20,
     alignSelf: 'center',
   },
 });

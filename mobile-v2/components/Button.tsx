@@ -3,8 +3,10 @@ import {
   ActivityIndicator,
   Animated,
   Pressable,
+  type StyleProp,
   StyleSheet,
   Text,
+  type ViewStyle,
 } from 'react-native';
 
 interface Props {
@@ -13,6 +15,7 @@ interface Props {
   text: string;
   disabled?: boolean;
   isAsyncAction?: boolean;
+  customStyle?: StyleProp<ViewStyle>;
 }
 
 export function Button({
@@ -21,6 +24,7 @@ export function Button({
   text,
   disabled,
   isAsyncAction,
+  customStyle,
 }: Props): JSX.Element {
   const [isLoading, setLoading] = useState(false);
   const focusAnim = useRef(new Animated.Value(0)).current;
@@ -72,6 +76,7 @@ export function Button({
         styles.content,
         (disabled || isLoading) && styles.disabled,
         { backgroundColor },
+        customStyle,
       ]}
     >
       <Pressable

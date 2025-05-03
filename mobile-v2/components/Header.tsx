@@ -59,12 +59,14 @@ const styles = StyleSheet.create({
   crossOut: {
     opacity: 0,
   },
+  iconBackground: {
+    backgroundColor: '#E8E4FE',
+    opacity: 0.6,
+    padding: 10,
+  },
   iconPressed: {
     backgroundColor: '#DCD9E2',
-  },
-  iconBackground: {
-    backgroundColor: '#F8F5FF',
-    padding: 10,
+    opacity: 1,
   },
   deactivateIcon: {
     opacity: 0,

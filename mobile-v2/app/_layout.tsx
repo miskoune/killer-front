@@ -28,7 +28,10 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="index" />
-        <Stack.Screen name="rules" options={{ presentation: 'modal' }} />
+        <Stack.Screen
+          name="rules"
+          options={{ presentation: 'modal', animation: 'slide_from_bottom' }}
+        />
         <Stack.Screen name="onboarding" />
       </Stack>
       <StatusBar style="dark" translucent />
