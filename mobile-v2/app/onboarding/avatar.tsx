@@ -155,7 +155,7 @@ export default function Avatar() {
           <Button
             disabled={!player?.avatar}
             color="primary"
-            onPress={() => router.push('/onboarding/create-room')}
+            onPress={() => router.push('/onboarding/resume')}
             text="Suivant"
             customStyle={{ marginBottom: insets.bottom }}
           />
