@@ -1,13 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { createRef, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import {
   View,
-  type TextInput,
-  TouchableWithoutFeedback,
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
   Image,
   Pressable,
@@ -21,12 +17,11 @@ import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
 
 const AVATARS = [
-  { id: 'pumpkin', source: require('@/assets/avatars/pumpkin.png') },
   { id: 'mummy', source: require('@/assets/avatars/mummy.png') },
-  {
-    id: 'frankeinstein',
-    source: require('@/assets/avatars/frankeinstein.png'),
-  },
+  { id: 'alien', source: require('@/assets/avatars/alien.png') },
+  { id: 'zombie', source: require('@/assets/avatars/zombie.png') },
+  { id: 'pumpkin', source: require('@/assets/avatars/pumpkin.png') },
+  { id: 'bat', source: require('@/assets/avatars/bat.png') },
 ];
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -39,7 +34,6 @@ const SCROLL_OFFSET = scrollViewVisibleWidth;
 export default function Avatar() {
   const player = usePlayerStore(selectPlayer);
   const updatePlayer = usePlayerStore(selectUpdatePlayer);
-  const inputRef = createRef<TextInput>();
   const scrollViewRef = useRef<ScrollView>(null);
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -73,107 +67,93 @@ export default function Avatar() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={[styles.content]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
-    >
-      <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
-        <Header title="Choisir un avatar" />
-        <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
-          <View style={[styles.view]}>
-            <View style={styles.avatarSliderContainer}>
-              <ScrollView
-                ref={scrollViewRef}
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={[
-                  styles.avatarContainer,
-                  { width: SCROLL_OFFSET * AVATARS.length },
-                ]}
-                snapToInterval={SCROLL_OFFSET}
-                decelerationRate="fast"
-                snapToAlignment="center"
-              >
-                {AVATARS.map((avatar, index) => (
-                  <Pressable
-                    key={avatar.id}
-                    onPress={() => {
-                      handleAvatarSelect(avatar.id, index);
-                      scrollViewRef.current?.scrollTo({
-                        x: index * SCROLL_OFFSET,
-                        animated: true,
-                      });
-                    }}
-                    style={[styles.avatarWrapper]}
-                  >
-                    <Image
-                      source={avatar.source}
-                      style={styles.avatar}
-                      resizeMode="contain"
-                    />
-                  </Pressable>
-                ))}
-              </ScrollView>
-            </View>
-            <View style={styles.arrowContainer}>
+    <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
+      <Header title="Choisir un avatar" />
+      <View style={[styles.view]}>
+        <View style={styles.avatarSliderContainer}>
+          <ScrollView
+            ref={scrollViewRef}
+            contentContainerStyle={[
+              styles.avatarContainer,
+              { width: SCROLL_OFFSET * AVATARS.length },
+            ]}
+            snapToInterval={SCROLL_OFFSET}
+            decelerationRate="fast"
+            snapToAlignment="center"
+          >
+            {AVATARS.map((avatar, index) => (
               <Pressable
-                onPress={scrollToPrevious}
-                style={[
-                  styles.arrowButton,
-                  currentIndex === 0 && styles.arrowButtonDisabled,
-                ]}
-                disabled={currentIndex === 0}
+                key={avatar.id}
+                onPress={() => {
+                  handleAvatarSelect(avatar.id, index);
+                  scrollViewRef.current?.scrollTo({
+                    x: index * SCROLL_OFFSET,
+                    animated: true,
+                  });
+                }}
+                style={[styles.avatarWrapper]}
               >
-                <Ionicons
-                  name="chevron-back"
-                  size={32}
-                  color={currentIndex === 0 ? '#DFD9FE' : '#A291FE'}
+                <Image
+                  source={avatar.source}
+                  style={styles.avatar}
+                  resizeMode="contain"
                 />
               </Pressable>
-              <Pressable
-                onPress={scrollToNext}
-                style={[
-                  styles.arrowButton,
-                  currentIndex === AVATARS.length - 1 &&
-                    styles.arrowButtonDisabled,
-                ]}
-                disabled={currentIndex === AVATARS.length - 1}
-              >
-                <Ionicons
-                  name="chevron-forward"
-                  size={32}
-                  color={
-                    currentIndex === AVATARS.length - 1 ? '#DFD9FE' : '#A291FE'
-                  }
-                />
-              </Pressable>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-
-        <View style={[styles.buttonContainer]}>
-          <Button
-            disabled={!player?.avatar}
-            color="primary"
-            onPress={() => router.push('/onboarding/resume')}
-            text="Suivant"
-            customStyle={{ marginBottom: insets.bottom }}
-          />
+            ))}
+          </ScrollView>
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        <View style={styles.arrowContainer}>
+          <Pressable
+            onPress={scrollToPrevious}
+            style={[
+              styles.arrowButton,
+              currentIndex === 0 && styles.arrowButtonDisabled,
+            ]}
+            disabled={currentIndex === 0}
+          >
+            <Ionicons
+              name="chevron-back"
+              size={32}
+              color={currentIndex === 0 ? '#DFD9FE' : '#A291FE'}
+            />
+          </Pressable>
+          <Pressable
+            onPress={scrollToNext}
+            style={[
+              styles.arrowButton,
+              currentIndex === AVATARS.length - 1 && styles.arrowButtonDisabled,
+            ]}
+            disabled={currentIndex === AVATARS.length - 1}
+          >
+            <Ionicons
+              name="chevron-forward"
+              size={32}
+              color={
+                currentIndex === AVATARS.length - 1 ? '#DFD9FE' : '#A291FE'
+              }
+            />
+          </Pressable>
+        </View>
+      </View>
+
+      <View style={[styles.buttonContainer]}>
+        <Button
+          disabled={!player?.avatar}
+          color="primary"
+          onPress={() => router.push('/onboarding/resume')}
+          text="Suivant"
+          customStyle={{ marginBottom: insets.bottom }}
+        />
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    backgroundColor: '#F9F9F9',
-  },
   view: {
-    display: 'flex',
-    justifyContent: 'center',
     flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#F9F9F9',
     paddingHorizontal: 20,
   },
   scrollViewContent: {
@@ -232,6 +212,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   arrowButtonDisabled: {
-    opacity: 0.3,
+    opacity: 0.8,
   },
 });
