@@ -32,7 +32,6 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-empty-function': 'off', // Disable this rule to make empty function for testing case or default props
     '@typescript-eslint/no-var-requires': 'off', // Disable this rule to enable ES5 imports (const something = require('something');)
-    'react/jsx-fragments': ['error', 'syntax'], // Enforce the use of Fragment|React.Fragment instead of <></>
     'react/prop-types': 'off', // Disable prop-types as we use TypeScript for type checking
     'react/require-default-props': 'off', // Disable default props forcing when props is optional
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }], // Only use react inside .tsx files

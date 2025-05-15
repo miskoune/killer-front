@@ -57,7 +57,7 @@ export default function Resume() {
       <View style={styles.buttonContainer}>
         <Button
           disabled={!player?.avatar}
-          color="primary"
+          color="secondary"
           onPress={() => router.push('/')}
           text="Commencer à jouer"
           customStyle={{ marginBottom: insets.bottom }}

@@ -1,25 +1,27 @@
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
+import { Fragment } from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import InfosIcon from '@/assets/icons/infos.svg';
-import KillerParty from '@/assets/images/killerparty.svg';
 import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
+import { selectPlayer } from '@/selectors/player';
+import { usePlayerStore } from '@/store/player';
 import { useTranslation } from '@/translations';
 
 export default function Index(): JSX.Element {
   const { t } = useTranslation();
-
-  const router = useRouter();
+  const { push } = useRouter();
+  const player = usePlayerStore(selectPlayer);
 
   return (
     <SafeAreaView style={styles.container}>
       <FadeInView style={styles.fadeInView}>
         <View style={styles.howToPlayView}>
           <Pressable
-            onPress={() => router.push('/rules')}
+            onPress={() => push('/rules')}
             style={({ pressed }) => [
               styles.howToPlay,
               pressed && styles.howToPlayPressed,
@@ -44,16 +46,26 @@ export default function Index(): JSX.Element {
           />
         </View>
         <View style={styles.actions}>
-          <Button
-            color="primary"
-            onPress={() => router.push('/onboarding/pseudo')}
-            text={t('home.create.room.button')}
-          />
-          <Button
-            color="secondary"
-            onPress={() => router.push('/onboarding/pseudo')}
-            text={t('home.join.room')}
-          />
+          {player?.name ? (
+            <Fragment>
+              <Button
+                color="primary"
+                onPress={() => push('/onboarding/pseudo')}
+                text={t('home.create.room.button')}
+              />
+              <Button
+                color="secondary"
+                onPress={() => push('/onboarding/pseudo')}
+                text={t('home.join.room')}
+              />
+            </Fragment>
+          ) : (
+            <Button
+              color="secondary"
+              onPress={() => push('/onboarding/pseudo')}
+              text="Commencer à jouer"
+            />
+          )}
         </View>
       </FadeInView>
     </SafeAreaView>
