@@ -1,4 +1,4 @@
-import { router, useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { createRef, useState } from 'react';
 import {
   View,
@@ -41,12 +41,12 @@ export default function RoomName() {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
     >
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Header title="Choisir un nom pour la partie" />
+        <Header title="Choisir un nom de partie" />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={styles.view}>
             <Image
-              source={require('@/assets/images/pseudo.png')}
-              style={styles.lottie}
+              source={require('@/assets/images/room-name.png')}
+              style={styles.image}
               resizeMode="contain"
             />
             <Input
@@ -95,11 +95,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.2,
     borderTopColor: '#DFD9FE',
   },
-  lottie: {
-    width: 220,
-    height: 220,
-    marginTop: -20,
-    marginBottom: 20,
+  image: {
+    height: 250,
     alignSelf: 'center',
   },
 });

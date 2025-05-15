@@ -14,13 +14,13 @@ export async function request<T>({
   method: string;
   requestInit?: RequestInit;
 }): Promise<T> {
-  const token = await AsyncStorage.getItem('token');
+  // const token = await AsyncStorage.getItem('token');
 
   const response = await fetch(url, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      ...(token && { Authorization: `Bearer ${token}` }),
+      // ...(token && { Authorization: `Bearer ${token}` }),
     },
     credentials: 'include',
     method,
