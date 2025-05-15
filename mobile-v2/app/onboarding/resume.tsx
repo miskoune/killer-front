@@ -1,6 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { useState, useRef } from 'react';
 import {
   View,
   StyleSheet,
@@ -8,21 +6,16 @@ import {
   Image,
   Pressable,
   Dimensions,
+  Text,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
-import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
+import { selectPlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
 
-const AVATARS = [
-  { id: 'mummy', source: require('@/assets/avatars/mummy.png') },
-  { id: 'alien', source: require('@/assets/avatars/alien.png') },
-  { id: 'zombie', source: require('@/assets/avatars/zombie.png') },
-  { id: 'pumpkin', source: require('@/assets/avatars/pumpkin.png') },
-  { id: 'bat', source: require('@/assets/avatars/bat.png') },
-];
+import { AVATARS } from './constants';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -36,31 +29,37 @@ export default function Resume() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
+  const playerAvatar = AVATARS.find((avatar) => avatar.id === player?.avatar);
+
   return (
     <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
       <Header title="Récapitulatif" />
-      <View style={[styles.view]}>
+      <View style={styles.view}>
+        <View style={styles.playerInfoContainer}>
+          <Text style={styles.playerName}>{player?.name}</Text>
+          <Text style={styles.playerSubtitle}>Votre profil est prêt</Text>
+        </View>
         <View style={styles.avatarSliderContainer}>
-          <View style={[styles.avatarContainer]}>
-            {AVATARS.map((avatar) => (
-              <Pressable key={avatar.id} style={[styles.avatarWrapper]}>
+          <View style={styles.avatarContainer}>
+            {playerAvatar && (
+              <Pressable style={styles.avatarWrapper}>
                 <Image
-                  source={avatar.source}
+                  source={playerAvatar.source}
                   style={styles.avatar}
                   resizeMode="contain"
                 />
               </Pressable>
-            ))}
+            )}
           </View>
         </View>
       </View>
 
-      <View style={[styles.buttonContainer]}>
+      <View style={styles.buttonContainer}>
         <Button
           disabled={!player?.avatar}
           color="primary"
-          onPress={() => router.push('/onboarding/resume')}
-          text="Suivant"
+          onPress={() => router.push('/')}
+          text="Commencer à jouer"
           customStyle={{ marginBottom: insets.bottom }}
         />
       </View>
@@ -132,5 +131,21 @@ const styles = StyleSheet.create({
   },
   arrowButtonDisabled: {
     opacity: 0.8,
+  },
+  playerInfoContainer: {
+    alignItems: 'center',
+    marginBottom: 30,
+    paddingTop: 20,
+  },
+  playerName: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 8,
+  },
+  playerSubtitle: {
+    fontSize: 18,
+    color: 'black',
+    opacity: 0.5,
   },
 });

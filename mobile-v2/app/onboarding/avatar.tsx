@@ -16,13 +16,7 @@ import { Header } from '@/components/Header';
 import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
 
-const AVATARS = [
-  { id: 'mummy', source: require('@/assets/avatars/mummy.png') },
-  { id: 'alien', source: require('@/assets/avatars/alien.png') },
-  { id: 'zombie', source: require('@/assets/avatars/zombie.png') },
-  { id: 'pumpkin', source: require('@/assets/avatars/pumpkin.png') },
-  { id: 'bat', source: require('@/assets/avatars/bat.png') },
-];
+import { AVATARS } from './constants';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
