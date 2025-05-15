@@ -50,7 +50,7 @@ export default function Index(): JSX.Element {
             <Fragment>
               <Button
                 color="primary"
-                onPress={() => push('/onboarding/pseudo')}
+                onPress={() => push('/create-room/room-name')}
                 text={t('home.create.room.button')}
               />
               <Button

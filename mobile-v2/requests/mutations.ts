@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { request } from '@/utils/apis';
 
-import { type Player } from './types';
+import { type Player, type Room } from './types';
 
 export function useCreatePlayer() {
   const queryClient = useQueryClient();
@@ -23,4 +23,16 @@ export function useCreatePlayer() {
     mutationFn,
     onSuccess,
   });
+}
+
+export function useCreateRoom() {
+  const mutationFn = ({ isGameMastered }: { isGameMastered: boolean }) => {
+    return request<Room>({
+      url: 'https://api.killerparty.app/room',
+      method: 'POST',
+      requestInit: { body: JSON.stringify({ isGameMastered }) },
+    });
+  };
+
+  return useMutation({ mutationFn });
 }
