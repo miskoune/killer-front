@@ -13,10 +13,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
+import { AVATARS } from '@/features/onboarding/constants';
 import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
-
-import { AVATARS } from './constants';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
