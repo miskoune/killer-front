@@ -25,8 +25,8 @@ const SCROLL_OFFSET = scrollViewVisibleWidth;
 
 export default function Resume() {
   const player = usePlayerStore(selectPlayer);
-  const router = useRouter();
   const insets = useSafeAreaInsets();
+  const router = useRouter();
 
   const playerAvatar = AVATARS.find((avatar) => avatar.id === player?.avatar);
 
@@ -36,7 +36,7 @@ export default function Resume() {
       <View style={styles.view}>
         <View style={styles.playerInfoContainer}>
           <Text style={styles.playerName}>{player?.name}</Text>
-          <Text style={styles.playerSubtitle}>Votre profil est prêt</Text>
+          <Text style={styles.playerSubtitle}>Votre profil est prêt ✅</Text>
         </View>
         <View style={styles.avatarSliderContainer}>
           <View style={styles.avatarContainer}>

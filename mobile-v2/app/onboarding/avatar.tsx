@@ -14,6 +14,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { AVATARS } from '@/features/onboarding/constants';
+import { useErrorHandler } from '@/hooks/useErrorHandler';
+import { useCreatePlayer } from '@/requests/mutations';
 import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
 
@@ -31,6 +33,8 @@ export default function Avatar() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { mutateAsync: createPlayer } = useCreatePlayer();
+  const { handleError } = useErrorHandler();
 
   const handleAvatarSelect = (avatarId: string, index: number) => {
     setCurrentIndex(index);
@@ -56,6 +60,21 @@ export default function Avatar() {
         animated: true,
       });
       handleAvatarSelect(AVATARS[prevIndex].id, prevIndex);
+    }
+  };
+
+  const handleCreatePlayer = async () => {
+    if (!player?.name || !player?.avatar) return;
+
+    try {
+      await createPlayer({
+        name: player.name,
+        avatar: player.avatar,
+      });
+
+      router.push('/onboarding/resume');
+    } catch (error) {
+      handleError(error);
     }
   };
 
@@ -133,7 +152,7 @@ export default function Avatar() {
         <Button
           disabled={!player?.avatar}
           color="primary"
-          onPress={() => router.push('/onboarding/resume')}
+          onPress={handleCreatePlayer}
           text="Suivant"
           customStyle={{ marginBottom: insets.bottom }}
         />
