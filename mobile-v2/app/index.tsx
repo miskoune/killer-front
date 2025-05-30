@@ -1,7 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -13,21 +12,15 @@ import { useTranslation } from '@/translations';
 
 export default function Index() {
   const { t } = useTranslation();
-  const { push } = useRouter();
+  const router = useRouter();
   const { data: session } = useGetSession();
-
-  useEffect(() => {
-    AsyncStorage.getItem('token').then((token) => {
-      console.log({ token });
-    });
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <FadeInView style={styles.fadeInView}>
         <View style={styles.howToPlayView}>
           <Pressable
-            onPress={() => push('/rules')}
+            onPress={() => router.push('/rules')}
             style={({ pressed }) => [
               styles.howToPlay,
               pressed && styles.howToPlayPressed,
@@ -56,19 +49,19 @@ export default function Index() {
             <Fragment>
               <Button
                 color="primary"
-                onPress={() => push('/create-room/room-name')}
+                onPress={() => router.push('/create-room/room-name')}
                 text={t('home.create.room.button')}
               />
               <Button
                 color="secondary"
-                onPress={() => push('/onboarding/pseudo')}
+                onPress={() => router.push('/onboarding/pseudo')}
                 text={t('home.join.room')}
               />
             </Fragment>
           ) : (
             <Button
               color="secondary"
-              onPress={() => push('/onboarding/pseudo')}
+              onPress={() => router.push('/onboarding/pseudo')}
               text="Commencer à jouer"
             />
           )}
