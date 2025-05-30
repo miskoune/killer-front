@@ -3,6 +3,14 @@
  */
 export type RoomStatus = 'PENDING' | 'IN_GAME' | 'ENDED';
 
+export interface Session {
+  avatar: string;
+  id: number;
+  name: string;
+  room: Room | null;
+  status: PlayerStatus;
+  token: string;
+}
 export interface Player {
   id: number;
   name: string;

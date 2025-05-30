@@ -1,28 +1,19 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { request } from '@/utils/apis';
 
-import { type Player, type Room } from './types';
+import { type Session, type Room } from './types';
 
 export function useCreatePlayer() {
-  const queryClient = useQueryClient();
-
   const mutationFn = ({ name, avatar }: { name: string; avatar: string }) => {
-    return request<Player>({
+    return request<Session>({
       url: 'https://api.killerparty.app/player',
       method: 'POST',
       requestInit: { body: JSON.stringify({ name, avatar }) },
     });
   };
 
-  const onSuccess = () => {
-    queryClient.resetQueries({ queryKey: ['session'] });
-  };
-
-  return useMutation({
-    mutationFn,
-    onSuccess,
-  });
+  return useMutation({ mutationFn });
 }
 
 export function useCreateRoom() {

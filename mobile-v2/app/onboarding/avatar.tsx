@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useState, useRef } from 'react';
 import {
@@ -67,10 +68,12 @@ export default function Avatar() {
     if (!player?.name || !player?.avatar) return;
 
     try {
-      await createPlayer({
+      const { token } = await createPlayer({
         name: player.name,
         avatar: player.avatar,
       });
+
+      await AsyncStorage.setItem('token', token);
 
       router.push('/onboarding/resume');
     } catch (error) {

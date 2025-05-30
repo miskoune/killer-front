@@ -77,7 +77,7 @@ export async function createRequest<T>({
   if (
     response.status === 401 &&
     ['INVALID_TOKEN', 'EXPIRED_TOKEN', 'TOKEN_NOT_FOUND'].includes(
-      result.message,
+      result.message
     )
   ) {
     await AsyncStorage.removeItem('token');

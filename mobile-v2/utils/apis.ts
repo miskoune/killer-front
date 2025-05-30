@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Toast from 'react-native-toast-message';
 
-import { type TranslationKey, t } from '@/translations';
+import { t, type TranslationKey } from '@/translations';
 
 import { RequestError } from './errors';
 
@@ -14,13 +13,13 @@ export async function request<T>({
   method: string;
   requestInit?: RequestInit;
 }): Promise<T> {
-  // const token = await AsyncStorage.getItem('token');
+  const token = await AsyncStorage.getItem('token');
 
   const response = await fetch(url, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      // ...(token && { Authorization: `Bearer ${token}` }),
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
     credentials: 'include',
     method,
@@ -39,11 +38,6 @@ export async function request<T>({
 
     const errorMessage = t(`errors.${result.message}` as TranslationKey);
 
-    Toast.show({
-      type: 'error',
-      text2: errorMessage,
-    });
-
     throw new RequestError({
       message: errorMessage,
       errorCode: result.message,
@@ -53,19 +47,10 @@ export async function request<T>({
   if (response.status >= 400) {
     const errorMessage = t(`errors.${result?.detail}` as TranslationKey);
 
-    Toast.show({
-      type: 'error',
-      text2: errorMessage,
-    });
-
     throw new RequestError({
       message: errorMessage,
       errorCode: result?.detail,
     });
-  }
-
-  if (result?.token) {
-    await AsyncStorage.setItem('token', result.token);
   }
 
   return result;

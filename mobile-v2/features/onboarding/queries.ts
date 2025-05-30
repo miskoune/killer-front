@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { type Player } from '@/requests/types';
+import { type Session } from '@/requests/types';
 import { request } from '@/utils/apis';
 
 export function useGetSession() {
   const queryFn = () => {
-    return request<Player>({
+    return request<Session>({
       url: 'https://api.killerparty.app/player/me',
       method: 'GET',
     });

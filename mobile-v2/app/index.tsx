@@ -1,6 +1,7 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -14,6 +15,12 @@ export default function Index() {
   const { t } = useTranslation();
   const { push } = useRouter();
   const { data: session } = useGetSession();
+
+  useEffect(() => {
+    AsyncStorage.getItem('token').then((token) => {
+      console.log({ token });
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

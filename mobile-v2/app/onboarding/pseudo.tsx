@@ -41,7 +41,6 @@ export default function Pseudo() {
               resizeMode="contain"
             />
             <Input
-              innerRef={inputRef}
               label="Pseudo"
               value={player?.name ?? ''}
               setValue={(name) => updatePlayer({ name })}
