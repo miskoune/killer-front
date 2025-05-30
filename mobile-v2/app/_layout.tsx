@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -16,6 +17,12 @@ export default function RootLayout() {
   useEffect(() => {
     SplashScreen.hideAsync();
   }, []);
+
+  if (__DEV__) {
+    AsyncStorage.clear().then(() => {
+      console.log('AsyncStorage cleared on startup (dev only)');
+    });
+  }
 
   return (
     <Providers>

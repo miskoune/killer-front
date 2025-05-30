@@ -15,6 +15,8 @@ export default function Index() {
   const router = useRouter();
   const { data: session } = useGetSession();
 
+  console.log({ session });
+
   return (
     <SafeAreaView style={styles.container}>
       <FadeInView style={styles.fadeInView}>

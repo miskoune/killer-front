@@ -1,10 +1,13 @@
-import { useMutation } from '@tanstack/react-query';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { request } from '@/utils/apis';
 
 import { type Session, type Room } from './types';
 
 export function useCreatePlayer() {
+  const queryClient = useQueryClient();
+
   const mutationFn = ({ name, avatar }: { name: string; avatar: string }) => {
     return request<Session>({
       url: 'https://api.killerparty.app/player',
@@ -13,7 +16,16 @@ export function useCreatePlayer() {
     });
   };
 
-  return useMutation({ mutationFn });
+  const onSuccess = async ({ token }: { token: string }) => {
+    await AsyncStorage.setItem('token', token);
+
+    queryClient.invalidateQueries({ queryKey: ['session'] });
+  };
+
+  return useMutation({
+    mutationFn,
+    onSuccess,
+  });
 }
 
 export function useCreateRoom() {

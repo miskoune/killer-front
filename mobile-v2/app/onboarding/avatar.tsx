@@ -68,12 +68,10 @@ export default function Avatar() {
     if (!player?.name || !player?.avatar) return;
 
     try {
-      const { token } = await createPlayer({
+      await createPlayer({
         name: player.name,
         avatar: player.avatar,
       });
-
-      await AsyncStorage.setItem('token', token);
 
       router.push('/onboarding/resume');
     } catch (error) {
