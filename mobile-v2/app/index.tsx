@@ -7,14 +7,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import InfosIcon from '@/assets/icons/infos.svg';
 import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
-import { selectPlayer } from '@/selectors/player';
-import { usePlayerStore } from '@/store/player';
+import { useGetSession } from '@/features/onboarding/queries';
 import { useTranslation } from '@/translations';
 
-export default function Index(): JSX.Element {
+export default function Index() {
   const { t } = useTranslation();
   const { push } = useRouter();
-  const player = usePlayerStore(selectPlayer);
+  const { data: session } = useGetSession();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,7 +45,7 @@ export default function Index(): JSX.Element {
           />
         </View>
         <View style={styles.actions}>
-          {player?.name ? (
+          {session?.name ? (
             <Fragment>
               <Button
                 color="primary"

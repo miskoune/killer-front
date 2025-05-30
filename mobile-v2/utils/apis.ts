@@ -25,49 +25,7 @@ export async function request<T>({
     credentials: 'include',
     method,
     ...requestInit,
-  }).catch((error) => {
-    Toast.show({
-      type: 'error',
-      text2: t('errors.SERVER_ERROR'),
-    });
-
-    throw new Error(error.message);
   });
-
-  // No content
-  if (response.status === 204) {
-    return Promise.resolve() as Promise<T>;
-  }
-
-  // Forbidden
-  if (response.status === 403) {
-    const errorMessage = t('errors.FORBIDDEN');
-
-    Toast.show({
-      type: 'error',
-      text2: errorMessage,
-    });
-
-    throw new RequestError({
-      message: errorMessage,
-      errorCode: 'FORBIDDEN',
-    });
-  }
-
-  // Not found
-  if (response.status === 404) {
-    const errorMessage = t('errors.NOT_FOUND');
-
-    Toast.show({
-      type: 'error',
-      text2: errorMessage,
-    });
-
-    throw new RequestError({
-      message: errorMessage,
-      errorCode: 'NOT_FOUND',
-    });
-  }
 
   const result = await response.json();
 
