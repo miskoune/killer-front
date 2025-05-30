@@ -50,7 +50,6 @@ export default function RoomName() {
               resizeMode="contain"
             />
             <Input
-              innerRef={inputRef}
               label="Nom de la partie"
               value={roomName}
               setValue={(name) => setRoomName(name)}
