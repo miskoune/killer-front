@@ -1,10 +1,10 @@
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import { Fragment } from 'react';
-import { Text, View, Pressable, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import InfosIcon from '@/assets/icons/infos.svg';
+import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
 import { useGetSession } from '@/features/onboarding/queries';
@@ -21,20 +21,7 @@ export default function Index() {
     <SafeAreaView style={styles.container}>
       <FadeInView style={styles.fadeInView}>
         <View style={styles.howToPlayView}>
-          <Pressable
-            onPress={() => router.push('/rules')}
-            style={({ pressed }) => [
-              styles.howToPlay,
-              pressed && styles.howToPlayPressed,
-            ]}
-          >
-            <InfosIcon
-              height={14}
-              width={14}
-              color={styles.howToPlayText.color}
-            />
-            <Text style={styles.howToPlayText}>Règles du jeu</Text>
-          </Pressable>
+          {session?.avatar && <Avatar avatarId={session.avatar} />}
         </View>
         <View style={styles.header}>
           <Text style={styles.title}>KILLER PARTY</Text>
@@ -77,7 +64,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 20,
+    paddingTop: 10,
   },
   fadeInView: {
     flex: 1,
@@ -85,30 +72,7 @@ const styles = StyleSheet.create({
   },
   howToPlayView: {
     alignItems: 'flex-end',
-  },
-  howToPlay: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
     marginRight: 20,
-    backgroundColor: 'hsl(210, 7%, 20%)',
-    shadowColor: 'hsl(210, 7%, 40%)',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
-    elevation: 5,
-    borderRadius: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-  },
-  howToPlayPressed: {
-    backgroundColor: 'hsl(210, 7%, 40%)',
-  },
-  howToPlayText: {
-    marginLeft: 5,
-    textAlign: 'center',
-    fontSize: 12,
-    color: 'hsl(255, 100%, 100%)',
   },
   header: {
     justifyContent: 'center',

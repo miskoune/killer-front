@@ -25,7 +25,7 @@ export function Button({
   disabled,
   isAsyncAction,
   customStyle,
-}: Props): JSX.Element {
+}: Props) {
   const [isLoading, setLoading] = useState(false);
   const focusAnim = useRef(new Animated.Value(0)).current;
 
