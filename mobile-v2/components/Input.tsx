@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Animated, TextInput, StyleSheet, Pressable } from 'react-native';
 
+import { COLORS } from '@/constants/theme';
+
 interface Props {
   value: string;
   setValue: (value: string) => void;
@@ -8,12 +10,7 @@ interface Props {
   innerRef?: React.RefObject<TextInput>;
 }
 
-export function Input({
-  value,
-  setValue,
-  label,
-  innerRef,
-}: Props): JSX.Element {
+export function Input({ value, setValue, label, innerRef }: Props) {
   const focusAnim = React.useRef(new Animated.Value(0)).current;
   const [isFocused, setFocused] = React.useState(false);
   const textInputRef = React.useRef<TextInput>(null);
@@ -62,7 +59,7 @@ export function Input({
             {
               fontSize: focusAnim.interpolate({
                 inputRange: [0, 1],
-                outputRange: [16, 12],
+                outputRange: [20, 14],
               }),
             },
             isFocused && { visibility: 'hidden' },
@@ -75,15 +72,14 @@ export function Input({
         ref={textInputRef}
         style={[
           styles.input,
-          (isFocused || value) && { borderColor: '#ECE9FE', borderWidth: 2 },
+          (isFocused || value) && { borderColor: COLORS.textPrimaryColor },
         ]}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         onChangeText={setValue}
         value={value}
-        clearButtonMode="always"
         enterKeyHint="done"
-        keyboardAppearance="dark"
+        keyboardAppearance="light"
       />
     </Pressable>
   );
@@ -100,16 +96,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   label: {
-    fontWeight: '400',
-    opacity: 0.6,
+    fontSize: 18,
+    color: COLORS.textSecondaryColor,
+    fontWeight: '500',
     backgroundColor: 'transparent',
   },
   input: {
-    backgroundColor: '#F1EEFE',
+    color: COLORS.textPrimaryColor,
+    backgroundColor: COLORS.secondaryBackgroundColor,
     borderRadius: 10,
-    fontSize: 14,
+    fontSize: 20,
     padding: 20,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'transparent',
   },
 });

@@ -9,6 +9,8 @@ import {
   type ViewStyle,
 } from 'react-native';
 
+import { COLORS } from '@/constants/theme';
+
 interface Props {
   onPress: () => void | Promise<void>;
   color: 'primary' | 'secondary';
@@ -67,7 +69,9 @@ export function Button({
   const backgroundColor = focusAnim.interpolate({
     inputRange: [0, 1],
     outputRange:
-      color === 'primary' ? ['#474D52', '#2F3337'] : ['#6C7294', '#575B75'],
+      color === 'primary'
+        ? [COLORS.buttonPrimaryColor, '#2F3337']
+        : ['#6C7294', '#575B75'],
   });
 
   return (
@@ -102,7 +106,7 @@ export function Button({
 
 const styles = StyleSheet.create({
   content: {
-    padding: 15,
+    padding: 16,
     borderRadius: 20,
     shadowColor: 'hsl(210, 7%, 40%)',
     shadowOffset: { width: 1, height: 2 },
@@ -116,9 +120,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
+    color: COLORS.buttonPrimaryTextColor,
+    fontSize: 20,
+    fontWeight: '500',
     textAlign: 'center',
   },
   disabled: {

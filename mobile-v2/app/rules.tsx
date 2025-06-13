@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 
 import CloseIcon from '@/assets/icons/close.svg';
+import { COLORS } from '@/constants/theme';
 import { useTranslation } from '@/translations';
 
 export default function Rules() {
@@ -87,6 +88,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: 'hsl(210, 7%, 40%)',
+    color: COLORS.textSecondaryColor,
   },
 });

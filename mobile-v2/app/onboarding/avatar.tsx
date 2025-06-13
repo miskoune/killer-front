@@ -14,6 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
+import { COLORS } from '@/constants/theme';
 import { AVATARS } from '@/features/onboarding/constants';
 import { useErrorHandler } from '@/hooks/useErrorHandler';
 import { useCreatePlayer } from '@/requests/mutations';
@@ -80,103 +81,114 @@ export default function Avatar() {
   };
 
   return (
-    <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
-      <Header title="Choisir un avatar" />
-      <View style={[styles.view]}>
-        <View style={styles.avatarSliderContainer}>
-          <ScrollView
-            ref={scrollViewRef}
-            contentContainerStyle={[
-              styles.avatarContainer,
-              { width: SCROLL_OFFSET * AVATARS.length },
-            ]}
-            snapToInterval={SCROLL_OFFSET}
-            decelerationRate="fast"
-            snapToAlignment="center"
-          >
-            {AVATARS.map((avatar, index) => (
-              <Pressable
-                key={avatar.id}
-                onPress={() => {
-                  handleAvatarSelect(avatar.id, index);
-                  scrollViewRef.current?.scrollTo({
-                    x: index * SCROLL_OFFSET,
-                    animated: true,
-                  });
-                }}
-                style={[styles.avatarWrapper]}
-              >
-                <Image
-                  source={avatar.source}
-                  style={styles.avatar}
-                  resizeMode="contain"
-                />
-              </Pressable>
-            ))}
-          </ScrollView>
+    <View style={styles.content}>
+      <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
+        <Header title="Choisir un avatar" />
+        <View style={[styles.view]}>
+          <View style={styles.avatarSliderContainer}>
+            <ScrollView
+              ref={scrollViewRef}
+              contentContainerStyle={[
+                styles.avatarContainer,
+                { width: SCROLL_OFFSET * AVATARS.length },
+              ]}
+              snapToInterval={SCROLL_OFFSET}
+              decelerationRate="fast"
+              snapToAlignment="center"
+            >
+              {AVATARS.map((avatar, index) => (
+                <Pressable
+                  key={avatar.id}
+                  onPress={() => {
+                    handleAvatarSelect(avatar.id, index);
+                    scrollViewRef.current?.scrollTo({
+                      x: index * SCROLL_OFFSET,
+                      animated: true,
+                    });
+                  }}
+                  style={[styles.avatarWrapper]}
+                >
+                  <Image
+                    source={avatar.source}
+                    style={styles.avatar}
+                    resizeMode="contain"
+                  />
+                </Pressable>
+              ))}
+            </ScrollView>
+          </View>
+          <View style={styles.arrowContainer}>
+            <Pressable
+              onPress={scrollToPrevious}
+              style={[
+                styles.arrowButton,
+                currentIndex === 0 && styles.arrowButtonDisabled,
+              ]}
+              disabled={currentIndex === 0}
+            >
+              <Ionicons
+                name="chevron-back"
+                size={32}
+                color={
+                  currentIndex === 0
+                    ? COLORS.arrowColorInactive
+                    : COLORS.arrowColor
+                }
+              />
+            </Pressable>
+            <Pressable
+              onPress={scrollToNext}
+              style={[
+                styles.arrowButton,
+                currentIndex === AVATARS.length - 1 &&
+                  styles.arrowButtonDisabled,
+              ]}
+              disabled={currentIndex === AVATARS.length - 1}
+            >
+              <Ionicons
+                name="chevron-forward"
+                size={32}
+                color={
+                  currentIndex === AVATARS.length - 1
+                    ? COLORS.arrowColorInactive
+                    : COLORS.arrowColor
+                }
+              />
+            </Pressable>
+          </View>
         </View>
-        <View style={styles.arrowContainer}>
-          <Pressable
-            onPress={scrollToPrevious}
-            style={[
-              styles.arrowButton,
-              currentIndex === 0 && styles.arrowButtonDisabled,
-            ]}
-            disabled={currentIndex === 0}
-          >
-            <Ionicons
-              name="chevron-back"
-              size={32}
-              color={currentIndex === 0 ? '#DFD9FE' : '#A291FE'}
-            />
-          </Pressable>
-          <Pressable
-            onPress={scrollToNext}
-            style={[
-              styles.arrowButton,
-              currentIndex === AVATARS.length - 1 && styles.arrowButtonDisabled,
-            ]}
-            disabled={currentIndex === AVATARS.length - 1}
-          >
-            <Ionicons
-              name="chevron-forward"
-              size={32}
-              color={
-                currentIndex === AVATARS.length - 1 ? '#DFD9FE' : '#A291FE'
-              }
-            />
-          </Pressable>
-        </View>
-      </View>
 
-      <View style={[styles.buttonContainer]}>
-        <Button
-          disabled={!player?.avatar}
-          color="primary"
-          onPress={handleCreatePlayer}
-          text="Suivant"
-          customStyle={{ marginBottom: insets.bottom }}
-        />
-      </View>
-    </ScrollView>
+        <View style={[styles.buttonContainer]}>
+          <Button
+            disabled={!player?.avatar}
+            color="primary"
+            onPress={handleCreatePlayer}
+            text="Suivant"
+            customStyle={{ marginBottom: insets.bottom }}
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    backgroundColor: COLORS.primaryBackgroundColor,
+  },
   view: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F9F9F9',
     paddingHorizontal: 20,
   },
   scrollViewContent: {
     flexGrow: 1,
   },
   buttonContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.secondaryBackgroundColor,
     padding: 20,
-    borderTopWidth: 0.2,
-    borderTopColor: '#DFD9FE',
+    paddingBottom: 20,
   },
   avatarSliderContainer: {
     alignItems: 'center',
@@ -190,13 +202,12 @@ const styles = StyleSheet.create({
   avatarWrapper: {
     width: SCROLL_OFFSET,
     height: 300,
-    borderRadius: 100,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     shadowRadius: 4,
     elevation: 3,
   },
-
   avatar: {
     width: '100%',
     height: '100%',
@@ -212,17 +223,9 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.secondaryBackgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 4,
-    shadowColor: '#DFD9FE',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
   },
   arrowButtonDisabled: {
     opacity: 0.8,

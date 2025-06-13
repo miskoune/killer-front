@@ -41,7 +41,7 @@ export default function RootLayout() {
         />
         <Stack.Screen name="onboarding" />
       </Stack>
-      <StatusBar style="dark" translucent />
+      <StatusBar style="light" />
     </Providers>
   );
 }

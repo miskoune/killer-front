@@ -15,6 +15,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { Input } from '@/components/Input';
+import { COLORS } from '@/constants/theme';
 import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
 
@@ -65,7 +66,7 @@ export default function Pseudo() {
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: COLORS.primaryBackgroundColor,
   },
   view: {
     display: 'flex',
@@ -79,11 +80,9 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   buttonContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.secondaryBackgroundColor,
     padding: 20,
     paddingBottom: 20,
-    borderTopWidth: 0.2,
-    borderTopColor: '#DFD9FE',
   },
   lottie: {
     width: 220,

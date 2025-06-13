@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
+import { COLORS } from '@/constants/theme';
 import { useGetSession } from '@/features/onboarding/queries';
 import { useTranslation } from '@/translations';
 
@@ -14,8 +15,6 @@ export default function Index() {
   const { t } = useTranslation();
   const router = useRouter();
   const { data: session } = useGetSession();
-
-  console.log({ session });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,7 +24,7 @@ export default function Index() {
         </View>
         <View style={styles.header}>
           <Text style={styles.title}>KILLER PARTY</Text>
-          <Text style={styles.headline}>{t('home.title')}</Text>
+
           <LottieView
             source={require('@/assets/lotties/players.json')}
             autoPlay
@@ -49,7 +48,7 @@ export default function Index() {
             </Fragment>
           ) : (
             <Button
-              color="secondary"
+              color="primary"
               onPress={() => router.push('/onboarding/pseudo')}
               text="Commencer à jouer"
             />
@@ -63,7 +62,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.primaryBackgroundColor,
     paddingTop: 10,
   },
   fadeInView: {
@@ -79,8 +78,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 400,
+    height: 400,
   },
   banner: {
     alignSelf: 'center',
@@ -97,16 +96,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: '600',
-    color: 'hsl(210, 7%, 30%)',
+    color: COLORS.textPrimaryColor,
     textAlign: 'center',
     marginTop: 10,
   },
-  headline: {
+  subtitle: {
     textAlign: 'center',
-    color: 'hsl(210, 7%, 40%)',
+    color: COLORS.textSecondaryColor,
     marginTop: 5,
-    fontSize: 16,
-    fontWeight: '300',
+    fontSize: 18,
+    fontWeight: '400',
   },
   actions: {
     margin: 20,

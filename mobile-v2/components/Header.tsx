@@ -1,8 +1,9 @@
 import { useRouter } from 'expo-router';
 import { Pressable, View, Text, StyleSheet } from 'react-native';
 
-import ArrowLeft from '../assets/icons/arrowLeft.svg';
-import CloseIcon from '../assets/icons/close.svg';
+import ArrowLeft from '@/assets/icons/arrowLeft.svg';
+import CloseIcon from '@/assets/icons/close.svg';
+import { COLORS } from '@/constants/theme';
 
 interface Props {
   title: string;
@@ -17,12 +18,12 @@ export function Header({ title }: Props) {
         onPress={() => router.back()}
         style={({ pressed }) => [
           styles.icon,
-          styles.iconBackground,
-          pressed && styles.iconPressed,
+          styles.arrowIconContainer,
+          pressed && styles.arrowIconPressedContainer,
         ]}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
       >
-        <ArrowLeft />
+        <ArrowLeft height={26} width={26} fill={COLORS.arrowColor} />
       </Pressable>
       <Text style={styles.title}>{title}</Text>
       <Pressable
@@ -30,7 +31,7 @@ export function Header({ title }: Props) {
         style={({ pressed }) => [
           styles.icon,
           styles.crossOut,
-          pressed && styles.iconPressed,
+          pressed && styles.crossOutPressed,
         ]}
       >
         <CloseIcon />
@@ -45,12 +46,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#F9F9F9',
+    backgroundColor: COLORS.primaryBackgroundColor,
     paddingHorizontal: 20,
-    paddingBottom: 20,
   },
   title: {
-    fontSize: 20,
+    color: COLORS.textPrimaryColor,
+    fontSize: 24,
+    marginVertical: 20,
     fontWeight: '600',
   },
   icon: {
@@ -59,16 +61,14 @@ const styles = StyleSheet.create({
   crossOut: {
     opacity: 0,
   },
-  iconBackground: {
-    backgroundColor: '#E8E4FE',
-    opacity: 0.6,
-    padding: 10,
+  arrowIconContainer: {
+    backgroundColor: COLORS.arrowButtonColor,
+    padding: 8,
   },
-  iconPressed: {
-    backgroundColor: '#DCD9E2',
-    opacity: 1,
+  arrowIconPressedContainer: {
+    backgroundColor: COLORS.arrowButtonPressedColor,
   },
-  deactivateIcon: {
+  crossOutPressed: {
     opacity: 0,
   },
 });
