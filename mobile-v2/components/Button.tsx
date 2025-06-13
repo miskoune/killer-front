@@ -70,8 +70,8 @@ export function Button({
     inputRange: [0, 1],
     outputRange:
       color === 'primary'
-        ? [COLORS.buttonPrimaryColor, '#2F3337']
-        : ['#6C7294', '#575B75'],
+        ? [COLORS.buttonPrimaryColor, COLORS.buttonPrimaryPressedColor]
+        : [COLORS.buttonSecondaryColor, COLORS.buttonSecondaryPressedColor],
   });
 
   return (
