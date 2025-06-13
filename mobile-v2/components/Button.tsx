@@ -107,7 +107,7 @@ export function Button({
 const styles = StyleSheet.create({
   content: {
     padding: 16,
-    borderRadius: 20,
+    borderRadius: 10,
     shadowColor: 'hsl(210, 7%, 40%)',
     shadowOffset: { width: 1, height: 2 },
     shadowRadius: 6,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: COLORS.buttonPrimaryTextColor,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '500',
     textAlign: 'center',
   },

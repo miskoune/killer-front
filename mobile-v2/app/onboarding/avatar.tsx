@@ -95,6 +95,7 @@ export default function Avatar() {
               snapToInterval={SCROLL_OFFSET}
               decelerationRate="fast"
               snapToAlignment="center"
+              scrollEnabled={false}
             >
               {AVATARS.map((avatar, index) => (
                 <Pressable
@@ -128,7 +129,7 @@ export default function Avatar() {
             >
               <Ionicons
                 name="chevron-back"
-                size={32}
+                size={22}
                 color={
                   currentIndex === 0
                     ? COLORS.arrowColorInactive
@@ -147,7 +148,7 @@ export default function Avatar() {
             >
               <Ionicons
                 name="chevron-forward"
-                size={32}
+                size={22}
                 color={
                   currentIndex === AVATARS.length - 1
                     ? COLORS.arrowColorInactive
@@ -228,6 +229,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   arrowButtonDisabled: {
-    opacity: 0.8,
+    opacity: 0.5,
   },
 });

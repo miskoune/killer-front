@@ -23,7 +23,7 @@ export function Header({ title }: Props) {
         ]}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
       >
-        <ArrowLeft height={26} width={26} fill={COLORS.arrowColor} />
+        <ArrowLeft height={20} width={20} fill={COLORS.arrowColor} />
       </Pressable>
       <Text style={styles.title}>{title}</Text>
       <Pressable
