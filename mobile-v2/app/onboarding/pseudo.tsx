@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   buttonContainer: {
-    backgroundColor: COLORS.secondaryBackgroundColor,
     padding: 20,
     paddingBottom: 20,
   },

@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     color: COLORS.textSecondaryColor,
-    fontWeight: '500',
+    fontWeight: '300',
+    opacity: 0.5,
     backgroundColor: 'transparent',
   },
   input: {

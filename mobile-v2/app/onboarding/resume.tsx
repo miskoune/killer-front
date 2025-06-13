@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
+import { COLORS } from '@/constants/theme';
 import { AVATARS } from '@/features/onboarding/constants';
 import { selectPlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
@@ -31,120 +32,79 @@ export default function Resume() {
   const playerAvatar = AVATARS.find((avatar) => avatar.id === player?.avatar);
 
   return (
-    <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
-      <Header title="Récapitulatif" />
-      <View style={styles.view}>
-        <View style={styles.playerInfoContainer}>
-          <Text style={styles.playerName}>{player?.name}</Text>
-          <Text style={styles.playerSubtitle}>Votre profil est prêt ✅</Text>
-        </View>
-        <View style={styles.avatarSliderContainer}>
-          <View style={styles.avatarContainer}>
+    <View style={styles.content}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <Header title="Récapitulatif" />
+        <View style={styles.view}>
+          <View style={styles.playerInfoContainer}>
+            <Text style={styles.playerName}>{player?.name}</Text>
+            <Text style={styles.playerSubtitle}>Votre profil est prêt !</Text>
             {playerAvatar && (
-              <Pressable style={styles.avatarWrapper}>
-                <Image
-                  source={playerAvatar.source}
-                  style={styles.avatar}
-                  resizeMode="contain"
-                />
-              </Pressable>
+              <Image
+                source={playerAvatar.source}
+                style={styles.avatar}
+                resizeMode="contain"
+              />
             )}
           </View>
         </View>
-      </View>
 
-      <View style={styles.buttonContainer}>
-        <Button
-          disabled={!player?.avatar}
-          color="secondary"
-          onPress={() => router.push('/')}
-          text="Commencer à jouer"
-          customStyle={{ marginBottom: insets.bottom }}
-        />
-      </View>
-    </ScrollView>
+        <View style={styles.buttonContainer}>
+          <Button
+            disabled={!player?.avatar}
+            color="primary"
+            onPress={() => router.push('/')}
+            text="Commencer à jouer"
+            customStyle={{ marginBottom: insets.bottom }}
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    backgroundColor: COLORS.primaryBackgroundColor,
+  },
   view: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F9F9F9',
     paddingHorizontal: 20,
   },
   scrollViewContent: {
     flexGrow: 1,
   },
   buttonContainer: {
-    backgroundColor: '#fff',
     padding: 20,
-    borderTopWidth: 0.2,
-    borderTopColor: '#DFD9FE',
-  },
-  avatarSliderContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 20,
-  },
-  avatarContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  avatarWrapper: {
-    width: SCROLL_OFFSET,
-    height: 300,
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowRadius: 4,
-    elevation: 3,
+    paddingBottom: 20,
   },
 
   avatar: {
-    width: '100%',
-    height: '100%',
-  },
-  arrowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 20,
-    marginTop: 10,
-  },
-  arrowButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 4,
-    shadowColor: '#DFD9FE',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-  },
-  arrowButtonDisabled: {
-    opacity: 0.8,
+    height: 300,
   },
   playerInfoContainer: {
     alignItems: 'center',
-    marginBottom: 30,
-    paddingTop: 20,
+    padding: 20,
+    borderRadius: 20,
+    backgroundColor: COLORS.secondaryBackgroundColor,
+    shadowColor: COLORS.shadowColor,
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
   },
   playerName: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: 'black',
+    fontSize: 24,
+    color: COLORS.textPrimaryColor,
     marginBottom: 8,
   },
   playerSubtitle: {
-    fontSize: 18,
-    color: 'black',
-    opacity: 0.5,
+    fontSize: 16,
+    color: COLORS.textSecondaryColor,
   },
 });
