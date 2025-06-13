@@ -9,4 +9,5 @@ export const COLORS = {
   arrowButtonPressedColor: '#525354',
   arrowColor: '#FED32B',
   arrowColorInactive: '#74767E',
+  inputBorderColor: '#CCA40A',
 };

@@ -59,7 +59,7 @@ export function Input({ value, setValue, label, innerRef }: Props) {
             {
               fontSize: focusAnim.interpolate({
                 inputRange: [0, 1],
-                outputRange: [20, 14],
+                outputRange: [16, 12],
               }),
             },
             isFocused && { visibility: 'hidden' },
@@ -72,7 +72,10 @@ export function Input({ value, setValue, label, innerRef }: Props) {
         ref={textInputRef}
         style={[
           styles.input,
-          (isFocused || value) && { borderColor: COLORS.textPrimaryColor },
+          (isFocused || value) && {
+            borderColor: COLORS.inputBorderColor,
+            opacity: 0.8,
+          },
         ]}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.secondaryBackgroundColor,
     borderRadius: 10,
     fontSize: 20,
-    padding: 20,
+    padding: 16,
     borderWidth: 1,
     borderColor: 'transparent',
   },
