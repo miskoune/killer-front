@@ -15,10 +15,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { Input } from '@/components/Input';
+import { COLORS } from '@/constants/theme';
+import { useGetSession } from '@/features/onboarding/queries';
 import { useCreateRoom } from '@/requests/mutations';
 
 export default function RoomName() {
-  const [roomName, setRoomName] = useState('');
+  const { data: session } = useGetSession();
+  const [roomName, setRoomName] = useState(
+    session?.name ? `Partie de ${session.name}` : '',
+  );
   const inputRef = createRef<TextInput>();
 
   const insets = useSafeAreaInsets();
@@ -41,7 +46,7 @@ export default function RoomName() {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
     >
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Header title="Choisir un nom de partie" />
+        <Header title="Choisir un nom" />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={styles.view}>
             <Image
@@ -74,7 +79,7 @@ export default function RoomName() {
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: COLORS.primaryBackgroundColor,
   },
   view: {
     display: 'flex',
@@ -88,11 +93,7 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   buttonContainer: {
-    backgroundColor: '#fff',
     padding: 20,
-    paddingBottom: 20,
-    borderTopWidth: 0.2,
-    borderTopColor: '#DFD9FE',
   },
   image: {
     height: 250,

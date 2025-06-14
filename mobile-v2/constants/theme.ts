@@ -1,6 +1,6 @@
 export const COLORS = {
   primaryBackgroundColor: '#212328',
-  secondaryBackgroundColor: '#4D525E',
+  secondaryBackgroundColor: '#2F323A',
   textPrimaryColor: 'white',
   textSecondaryColor: '#BECAE8',
   buttonPrimaryColor: '#FED32B',
@@ -12,6 +12,7 @@ export const COLORS = {
   arrowButtonPressedColor: '#525354',
   arrowColor: '#FED32B',
   arrowColorInactive: '#74767E',
-  inputBorderColor: 'white',
+  inputBorderColor: '#74767E',
+  inputBackgroundColor: '#2F323A',
   shadowColor: 'black',
 };
