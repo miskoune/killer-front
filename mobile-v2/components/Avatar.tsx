@@ -10,7 +10,7 @@ interface AvatarProps {
   avatarId: string;
 }
 
-export function Avatar({ onPress, size = 40, avatarId }: AvatarProps) {
+export function Avatar({ onPress, size = 48, avatarId }: AvatarProps) {
   const avatarStyle = [
     styles.avatar,
     { width: size, height: size, borderRadius: size / 2 },
@@ -31,9 +31,9 @@ export function Avatar({ onPress, size = 40, avatarId }: AvatarProps) {
         <Image
           source={avatarData.source}
           style={{
-            width: size * 0.95,
-            height: size * 0.95,
-            borderRadius: (size * 0.95) / 2,
+            width: size,
+            height: size,
+            borderRadius: size / 2,
           }}
           resizeMode="cover"
         />
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   avatarPressed: {
-    backgroundColor: COLORS.buttonSecondaryPressedColor,
-    shadowOpacity: 0.5,
+    backgroundColor: COLORS.arrowButtonPressedColor,
   },
 });
