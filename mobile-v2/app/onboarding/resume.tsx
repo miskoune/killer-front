@@ -1,13 +1,5 @@
 import { useRouter } from 'expo-router';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Image,
-  Pressable,
-  Dimensions,
-  Text,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, Image, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/Button';
@@ -16,13 +8,6 @@ import { COLORS } from '@/constants/theme';
 import { AVATARS } from '@/features/onboarding/constants';
 import { selectPlayer } from '@/selectors/player';
 import { usePlayerStore } from '@/store/player';
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-
-// Calculate the visible width for the ScrollView
-const scrollViewVisibleWidth = SCREEN_WIDTH - 40; // 40 for container padding
-// Calculate padding needed inside the ScrollView to center items
-const SCROLL_OFFSET = scrollViewVisibleWidth;
 
 export default function Resume() {
   const player = usePlayerStore(selectPlayer);
