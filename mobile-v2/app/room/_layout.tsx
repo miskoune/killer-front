@@ -2,6 +2,8 @@ import { Stack } from 'expo-router';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { COLORS } from '@/constants/theme';
+
 export default function RoomLayout() {
   const insets = useSafeAreaInsets();
 
@@ -9,7 +11,7 @@ export default function RoomLayout() {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#F9F9F9',
+        backgroundColor: COLORS.primaryBackgroundColor,
         paddingTop: insets.top,
       }}
     >

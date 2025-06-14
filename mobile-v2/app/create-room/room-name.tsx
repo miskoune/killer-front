@@ -17,6 +17,7 @@ import { Header } from '@/components/Header';
 import { Input } from '@/components/Input';
 import { COLORS } from '@/constants/theme';
 import { useGetSession } from '@/features/onboarding/queries';
+import { useErrorHandler } from '@/hooks/useErrorHandler';
 import { useCreateRoom } from '@/requests/mutations';
 
 export default function RoomName() {
@@ -24,8 +25,8 @@ export default function RoomName() {
   const [roomName, setRoomName] = useState(
     session?.name ? `Partie de ${session.name}` : '',
   );
+  const { handleError } = useErrorHandler();
   const inputRef = createRef<TextInput>();
-
   const insets = useSafeAreaInsets();
   const { mutateAsync: createRoom } = useCreateRoom();
 
@@ -35,7 +36,7 @@ export default function RoomName() {
 
       router.push(`/room/${room.id}/pending`);
     } catch (error) {
-      console.log(error);
+      handleError(error);
     }
   };
 
