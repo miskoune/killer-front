@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "killerparty",
-    "slug": "killerparty",
+    "name": "mobile-v2",
+    "slug": "mobile-v2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/new-logo.png",
