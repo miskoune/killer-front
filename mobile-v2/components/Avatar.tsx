@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Pressable, Image } from 'react-native';
 
+import { COLORS } from '@/constants/theme';
 import { AVATARS } from '@/features/onboarding/constants';
 
 interface AvatarProps {
@@ -43,20 +44,17 @@ export function Avatar({ onPress, size = 40, avatarId }: AvatarProps) {
 
 const styles = StyleSheet.create({
   avatar: {
-    backgroundColor: '#ffffff',
+    backgroundColor: COLORS.secondaryBackgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 3,
+    shadowColor: COLORS.shadowColor,
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
   },
   avatarPressed: {
-    backgroundColor: '#575B75',
-    shadowOpacity: 0.3,
-  },
-  icon: {
-    color: '#ffffff',
+    backgroundColor: COLORS.buttonSecondaryPressedColor,
+    shadowOpacity: 0.5,
   },
 });

@@ -53,7 +53,7 @@ export default function Pseudo() {
           <Button
             disabled={!player?.name}
             color="primary"
-            onPress={() => router.push('/onboarding/avatar')}
+            onPress={() => router.push('/onboarding/choose-avatar')}
             text="Suivant"
             customStyle={{ marginBottom: insets.bottom }}
           />

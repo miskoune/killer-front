@@ -34,22 +34,15 @@ export default function Index() {
         </View>
         <View style={styles.actions}>
           {session?.name ? (
-            <Fragment>
-              <Button
-                color="primary"
-                onPress={() => router.push('/create-room/room-name')}
-                text={t('home.create.room.button')}
-              />
-              <Button
-                color="secondary"
-                onPress={() => router.push('/onboarding/pseudo')}
-                text={t('home.join.room')}
-              />
-            </Fragment>
+            <Button
+              color="primary"
+              onPress={() => router.push('/create-room/room-name')}
+              text={t('home.create.room.button')}
+            />
           ) : (
             <Button
               color="primary"
-              onPress={() => router.push('/onboarding/pseudo')}
+              onPress={() => router.push('/onboarding/choose-pseudo')}
               text="Commencer à jouer"
             />
           )}
