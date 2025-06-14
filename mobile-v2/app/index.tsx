@@ -1,7 +1,6 @@
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
-import { Fragment } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Avatar } from '@/components/Avatar';
@@ -18,36 +17,38 @@ export default function Index() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FadeInView style={styles.fadeInView}>
-        <View style={styles.howToPlayView}>
-          {session?.avatar && <Avatar avatarId={session.avatar} />}
-        </View>
-        <View style={styles.header}>
-          <Text style={styles.title}>KILLER PARTY</Text>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <FadeInView style={styles.fadeInView}>
+          <View style={styles.howToPlayView}>
+            {session?.avatar && <Avatar avatarId={session.avatar} />}
+          </View>
+          <View style={styles.header}>
+            <Text style={styles.title}>KILLER PARTY</Text>
 
-          <LottieView
-            source={require('@/assets/lotties/players.json')}
-            autoPlay
-            style={styles.image}
-            loop
-          />
-        </View>
-        <View style={styles.actions}>
-          {session?.name ? (
-            <Button
-              color="primary"
-              onPress={() => router.push('/create-room/room-name')}
-              text={t('home.create.room.button')}
+            <LottieView
+              source={require('@/assets/lotties/players.json')}
+              autoPlay
+              style={styles.image}
+              loop
             />
-          ) : (
-            <Button
-              color="primary"
-              onPress={() => router.push('/onboarding/choose-pseudo')}
-              text="Commencer à jouer"
-            />
-          )}
-        </View>
-      </FadeInView>
+          </View>
+          <View style={styles.actions}>
+            {session?.name ? (
+              <Button
+                color="primary"
+                onPress={() => router.push('/create-room/room-name')}
+                text={t('home.create.room.button')}
+              />
+            ) : (
+              <Button
+                color="primary"
+                onPress={() => router.push('/onboarding/choose-pseudo')}
+                text="Commencer à jouer"
+              />
+            )}
+          </View>
+        </FadeInView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -57,6 +58,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.primaryBackgroundColor,
     paddingTop: 10,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
   },
   fadeInView: {
     flex: 1,
