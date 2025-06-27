@@ -4,7 +4,7 @@
     "slug": "mobile-v2",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/new-logo.png",
+    "icon": "./assets/images/logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -12,7 +12,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.miskoune.killerparty",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAllowsArbitraryLoads": true
       }
     },
     "android": {
@@ -31,12 +32,12 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/new-logo.png",
+          "image": "./assets/images/splash.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#212328",
           "dark": {
-            "image": "./assets/images/new-logo.png",
+            "image": "./assets/images/splash.png",
             "imageWidth": 200,
             "resizeMode": "contain",
             "backgroundColor": "#212328"
