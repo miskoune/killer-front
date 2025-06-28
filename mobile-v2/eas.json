@@ -12,6 +12,9 @@
       "ios": {
         "simulator": true
       }
+    },
+    "production": {
+      "autoIncrement": true
     }
   }
 }
