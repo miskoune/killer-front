@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
-import { View, StyleSheet, ScrollView, Image, Text } from 'react-native';
+import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/Button';
@@ -16,6 +17,8 @@ export default function Resume() {
 
   const playerAvatar = AVATARS.find((avatar) => avatar.id === player?.avatar);
 
+  console.log(playerAvatar);
+
   return (
     <View style={styles.content}>
       <ScrollView
@@ -25,15 +28,11 @@ export default function Resume() {
         <Header title="Récapitulatif" />
         <View style={styles.view}>
           <View style={styles.playerInfoContainer}>
+            {playerAvatar && (
+              <Image source={playerAvatar.source} style={styles.avatar} />
+            )}
             <Text style={styles.playerName}>{player?.name}</Text>
             <Text style={styles.playerSubtitle}>Votre profil est prêt !</Text>
-            {playerAvatar && (
-              <Image
-                source={playerAvatar.source}
-                style={styles.avatar}
-                resizeMode="contain"
-              />
-            )}
           </View>
         </View>
 
@@ -68,9 +67,10 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 20,
   },
-
   avatar: {
-    height: 300,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
   },
   playerInfoContainer: {
     alignItems: 'center',

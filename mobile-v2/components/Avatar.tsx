@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { StyleSheet, Pressable, Image } from 'react-native';
+import { StyleSheet, Pressable } from 'react-native';
 
 import { COLORS } from '@/constants/theme';
 import { AVATARS } from '@/features/onboarding/constants';
@@ -35,7 +36,6 @@ export function Avatar({ onPress, size = 48, avatarId }: AvatarProps) {
             height: size,
             borderRadius: size / 2,
           }}
-          resizeMode="cover"
         />
       }
     </Pressable>

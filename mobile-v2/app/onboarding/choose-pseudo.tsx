@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { createRef } from 'react';
 import {
@@ -8,7 +9,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Image,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -39,7 +39,6 @@ export default function Pseudo() {
             <Image
               source={require('@/assets/images/pseudo.png')}
               style={styles.lottie}
-              resizeMode="contain"
             />
             <Input
               label="Pseudo"

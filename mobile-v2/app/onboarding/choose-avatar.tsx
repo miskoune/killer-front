@@ -1,12 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { useState, useRef } from 'react';
 import {
   View,
   StyleSheet,
   ScrollView,
-  Image,
   Pressable,
   Dimensions,
 } from 'react-native';
@@ -80,6 +80,8 @@ export default function Avatar() {
     }
   };
 
+  console.log(AVATARS);
+
   return (
     <View style={styles.content}>
       <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
@@ -109,11 +111,7 @@ export default function Avatar() {
                   }}
                   style={[styles.avatarWrapper]}
                 >
-                  <Image
-                    source={avatar.source}
-                    style={styles.avatar}
-                    resizeMode="contain"
-                  />
+                  <Image source={avatar.source} style={styles.avatar} />
                 </Pressable>
               ))}
             </ScrollView>

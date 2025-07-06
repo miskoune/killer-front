@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { createRef, useState } from 'react';
 import {
@@ -8,7 +9,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Image,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -47,13 +47,12 @@ export default function RoomName() {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
     >
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Header title="Choisir un nom" />
+        <Header title="Choisir un nom de partie" />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={styles.view}>
             <Image
               source={require('@/assets/images/room-name.png')}
               style={styles.image}
-              resizeMode="contain"
             />
             <Input
               label="Nom de la partie"
@@ -86,6 +85,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     paddingHorizontal: 20,
+    gap: 20,
   },
   scrollViewContent: {
     flexGrow: 1,
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    height: 250,
+    height: 200,
+    width: 200,
     alignSelf: 'center',
   },
 });
