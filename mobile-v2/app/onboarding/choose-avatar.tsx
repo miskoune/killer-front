@@ -80,8 +80,6 @@ export default function Avatar() {
     }
   };
 
-  console.log(AVATARS);
-
   return (
     <View style={styles.content}>
       <ScrollView contentContainerStyle={[styles.scrollViewContent]}>

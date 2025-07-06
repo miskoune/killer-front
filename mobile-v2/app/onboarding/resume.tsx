@@ -17,8 +17,6 @@ export default function Resume() {
 
   const playerAvatar = AVATARS.find((avatar) => avatar.id === player?.avatar);
 
-  console.log(playerAvatar);
-
   return (
     <View style={styles.content}>
       <ScrollView
