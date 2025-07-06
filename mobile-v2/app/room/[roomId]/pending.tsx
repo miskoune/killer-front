@@ -1,4 +1,5 @@
 import { useLocalSearchParams } from 'expo-router';
+import { useEffect } from 'react';
 import {
   Text,
   View,
@@ -7,23 +8,60 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import EventSource from 'react-native-sse';
 
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
 import { Header } from '@/components/Header';
+import { ROOM_TOPIC } from '@/constants/sse';
 import { COLORS } from '@/constants/theme';
 import { useGetSession } from '@/features/onboarding/queries';
 import { useGetRoom } from '@/features/room/queries';
-import { type Player } from '@/requests/types';
+import { type Room, type Player } from '@/requests/types';
 import { useTranslation } from '@/translations';
 
 export default function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const { data: session } = useGetSession();
-  const { data: room, isLoading, error } = useGetRoom(roomId);
+  const { data: session, refetch: refetchSession } = useGetSession();
+  const {
+    data: room,
+    isLoading,
+    error,
+    refetch: refetchRoom,
+  } = useGetRoom(roomId);
+
+  /**
+   * Listen to SSE events emits in the Room page.
+   */
+  useEffect(
+    function listenEvents() {
+      const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomId}`);
+
+      roomEventSource.addEventListener('message', (event) => {
+        if (event.type === 'message' && event.data) {
+          const roomInfos: Room = JSON.parse(event.data);
+
+          const isPlayerInRoom = roomInfos.players.some(
+            ({ id }) => id === session?.id,
+          );
+
+          if (isPlayerInRoom) {
+            refetchRoom().then(() => {
+              refetchSession();
+            });
+          } else {
+            refetchSession();
+          }
+        }
+      });
+
+      return () => roomEventSource.close();
+    },
+    [roomId, session?.id, refetchRoom, refetchSession],
+  );
 
   // Handle error state
   if (error) {
@@ -63,7 +101,6 @@ export default function PendingRoom() {
       </View>
     );
   }
-
   const isAdmin = session?.id === room.admin.id;
 
   return (
