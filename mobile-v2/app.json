@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "Killerparty",
-    "slug": "mobile-v2",
-    "version": "1.0.0",
+    "slug": "killerparty",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
     "scheme": "killerparty",
@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.killerparty2.mobile",
+      "bundleIdentifier": "com.killerparty.mobile",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSAllowsArbitraryLoads": true
@@ -21,7 +21,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#212328"
       },
-      "package": "com.killerparty2.mobile"
+      "package": "com.killerparty.mobile"
     },
     "web": {
       "bundler": "metro",
@@ -54,7 +54,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "01d4ed8b-7b3d-4fa6-8d68-87e666b06452"
+        "projectId": "2e54ce18-54e1-4a6b-8fd4-46c1931ee97d"
       }
     }
   }
