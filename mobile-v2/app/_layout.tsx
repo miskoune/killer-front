@@ -18,11 +18,11 @@ export default function RootLayout() {
     SplashScreen.hideAsync();
   }, []);
 
-  if (__DEV__) {
+  /*   if (__DEV__) {
     AsyncStorage.clear().then(() => {
       console.log('AsyncStorage cleared on startup (dev only)');
     });
-  }
+  } */
 
   return (
     <Providers>

@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
+import { useEffect } from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -14,6 +15,12 @@ export default function Index() {
   const { t } = useTranslation();
   const router = useRouter();
   const { data: session } = useGetSession();
+
+  useEffect(() => {
+    if (session?.room?.id && session.room.status === 'PENDING') {
+      router.push(`/room/${session.room.id}/pending`);
+    }
+  }, [session, router]);
 
   return (
     <SafeAreaView style={styles.container}>
