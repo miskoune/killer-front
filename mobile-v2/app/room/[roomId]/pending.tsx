@@ -34,9 +34,6 @@ export default function PendingRoom() {
     refetch: refetchRoom,
   } = useGetRoom(roomId);
 
-  /**
-   * Listen to SSE events emits in the Room page.
-   */
   useEffect(
     function listenEvents() {
       const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomId}`);

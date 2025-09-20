@@ -26,6 +26,9 @@ export default function MissionsManagement() {
   const router = useRouter();
   const { t } = useTranslation();
   const [newMissionContent, setNewMissionContent] = useState('');
+  const [deletingMissionId, setDeletingMissionId] = useState<number | null>(
+    null,
+  );
   const { data: room, isLoading, error } = useGetRoom(roomId);
   const { data: session } = useGetSession();
   const { handleError } = useErrorHandler();
@@ -47,7 +50,12 @@ export default function MissionsManagement() {
   };
 
   const handleDeleteMission = (missionId: number) => {
-    deleteMission.mutate(missionId, { onError: handleError });
+    setDeletingMissionId(missionId);
+
+    deleteMission.mutate(missionId, {
+      onError: handleError,
+      onSettled: () => setDeletingMissionId(null),
+    });
   };
 
   // Handle error state
@@ -126,8 +134,6 @@ export default function MissionsManagement() {
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.textInput}
-                placeholder={t('room.mission.placeholder')}
-                placeholderTextColor={COLORS.textSecondaryColor}
                 value={newMissionContent}
                 onChangeText={setNewMissionContent}
                 multiline
@@ -145,7 +151,7 @@ export default function MissionsManagement() {
               onPress={handleCreateMission}
               text={t('room.create.new.mission.button')}
               disabled={!newMissionContent.trim() || createMission.isPending}
-              isAsyncAction
+              isLoading={createMission.isPending}
             />
           </View>
 
@@ -177,9 +183,9 @@ export default function MissionsManagement() {
                     <TouchableOpacity
                       style={styles.deleteButton}
                       onPress={() => handleDeleteMission(mission.id)}
-                      disabled={deleteMission.isPending}
+                      disabled={deletingMissionId === mission.id}
                     >
-                      {deleteMission.isPending ? (
+                      {deletingMissionId === mission.id ? (
                         <ActivityIndicator
                           size="small"
                           color={COLORS.textSecondaryColor}

@@ -7,8 +7,6 @@ export function useCreateMission() {
   const queryClient = useQueryClient();
 
   const mutationFn = ({ content }: { content: string }) => {
-    console.log('Creating mission with content:', content);
-
     return request<void>({
       url: MISSION_ENDPOINT,
       method: 'POST',
@@ -17,13 +15,8 @@ export function useCreateMission() {
   };
 
   const onSuccess = () => {
-    console.log('Mission created successfully, invalidating queries...');
-
-    // Invalidate room and session queries to refresh mission data
     queryClient.invalidateQueries({ queryKey: ['room'] });
     queryClient.invalidateQueries({ queryKey: ['session'] });
-
-    console.log('Queries invalidated');
   };
 
   return useMutation({

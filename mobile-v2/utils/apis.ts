@@ -49,12 +49,10 @@ export async function request<T>({
   }
 
   if (response.status >= 400) {
-    const errorMessage = t(`errors.${result?.detail}` as TranslationKey);
+    const ERROR_KEY = result.violations.at(0).template;
+    const ERROR_MESSAGE = t(`errors.${ERROR_KEY}` as TranslationKey);
 
-    throw new RequestError({
-      message: errorMessage,
-      errorCode: result?.detail,
-    });
+    throw new RequestError({ message: ERROR_MESSAGE, errorCode: ERROR_KEY });
   }
 
   return result;

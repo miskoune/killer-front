@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import {
   ActivityIndicator,
   Animated,
@@ -16,8 +16,8 @@ interface Props {
   color: 'primary' | 'secondary';
   text: string;
   disabled?: boolean;
-  isAsyncAction?: boolean;
   customStyle?: StyleProp<ViewStyle>;
+  isLoading?: boolean;
 }
 
 export function Button({
@@ -25,30 +25,10 @@ export function Button({
   color,
   text,
   disabled,
-  isAsyncAction,
   customStyle,
+  isLoading = false,
 }: Props) {
-  const [isLoading, setLoading] = useState(false);
   const focusAnim = useRef(new Animated.Value(0)).current;
-
-  const handlePress = async () => {
-    // Prevent multiple presses
-
-    try {
-      if (isAsyncAction) {
-        setLoading(true);
-        await onPress();
-      } else {
-        onPress();
-      }
-    } catch (error) {
-      console.error('Button press error:', error);
-    } finally {
-      if (isAsyncAction) {
-        setLoading(false);
-      }
-    }
-  };
 
   const handlePressIn = () => {
     Animated.timing(focusAnim, {
@@ -85,7 +65,7 @@ export function Button({
     >
       <Pressable
         style={styles.button}
-        onPress={handlePress}
+        onPress={onPress}
         disabled={disabled || isLoading}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
