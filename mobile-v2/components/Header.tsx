@@ -1,17 +1,33 @@
 import { useRouter } from 'expo-router';
-import { Pressable, View, Text, StyleSheet } from 'react-native';
+import {
+  Pressable,
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 
 import ArrowLeft from '@/assets/icons/arrowLeft.svg';
-import CloseIcon from '@/assets/icons/close.svg';
+
 import { COLORS } from '@/constants/theme';
 
 interface Props {
   title: string;
   showBackButton?: boolean;
   onBackPress?: () => void;
+  rightAction?: {
+    icon: React.ComponentType<any>;
+    onPress: () => void;
+    loading?: boolean;
+  };
 }
 
-export function Header({ title, showBackButton = false, onBackPress }: Props) {
+export function Header({
+  title,
+  showBackButton = false,
+  onBackPress,
+  rightAction,
+}: Props) {
   const router = useRouter();
 
   const handleBackPress = () => {
@@ -40,16 +56,30 @@ export function Header({ title, showBackButton = false, onBackPress }: Props) {
         <View style={styles.placeholder} />
       )}
       <Text style={styles.title}>{title}</Text>
-      <Pressable
-        onPress={() => router.dismiss()}
-        style={({ pressed }) => [
-          styles.icon,
-          styles.crossOut,
-          pressed && styles.crossOutPressed,
-        ]}
-      >
-        <CloseIcon />
-      </Pressable>
+      {rightAction ? (
+        <Pressable
+          onPress={rightAction.onPress}
+          style={({ pressed }) => [
+            styles.icon,
+            styles.rightActionContainer,
+            pressed && styles.rightActionPressed,
+          ]}
+          disabled={rightAction.loading}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          {rightAction.loading ? (
+            <ActivityIndicator size="small" color={COLORS.textSecondaryColor} />
+          ) : (
+            <rightAction.icon
+              height={20}
+              width={20}
+              color={COLORS.arrowColor}
+            />
+          )}
+        </Pressable>
+      ) : (
+        <View style={styles.placeholder} />
+      )}
     </View>
   );
 }
@@ -72,9 +102,6 @@ const styles = StyleSheet.create({
   icon: {
     borderRadius: 10,
   },
-  crossOut: {
-    opacity: 0,
-  },
   arrowIconContainer: {
     backgroundColor: COLORS.arrowButtonColor,
     padding: 8,
@@ -82,8 +109,12 @@ const styles = StyleSheet.create({
   arrowIconPressedContainer: {
     backgroundColor: COLORS.arrowButtonPressedColor,
   },
-  crossOutPressed: {
-    opacity: 0,
+  rightActionContainer: {
+    backgroundColor: COLORS.arrowButtonColor,
+    padding: 8,
+  },
+  rightActionPressed: {
+    backgroundColor: COLORS.arrowButtonPressedColor,
   },
   placeholder: {
     width: 36, // Same width as the arrow icon container

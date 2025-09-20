@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EventSource from 'react-native-sse';
@@ -14,18 +15,22 @@ import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
 import { Header } from '@/components/Header';
+import LeaveIcon from '@/assets/icons/leave.svg';
 import { ROOM_TOPIC } from '@/constants/sse';
 import { COLORS } from '@/constants/theme';
 import { useGetSession } from '@/features/onboarding/queries';
 import { useGetRoom } from '@/features/room/queries';
+import { useLeaveRoom } from '@/requests/mutations';
 import { type Room, type Player } from '@/requests/types';
 import { useTranslation } from '@/translations';
+import { useErrorHandler } from '@/hooks/useErrorHandler';
 
 export default function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
   const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { handleError } = useErrorHandler();
   const { data: session, refetch: refetchSession } = useGetSession();
   const {
     data: room,
@@ -33,6 +38,32 @@ export default function PendingRoom() {
     error,
     refetch: refetchRoom,
   } = useGetRoom(roomId);
+  const leaveRoom = useLeaveRoom();
+
+  const handleLeaveRoom = () => {
+    Alert.alert(
+      t('alert.leave.warning.title'),
+      t('alert.leave.warning.description'),
+      [
+        {
+          text: 'Annuler',
+          style: 'cancel',
+        },
+        {
+          text: t('room.leave.confirm.button'),
+          style: 'destructive',
+          onPress: () => {
+            if (session?.id) {
+              leaveRoom.mutate(session.id, {
+                onError: handleError,
+                onSuccess: () => router.replace('/'),
+              });
+            }
+          },
+        },
+      ],
+    );
+  };
 
   useEffect(
     function listenEvents() {
@@ -103,12 +134,18 @@ export default function PendingRoom() {
 
   return (
     <View style={styles.container}>
+      <Header
+        title={room.name.toUpperCase()}
+        rightAction={{
+          icon: LeaveIcon,
+          onPress: handleLeaveRoom,
+          loading: leaveRoom.isPending,
+        }}
+      />
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.roomName}>{room.name.toUpperCase()}</Text>
-
         <FadeInView style={styles.content}>
           {/* Room Info Section */}
           <View style={styles.roomInfoContainer}>
@@ -277,13 +314,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  roomName: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: COLORS.textPrimaryColor,
-    textAlign: 'center',
-    marginVertical: 20,
-  },
   // Room Info Styles
   roomInfoContainer: {
     backgroundColor: COLORS.secondaryBackgroundColor,
