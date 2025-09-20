@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { ROOM_ENDPOINT } from '@/constants/endpoints';
 import { type Room } from '@/requests/types';
 import { request } from '@/utils/apis';
 
 export function useGetRoom(roomId: string) {
   const queryFn = () => {
     return request<Room>({
-      url: `https://api.killerparty.app/room/${roomId}`,
+      url: `${ROOM_ENDPOINT}/${roomId}`,
       method: 'GET',
     });
   };

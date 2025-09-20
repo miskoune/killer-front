@@ -7,24 +7,38 @@ import { COLORS } from '@/constants/theme';
 
 interface Props {
   title: string;
+  showBackButton?: boolean;
+  onBackPress?: () => void;
 }
 
-export function Header({ title }: Props) {
+export function Header({ title, showBackButton = false, onBackPress }: Props) {
   const router = useRouter();
+
+  const handleBackPress = () => {
+    if (onBackPress) {
+      onBackPress();
+    } else {
+      router.back();
+    }
+  };
 
   return (
     <View style={styles.header}>
-      <Pressable
-        onPress={() => router.back()}
-        style={({ pressed }) => [
-          styles.icon,
-          styles.arrowIconContainer,
-          pressed && styles.arrowIconPressedContainer,
-        ]}
-        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-      >
-        <ArrowLeft height={20} width={20} fill={COLORS.arrowColor} />
-      </Pressable>
+      {showBackButton ? (
+        <Pressable
+          onPress={handleBackPress}
+          style={({ pressed }) => [
+            styles.icon,
+            styles.arrowIconContainer,
+            pressed && styles.arrowIconPressedContainer,
+          ]}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <ArrowLeft height={20} width={20} fill={COLORS.arrowColor} />
+        </Pressable>
+      ) : (
+        <View style={styles.placeholder} />
+      )}
       <Text style={styles.title}>{title}</Text>
       <Pressable
         onPress={() => router.dismiss()}
@@ -70,5 +84,9 @@ const styles = StyleSheet.create({
   },
   crossOutPressed: {
     opacity: 0,
+  },
+  placeholder: {
+    width: 36, // Same width as the arrow icon container
+    height: 36,
   },
 });

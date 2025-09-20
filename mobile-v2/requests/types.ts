@@ -10,6 +10,7 @@ export interface Session {
   room: Room | null;
   status: PlayerStatus;
   token: string;
+  authoredMissions?: Mission[];
 }
 export interface Player {
   id: number;

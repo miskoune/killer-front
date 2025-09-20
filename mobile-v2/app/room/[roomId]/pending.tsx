@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect } from 'react';
 import {
   Text,
@@ -24,6 +24,7 @@ import { useTranslation } from '@/translations';
 export default function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
   const { t } = useTranslation();
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   const { data: session, refetch: refetchSession } = useGetSession();
   const {
@@ -235,8 +236,7 @@ export default function PendingRoom() {
         <Button
           color="secondary"
           onPress={() => {
-            // TODO: Implement manage missions functionality
-            console.log('Manage missions');
+            router.push(`/room/${roomId}/missions`);
           }}
           text={t('room.manage.missions')}
         />

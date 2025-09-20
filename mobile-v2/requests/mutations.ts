@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { PLAYER_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { request } from '@/utils/apis';
 
 import { type Session, type Room } from './types';
@@ -10,7 +11,7 @@ export function useCreatePlayer() {
 
   const mutationFn = ({ name, avatar }: { name: string; avatar: string }) => {
     return request<Session>({
-      url: 'https://api.killerparty.app/player',
+      url: PLAYER_ENDPOINT,
       method: 'POST',
       requestInit: { body: JSON.stringify({ name, avatar }) },
     });
@@ -31,7 +32,7 @@ export function useCreatePlayer() {
 export function useCreateRoom() {
   const mutationFn = ({ isGameMastered }: { isGameMastered: boolean }) => {
     return request<Room>({
-      url: 'https://api.killerparty.app/room',
+      url: ROOM_ENDPOINT,
       method: 'POST',
       requestInit: { body: JSON.stringify({ isGameMastered }) },
     });
