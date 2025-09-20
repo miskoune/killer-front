@@ -26,6 +26,10 @@ export async function request<T>({
     ...requestInit,
   });
 
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
   const result = await response.json();
 
   if (

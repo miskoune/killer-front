@@ -35,7 +35,7 @@ export function useCreateMission() {
 export function useDeleteMission() {
   const queryClient = useQueryClient();
 
-  const mutationFn = ({ missionId }: { missionId: number }) => {
+  const mutationFn = (missionId: number) => {
     return request<void>({
       url: `${MISSION_ENDPOINT}/${missionId}`,
       method: 'DELETE',

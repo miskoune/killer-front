@@ -6,9 +6,9 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
-  Alert,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 import { Button } from '@/components/Button';
@@ -18,62 +18,36 @@ import { COLORS } from '@/constants/theme';
 import { useGetSession } from '@/features/onboarding/queries';
 import { useGetRoom } from '@/features/room/queries';
 import { useCreateMission, useDeleteMission } from '@/requests/mission';
-import { type Mission } from '@/requests/types';
 import { useTranslation } from '@/translations';
 import { useErrorHandler } from '@/hooks/useErrorHandler';
 
 export default function MissionsManagement() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
-  const { t } = useTranslation();
   const router = useRouter();
-  const { data: session } = useGetSession();
-  const { data: room, isLoading, error } = useGetRoom(roomId);
-
-  const { handleError } = useErrorHandler();
+  const { t } = useTranslation();
   const [newMissionContent, setNewMissionContent] = useState('');
-  const createMissionMutation = useCreateMission();
-  const deleteMissionMutation = useDeleteMission();
+  const { data: room, isLoading, error } = useGetRoom(roomId);
+  const { data: session } = useGetSession();
+  const { handleError } = useErrorHandler();
+  const createMission = useCreateMission();
+  const deleteMission = useDeleteMission();
 
-  const handleCreateMission = async () => {
+  const handleCreateMission = () => {
     if (!newMissionContent.trim()) {
-      return handleError(new Error('Veuillez saisir le contenu de la mission'));
+      return Alert.alert('Erreur', 'Veuillez saisir le contenu de la mission');
     }
 
-    try {
-      await createMissionMutation.mutateAsync({
-        content: newMissionContent.trim(),
-      });
-
-      setNewMissionContent('');
-    } catch (error) {
-      handleError(error);
-    }
+    createMission.mutate(
+      { content: newMissionContent.trim() },
+      {
+        onError: handleError,
+        onSuccess: () => setNewMissionContent(''),
+      },
+    );
   };
 
-  const handleDeleteMission = (mission: Mission) => {
-    Alert.alert(
-      'Supprimer la mission',
-      `Êtes-vous sûr de vouloir supprimer cette mission ?\n\n"${mission.content}"`,
-      [
-        {
-          text: 'Annuler',
-          style: 'cancel',
-        },
-        {
-          text: 'Supprimer',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await deleteMissionMutation.mutateAsync({
-                missionId: mission.id,
-              });
-            } catch (error) {
-              handleError(error);
-            }
-          },
-        },
-      ],
-    );
+  const handleDeleteMission = (missionId: number) => {
+    deleteMission.mutate(missionId, { onError: handleError });
   };
 
   // Handle error state
@@ -170,9 +144,7 @@ export default function MissionsManagement() {
               color="primary"
               onPress={handleCreateMission}
               text={t('room.create.new.mission.button')}
-              disabled={
-                !newMissionContent.trim() || createMissionMutation.isPending
-              }
+              disabled={!newMissionContent.trim() || createMission.isPending}
               isAsyncAction
             />
           </View>
@@ -204,10 +176,10 @@ export default function MissionsManagement() {
                     </View>
                     <TouchableOpacity
                       style={styles.deleteButton}
-                      onPress={() => handleDeleteMission(mission)}
-                      disabled={deleteMissionMutation.isPending}
+                      onPress={() => handleDeleteMission(mission.id)}
+                      disabled={deleteMission.isPending}
                     >
-                      {deleteMissionMutation.isPending ? (
+                      {deleteMission.isPending ? (
                         <ActivityIndicator
                           size="small"
                           color={COLORS.textSecondaryColor}
@@ -328,7 +300,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 15,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     shadowColor: COLORS.shadowColor,
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
