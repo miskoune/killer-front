@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useRouter, usePathname } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import { useEffect } from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
@@ -14,13 +14,19 @@ import { useTranslation } from '@/translations';
 export default function Index() {
   const { t } = useTranslation();
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = useGetSession();
 
   useEffect(() => {
-    if (session?.room?.id && session.room.status === 'PENDING') {
-      router.push(`/room/${session.room.id}/pending`);
+    // Only redirect if we're actually on the index page
+    if (
+      pathname === '/' &&
+      session?.room?.id &&
+      session.room.status === 'PENDING'
+    ) {
+      router.replace(`/room/${session.room.id}/pending`);
     }
-  }, [session, router]);
+  }, [session, router, pathname]);
 
   return (
     <SafeAreaView style={styles.container}>
