@@ -29,10 +29,10 @@ export default function MissionsManagement() {
   const { data: session } = useGetSession();
   const { data: room, isLoading, error } = useGetRoom(roomId);
 
+  const { handleError } = useErrorHandler();
   const [newMissionContent, setNewMissionContent] = useState('');
   const createMissionMutation = useCreateMission();
   const deleteMissionMutation = useDeleteMission();
-  const { handleError } = useErrorHandler();
 
   const handleCreateMission = async () => {
     if (!newMissionContent.trim()) {
@@ -45,8 +45,6 @@ export default function MissionsManagement() {
       });
 
       setNewMissionContent('');
-
-      Alert.alert('Succès', t('toast.mission.created'));
     } catch (error) {
       handleError(error);
     }
@@ -69,7 +67,6 @@ export default function MissionsManagement() {
               await deleteMissionMutation.mutateAsync({
                 missionId: mission.id,
               });
-              Alert.alert('Succès', t('toast.mission.deleted'));
             } catch (error) {
               handleError(error);
             }
