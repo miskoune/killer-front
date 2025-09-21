@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { COLORS } from '@/constants/theme';
 import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
 import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
 import { AVATARS } from '@/shared/constants/avatars';
+import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { usePlayerStore } from '@/store/player';
 

@@ -6,10 +6,10 @@ import { useEffect } from 'react';
 import { Text, View, StyleSheet, ScrollView, Pressable } from 'react-native';
 
 import DeletePlayerIcon from '@/assets/icons/x.svg';
-import { COLORS } from '@/constants/theme';
 import { selectClearPlayer } from '@/selectors/player';
 import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
+import { COLORS } from '@/shared/constants/theme';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { usePlayerStore } from '@/store/player';
 import { useTranslation } from '@/translations';
@@ -81,7 +81,7 @@ export default function Index() {
                 />
                 <Button
                   color="secondary"
-                  onPress={() => router.push('/join-room/room-code')}
+                  onPress={() => router.push('/join-room')}
                   text={t('home.join.room')}
                 />
               </>

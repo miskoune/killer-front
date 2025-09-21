@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { COLORS } from '@/constants/theme';
 import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
 import { Input } from '@/shared/components/Input';
+import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 

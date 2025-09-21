@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import ArrowLeft from '@/assets/icons/arrowLeft.svg';
-import { COLORS } from '@/constants/theme';
+import { COLORS } from '@/shared/constants/theme';
 
 interface Props {
   title: string;

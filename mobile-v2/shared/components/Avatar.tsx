@@ -7,8 +7,8 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { COLORS } from '@/constants/theme';
 import { AVATARS } from '@/shared/constants/avatars';
+import { COLORS } from '@/shared/constants/theme';
 
 interface AvatarProps {
   onPress?: () => void;

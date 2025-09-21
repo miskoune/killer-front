@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Animated, TextInput, StyleSheet, Pressable } from 'react-native';
 
-import { COLORS } from '@/constants/theme';
+import { COLORS } from '@/shared/constants/theme';
 
 interface Props {
   value: string;

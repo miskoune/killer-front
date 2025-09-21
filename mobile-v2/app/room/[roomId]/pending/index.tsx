@@ -13,13 +13,13 @@ import EventSource from 'react-native-sse';
 
 import LeaveIcon from '@/assets/icons/leave.svg';
 import { ROOM_TOPIC } from '@/constants/sse';
-import { COLORS } from '@/constants/theme';
 import { useGetRoom } from '@/features/room/queries';
 import { useLeaveRoom } from '@/requests/mutations';
 import { Avatar } from '@/shared/components/Avatar';
 import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
+import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { type Player } from '@/shared/types/player';

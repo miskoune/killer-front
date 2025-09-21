@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { COLORS } from '@/constants/theme';
+import { COLORS } from '@/shared/constants/theme';
 import { Providers } from '@/shared/utils/providers';
 import { setupIntl } from '@/translations';
 

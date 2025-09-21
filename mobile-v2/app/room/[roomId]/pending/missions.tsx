@@ -11,12 +11,12 @@ import {
   Alert,
 } from 'react-native';
 
-import { COLORS } from '@/constants/theme';
 import { useGetRoom } from '@/features/room/queries';
 import { useCreateMission, useDeleteMission } from '@/requests/mission';
 import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
+import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useTranslation } from '@/translations';
