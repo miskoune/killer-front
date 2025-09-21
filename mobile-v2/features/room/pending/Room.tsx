@@ -7,11 +7,9 @@ import {
   Alert,
   RefreshControl,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EventSource from 'react-native-sse';
 
 import LeaveIcon from '@/assets/icons/leave.svg';
-import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
 import { COLORS } from '@/shared/constants/theme';
@@ -24,6 +22,7 @@ import { ROOM_TOPIC } from '../constants';
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
 
+import { FooterActions } from './FooterActions';
 import { GameStatus } from './GameStatus';
 import { Players } from './Players';
 import { RoomCode } from './RoomCode';
@@ -35,7 +34,6 @@ export function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
   const { t } = useTranslation();
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   const { handleError } = useErrorHandler();
   const session = useGetSession();
   const room = useGetRoom(roomId);
@@ -133,6 +131,7 @@ export function PendingRoom() {
           loading: leaveRoom.isPending,
         }}
       />
+
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
@@ -150,28 +149,7 @@ export function PendingRoom() {
         </FadeInView>
       </ScrollView>
 
-      <View
-        style={[styles.bottomActions, { paddingBottom: insets.bottom + 20 }]}
-      >
-        {session.data?.id === room.data?.admin.id && (
-          <Button
-            color="primary"
-            onPress={() => {}}
-            text={t('room.start.party.button')}
-            disabled={
-              !room.data?.hasEnoughPlayers || !room.data?.hasEnoughMissions
-            }
-          />
-        )}
-
-        <Button
-          color="secondary"
-          onPress={() => {
-            router.push(`/room/${roomId}/pending/missions`);
-          }}
-          text={t('room.manage.missions')}
-        />
-      </View>
+      <FooterActions roomId={room.data?.id} />
     </View>
   );
 }
@@ -188,15 +166,5 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
     paddingBottom: 20,
-  },
-
-  // Bottom Actions Styles
-  bottomActions: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    backgroundColor: COLORS.primaryBackgroundColor,
-    borderTopWidth: 1,
-    borderTopColor: COLORS.inputBorderColor,
-    gap: 12,
   },
 });
