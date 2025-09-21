@@ -23,7 +23,7 @@ export function ChooseRoom() {
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
       >
-        <Header title="Commencer à jouer" showBackButton />
+        <Header title="Commencer à jouer" />
         <View style={styles.view}>
           <View style={styles.playerInfoContainer}>
             {playerAvatar && (
@@ -42,7 +42,7 @@ export function ChooseRoom() {
           />
           <Button
             color="secondary"
-            onPress={() => router.push('/join-room/room-code')}
+            onPress={() => router.push('/join-room')}
             text={t('home.join.room')}
           />
         </View>

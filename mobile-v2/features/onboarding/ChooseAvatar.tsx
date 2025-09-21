@@ -157,7 +157,6 @@ export function ChooseAvatar() {
 
         <View style={[styles.buttonContainer]}>
           <Button
-            disabled={!player?.avatar}
             color="primary"
             onPress={handleCreatePlayer}
             text="Suivant"
