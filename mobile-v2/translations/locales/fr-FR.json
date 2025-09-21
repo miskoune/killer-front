@@ -44,7 +44,7 @@
   "room.players.count_one": "{{count}} joueur",
   "room.players.count_other": "{{count}} joueurs",
   "room.missions.authored.count_zero": "N'a pas encore écrit de mission",
-  "room.missions.authored.count_one": "À écrit une mission",
+  "room.missions.authored.count_one": "À écrit au moins une mission",
   "room.missions.authored.count_other": "À écrit {{count}} missions",
   "room.players.missing.count_one": "Il manque {{count}} joueur pour pouvoir lancer la partie",
   "room.players.enough.count": "Assez de joueurs pour lancer la partie",
