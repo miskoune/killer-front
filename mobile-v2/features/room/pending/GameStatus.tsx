@@ -28,6 +28,14 @@ export function GameStatus({ roomId }: GameStatusProps) {
     return t('room.start.party.each.player.has.mission.condition');
   };
 
+  const roomHasEnoughMissions = () => {
+    if (room.data?.isGameMastered) {
+      return room.data?.hasEnoughMissions;
+    }
+
+    return room.data?.hasEnoughMissions && room.data?.allPlayersAddedMissions;
+  };
+
   return (
     <View style={styles.gameStatusSection}>
       <Text style={styles.sectionTitle}>
@@ -52,12 +60,14 @@ export function GameStatus({ roomId }: GameStatusProps) {
           <Text
             style={[
               styles.conditionStatus,
-              room.data?.hasEnoughMissions && styles.conditionMet,
+              roomHasEnoughMissions() && styles.conditionMet,
             ]}
           >
-            {room.data?.hasEnoughMissions ? '✓' : '✗'}
+            {roomHasEnoughMissions() ? '✓' : '✗'}
           </Text>
         </View>
+
+        <View style={styles.conditionItem}></View>
       </View>
     </View>
   );

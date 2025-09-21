@@ -14,4 +14,5 @@ export interface Room {
   hasEnoughMissions: boolean;
   hasEnoughPlayers: boolean;
   isGameMastered: boolean;
+  allPlayersAddedMissions: boolean;
 }
