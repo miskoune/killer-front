@@ -1,5 +1,9 @@
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 export function InGameRoom() {
-  return <View>InGameRoom</View>;
+  return (
+    <View>
+      <Text>InGameRoom</Text>
+    </View>
+  );
 }

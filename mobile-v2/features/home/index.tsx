@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQueryClient } from '@tanstack/react-query';
-import { type RelativePathString, usePathname, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
-import { useEffect } from 'react';
 import { Text, View, StyleSheet, ScrollView, Pressable } from 'react-native';
 
 import { Button } from '@/shared/components/Button';
@@ -11,30 +10,14 @@ import { COLORS } from '@/shared/constants/theme';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useTranslation } from '@/translations';
 
-import { MAP_ROOM_STATUS_TO_ROUTE } from './constants/room-status';
 import CloseIcon from './icons/close.svg';
 
 export function Home() {
   const { t } = useTranslation();
   const router = useRouter();
-  const pathname = usePathname();
+
   const session = useGetSession();
   const queryClient = useQueryClient();
-
-  useEffect(() => {
-    if (pathname === '/' && session?.data?.room?.id) {
-      // eslint-disable-next-line no-console
-      console.log('redirecting to room', {
-        session: session.data.room.status,
-      });
-
-      const roomRoute = MAP_ROOM_STATUS_TO_ROUTE.get(session.data.room.status);
-
-      router.replace(
-        `/room/${session.data.room.id}/${roomRoute}` as RelativePathString,
-      );
-    }
-  }, [session.data?.room?.id, router, pathname]);
 
   const handleDeletePlayer = async () => {
     await AsyncStorage.removeItem('token');
