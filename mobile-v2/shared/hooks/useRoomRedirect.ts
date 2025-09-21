@@ -17,12 +17,14 @@ export function useRoomRedirect() {
   const session = useGetSession();
 
   useEffect(() => {
-    if (session?.data?.room?.id) {
+    if (session.data?.room?.id && session.data.room.status) {
       const roomRoute = MAP_ROOM_STATUS_TO_ROUTE.get(session.data.room.status);
 
-      router.replace(
-        `/room/${session.data.room.id}/${roomRoute}` as RelativePathString,
-      );
+      if (!pathname.includes(roomRoute!)) {
+        router.replace(
+          `/room/${session.data.room.id}/${roomRoute}` as RelativePathString,
+        );
+      }
     }
-  }, [session.data?.room?.id, router, pathname]);
+  }, [session.data?.room?.id, session.data?.room?.status, router, pathname]);
 }
