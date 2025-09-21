@@ -123,15 +123,6 @@ export function PendingRoom() {
 
   return (
     <View style={styles.container}>
-      <Header
-        title={room.data?.name.toUpperCase()}
-        rightAction={{
-          icon: LeaveIcon,
-          onPress: confirmLeaveRoom,
-          loading: leaveRoom.isPending,
-        }}
-      />
-
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
@@ -142,6 +133,15 @@ export function PendingRoom() {
           />
         }
       >
+        <Header
+          title={room.data?.name.toUpperCase()}
+          rightAction={{
+            icon: LeaveIcon,
+            onPress: confirmLeaveRoom,
+            loading: leaveRoom.isPending,
+          }}
+        />
+
         <FadeInView style={styles.content}>
           <RoomCode roomCode={room.data?.id} />
           <Players roomId={room.data?.id} />
