@@ -48,7 +48,7 @@ export function ChooseRoomName() {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
     >
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <Header title="Choisir un nom de partie" showBackButton />
+        <Header title="Nom de la partie" showBackButton />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={styles.view}>
             <Image
