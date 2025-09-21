@@ -12,14 +12,15 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { COLORS } from '@/constants/theme';
-import { useUpdatePlayer } from '@/requests/mutations';
 import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
 import { Input } from '@/shared/components/Input';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 
-export default function RoomCode() {
+import { useUpdatePlayer } from './hooks/useUpdatePlayer';
+
+export function JoinRoom() {
   const [roomCode, setRoomCode] = useState('');
   const { handleError } = useErrorHandler();
   const insets = useSafeAreaInsets();
