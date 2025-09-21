@@ -1,5 +1,5 @@
-import { MissionsList } from '@/features/room/pending/MissionsList';
+import { Missions } from '@/features/room/pending/Missions';
 
 export default function MissionsPage() {
-  return <MissionsList />;
+  return <Missions />;
 }

@@ -27,9 +27,9 @@ import { ROOM_TOPIC } from '../constants';
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
 
-import { EmptyState } from './EmptyState';
-import { ErrorState } from './ErrorState';
-import { LoadingState } from './LoadingState';
+import { EmptyState } from './state/EmptyState';
+import { ErrorState } from './state/ErrorState';
+import { LoadingState } from './state/LoadingState';
 
 export function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();

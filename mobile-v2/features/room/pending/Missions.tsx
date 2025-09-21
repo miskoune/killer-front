@@ -22,7 +22,7 @@ import { useTranslation } from '@/translations';
 
 import { useGetRoom } from '../hooks/useGetRoom';
 
-export function MissionsList() {
+export function Missions() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
   const router = useRouter();
   const { t } = useTranslation();
