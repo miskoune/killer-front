@@ -7,6 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
+  RefreshControl,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EventSource from 'react-native-sse';
@@ -27,6 +28,8 @@ import { ROOM_TOPIC } from '../constants';
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
 
+import { RoomError } from './RoomError';
+
 export function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
   const { t } = useTranslation();
@@ -37,13 +40,22 @@ export function PendingRoom() {
   const {
     data: room,
     isLoading,
+    isPending,
     error,
     refetch: refetchRoom,
   } = useGetRoom(roomId);
-
   const leaveRoom = useLeaveRoom();
 
   const handleLeaveRoom = () => {
+    if (session?.id) {
+      leaveRoom.mutate(session.id, {
+        onError: handleError,
+        onSuccess: () => router.replace('/'),
+      });
+    }
+  };
+
+  const confirmLeaveRoom = () => {
     Alert.alert(
       t('alert.leave.warning.title'),
       t('alert.leave.warning.description'),
@@ -55,14 +67,7 @@ export function PendingRoom() {
         {
           text: t('room.leave.confirm.button'),
           style: 'destructive',
-          onPress: () => {
-            if (session?.id) {
-              leaveRoom.mutate(session.id, {
-                onError: handleError,
-                onSuccess: () => router.replace('/'),
-              });
-            }
-          },
+          onPress: handleLeaveRoom,
         },
       ],
     );
@@ -95,18 +100,12 @@ export function PendingRoom() {
     [roomId, session?.id, refetchRoom, refetchSession],
   );
 
-  // Handle error state
+  const handleRefresh = () => {
+    Promise.all([refetchRoom(), refetchSession()]);
+  };
+
   if (error) {
-    return (
-      <View style={styles.container}>
-        <Header title="Erreur" />
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>
-            Impossible de charger la partie. Veuillez réessayer.
-          </Text>
-        </View>
-      </View>
-    );
+    return <RoomError />;
   }
 
   // Handle loading state
@@ -133,7 +132,6 @@ export function PendingRoom() {
       </View>
     );
   }
-  const isAdmin = session?.id === room.admin.id;
 
   return (
     <View style={styles.container}>
@@ -141,13 +139,16 @@ export function PendingRoom() {
         title={room.name.toUpperCase()}
         rightAction={{
           icon: LeaveIcon,
-          onPress: handleLeaveRoom,
+          onPress: confirmLeaveRoom,
           loading: leaveRoom.isPending,
         }}
       />
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={isPending} onRefresh={handleRefresh} />
+        }
       >
         <FadeInView style={styles.content}>
           {/* Room Info Section */}
@@ -258,7 +259,7 @@ export function PendingRoom() {
       <View
         style={[styles.bottomActions, { paddingBottom: insets.bottom + 20 }]}
       >
-        {isAdmin && (
+        {session?.id === room.admin.id && (
           <Button
             color="primary"
             onPress={() => {}}
@@ -305,8 +306,10 @@ const styles = StyleSheet.create({
   errorContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    padding: 20,
+    marginHorizontal: 20,
+    gap: 20,
+    textAlign: 'center',
   },
   errorText: {
     color: COLORS.textPrimaryColor,
@@ -325,13 +328,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 5,
-  },
-  welcomeTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: COLORS.textPrimaryColor,
-    textAlign: 'center',
-    marginBottom: 10,
   },
   roomCode: {
     fontSize: 16,

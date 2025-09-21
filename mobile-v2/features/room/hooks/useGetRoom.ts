@@ -6,6 +6,7 @@ import { request } from '@/shared/utils/apis';
 
 export function useGetRoom(roomId: string) {
   const queryFn = () => {
+    throw new Error('test');
     return request<Room>({
       url: `${ROOM_ENDPOINT}/${roomId}`,
       method: 'GET',

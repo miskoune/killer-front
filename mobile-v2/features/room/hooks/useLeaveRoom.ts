@@ -6,7 +6,7 @@ import { request } from '@/shared/utils/apis';
 export function useLeaveRoom() {
   const queryClient = useQueryClient();
 
-  const mutationFn = (playerId: number) => {
+  const mutationFn = (playerId?: number) => {
     return request<void>({
       url: `${PLAYER_ENDPOINT}/${playerId}`,
       method: 'PATCH',
@@ -15,8 +15,10 @@ export function useLeaveRoom() {
   };
 
   const onSuccess = async () => {
-    await queryClient.invalidateQueries({ queryKey: ['session'] });
-    await queryClient.invalidateQueries({ queryKey: ['room'] });
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: ['session'] }),
+      queryClient.invalidateQueries({ queryKey: ['room'] }),
+    ]);
   };
 
   return useMutation({
