@@ -12,12 +12,16 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
 import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
 import { Input } from '@/shared/components/Input';
 import { COLORS } from '@/shared/constants/theme';
-import { usePlayerStore } from '@/store/player';
+
+import {
+  usePlayerStore,
+  selectPlayer,
+  selectUpdatePlayer,
+} from './store/player';
 
 export function ChoosePseudo() {
   const player = usePlayerStore(selectPlayer);

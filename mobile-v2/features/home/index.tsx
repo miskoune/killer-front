@@ -5,12 +5,10 @@ import LottieView from 'lottie-react-native';
 import { useEffect } from 'react';
 import { Text, View, StyleSheet, ScrollView, Pressable } from 'react-native';
 
-import { selectClearPlayer } from '@/selectors/player';
 import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { COLORS } from '@/shared/constants/theme';
 import { useGetSession } from '@/shared/hooks/useGetSession';
-import { usePlayerStore } from '@/store/player';
 import { useTranslation } from '@/translations';
 
 import CloseIcon from './icons/close.svg';
@@ -20,7 +18,6 @@ export function Home() {
   const router = useRouter();
   const pathname = usePathname();
   const { data: session } = useGetSession();
-  const clearPlayer = usePlayerStore(selectClearPlayer);
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -37,7 +34,6 @@ export function Home() {
   const handleDeletePlayer = async () => {
     await AsyncStorage.removeItem('token');
     queryClient.setQueriesData({ queryKey: ['session'] }, null);
-    clearPlayer();
   };
 
   return (

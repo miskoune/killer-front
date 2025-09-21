@@ -2,15 +2,22 @@ import { create } from 'zustand';
 
 import { type Player } from '@/shared/types/player';
 
-export interface PlayerStore {
+interface PlayerStore {
   player: Partial<Player> | null;
   updatePlayer: (player: Partial<Player>) => void;
-  clearPlayer: () => void;
 }
 
+/**
+ * Player Store
+ */
 export const usePlayerStore = create<PlayerStore>((set) => ({
   player: { avatar: 'mummy' },
   updatePlayer: (player: Partial<Player>) =>
     set((state) => ({ player: { ...state.player, ...player } })),
-  clearPlayer: () => set({ player: null }),
 }));
+
+/**
+ * Player Selectors
+ */
+export const selectPlayer = (state: PlayerStore) => state.player;
+export const selectUpdatePlayer = (state: PlayerStore) => state.updatePlayer;

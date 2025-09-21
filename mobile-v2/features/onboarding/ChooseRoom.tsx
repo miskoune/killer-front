@@ -2,12 +2,14 @@ import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 
-import { selectPlayer } from '@/selectors/player';
+import {
+  usePlayerStore,
+  selectPlayer,
+} from '@/features/onboarding/store/player';
 import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
 import { AVATARS } from '@/shared/constants/avatars';
 import { COLORS } from '@/shared/constants/theme';
-import { usePlayerStore } from '@/store/player';
 import { useTranslation } from '@/translations';
 
 export function ChooseRoom() {
