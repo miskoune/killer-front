@@ -15,7 +15,8 @@ export function useLeaveRoom() {
   };
 
   const onSuccess = async () => {
-    queryClient.invalidateQueries({ queryKey: ['session', 'room'] });
+    queryClient.invalidateQueries({ queryKey: ['room'] });
+    queryClient.invalidateQueries({ queryKey: ['session'] });
   };
 
   return useMutation({
