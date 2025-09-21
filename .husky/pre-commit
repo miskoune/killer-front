@@ -1,0 +1,1 @@
+cd mobile-v2 && npx lint-staged

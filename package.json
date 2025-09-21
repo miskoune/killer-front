@@ -1,0 +1,21 @@
+{
+  "name": "killer-front",
+  "version": "1.0.0",
+  "description": "This repository contains the **Front Web Application** source code for the **Killer Party** project.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miskoune/killer-front.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miskoune/killer-front/issues"
+  },
+  "homepage": "https://github.com/miskoune/killer-front#readme",
+  "scripts": {
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}

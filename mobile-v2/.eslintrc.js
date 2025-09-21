@@ -91,5 +91,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-require-imports': 'off',
+    'no-console': 'error',
   },
 };

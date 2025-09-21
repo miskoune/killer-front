@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PLAYER_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { request } from '@/utils/apis';
 
-import { type Session, type Room } from './types';
+import { type Session, type Room, type SessionUpdate } from './types';
 
 export function useCreatePlayer() {
   const queryClient = useQueryClient();
@@ -27,6 +27,18 @@ export function useCreatePlayer() {
     mutationFn,
     onSuccess,
   });
+}
+
+export function useUpdatePlayer() {
+  const mutationFn = (session: Partial<SessionUpdate>) => {
+    return request<Session>({
+      url: `${PLAYER_ENDPOINT}/${session.id}`,
+      method: 'PATCH',
+      requestInit: { body: JSON.stringify(session) },
+    });
+  };
+
+  return useMutation({ mutationFn });
 }
 
 export function useCreateRoom() {

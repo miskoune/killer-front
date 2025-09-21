@@ -15,23 +15,25 @@ import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { Input } from '@/components/Input';
 import { COLORS } from '@/constants/theme';
+import { useGetSession } from '@/features/onboarding/queries';
 import { useErrorHandler } from '@/hooks/useErrorHandler';
-import { useCreateRoom } from '@/requests/mutations';
+import { useUpdatePlayer } from '@/requests/mutations';
 
 export default function RoomCode() {
-  const [roomName, setRoomName] = useState('');
+  const [roomCode, setRoomCode] = useState('');
   const { handleError } = useErrorHandler();
   const insets = useSafeAreaInsets();
-  const { mutateAsync: createRoom } = useCreateRoom();
+  const updatePlayer = useUpdatePlayer();
+  const { data: session } = useGetSession();
 
-  const handleRoomName = async () => {
-    try {
-      const room = await createRoom({ isGameMastered: true });
-
-      router.push(`/room/${room.id}/pending`);
-    } catch (error) {
-      handleError(error);
-    }
+  const handleRoomName = () => {
+    updatePlayer.mutate(
+      { id: session?.id, room: roomCode },
+      {
+        onSuccess: ({ room }) => router.push(`/room/${room?.id}/pending`),
+        onError: handleError,
+      },
+    );
   };
 
   return (
@@ -45,20 +47,20 @@ export default function RoomCode() {
         <TouchableWithoutFeedback>
           <View style={styles.view}>
             <Image
-              source={require('@/assets/images/room-name.png')}
+              source={require('@/assets/images/room-code.png')}
               style={styles.image}
             />
             <Input
               label="Code de la partie"
-              value={roomName}
-              setValue={(name) => setRoomName(name)}
+              value={roomCode}
+              setValue={(name) => setRoomCode(name)}
             />
           </View>
         </TouchableWithoutFeedback>
 
         <View style={[styles.buttonContainer]}>
           <Button
-            disabled={!roomName}
+            disabled={!roomCode}
             color="primary"
             onPress={handleRoomName}
             text="Rejoindre la partie"

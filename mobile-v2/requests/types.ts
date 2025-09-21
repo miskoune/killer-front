@@ -20,6 +20,11 @@ export interface Player {
   hasAtLeastOneMission: boolean;
 }
 
+export interface SessionUpdate {
+  id: number;
+  room: string | null;
+}
+
 export interface Mission {
   id: number;
   content: string;
