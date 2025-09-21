@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { ROOM_ENDPOINT } from '@/constants/endpoints';
+import { ROOM_ENDPOINT } from '@/shared/constants/endpoints';
 import { type Room } from '@/shared/types/room';
 import { request } from '@/shared/utils/apis';
 

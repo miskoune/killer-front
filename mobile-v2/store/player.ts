@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { type Player } from '@/requests/types';
+import { type Player } from '@/shared/types/player';
 
 export interface PlayerStore {
   player: Partial<Player> | null;

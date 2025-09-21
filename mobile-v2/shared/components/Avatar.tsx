@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { COLORS } from '@/constants/theme';
-import { AVATARS } from '@/features/onboarding/constants';
+import { AVATARS } from '@/shared/constants/avatars';
 
 interface AvatarProps {
   onPress?: () => void;

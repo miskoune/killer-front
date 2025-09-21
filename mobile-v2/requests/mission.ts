@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { MISSION_ENDPOINT } from '@/constants/endpoints';
+import { MISSION_ENDPOINT } from '@/shared/constants/endpoints';
 import { request } from '@/shared/utils/apis';
 
 export function useCreateMission() {

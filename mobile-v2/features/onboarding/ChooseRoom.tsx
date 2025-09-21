@@ -1,18 +1,18 @@
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { COLORS } from '@/constants/theme';
-import { AVATARS } from '@/features/onboarding/constants';
 import { selectPlayer } from '@/selectors/player';
 import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
+import { AVATARS } from '@/shared/constants/avatars';
 import { usePlayerStore } from '@/store/player';
+import { useTranslation } from '@/translations';
 
-export default function Resume() {
+export function ChooseRoom() {
+  const { t } = useTranslation();
   const player = usePlayerStore(selectPlayer);
-  const insets = useSafeAreaInsets();
   const router = useRouter();
 
   const playerAvatar = AVATARS.find((avatar) => avatar.id === player?.avatar);
@@ -23,7 +23,7 @@ export default function Resume() {
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
       >
-        <Header title="Récapitulatif" />
+        <Header title="Commencer à jouer" showBackButton />
         <View style={styles.view}>
           <View style={styles.playerInfoContainer}>
             {playerAvatar && (
@@ -36,11 +36,14 @@ export default function Resume() {
 
         <View style={styles.buttonContainer}>
           <Button
-            disabled={!player?.avatar}
             color="primary"
-            onPress={() => router.push('/')}
-            text="Commencer à jouer"
-            customStyle={{ marginBottom: insets.bottom }}
+            onPress={() => router.push('/create-room')}
+            text={t('home.create.room.button')}
+          />
+          <Button
+            color="secondary"
+            onPress={() => router.push('/join-room/room-code')}
+            text={t('home.join.room')}
           />
         </View>
       </ScrollView>
@@ -63,19 +66,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 20,
-    paddingBottom: 20,
+    paddingBottom: 40,
+    gap: 15,
   },
   avatar: {
-    width: 100,
-    height: 100,
+    width: 300,
+    height: 300,
     borderRadius: 50,
   },
   playerInfoContainer: {
     alignItems: 'center',
     padding: 20,
     borderRadius: 20,
-    backgroundColor: COLORS.secondaryBackgroundColor,
-    shadowColor: COLORS.shadowColor,
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 5,

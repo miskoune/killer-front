@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { PLAYER_ENDPOINT } from '@/constants/endpoints';
+import { PLAYER_ENDPOINT } from '@/shared/constants/endpoints';
 import { type Session } from '@/shared/types/session';
 import { request } from '@/shared/utils/apis';
 
