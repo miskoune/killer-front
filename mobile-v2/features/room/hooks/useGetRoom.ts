@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { ROOM_ENDPOINT } from '@/shared/constants/endpoints';
 import { type Room } from '@/shared/types/room';
-import { request } from '@/shared/utils/apis';
+import { request } from '@/shared/utils/request';
 
 export function useGetRoom(roomId: string) {
   const queryFn = async () => {

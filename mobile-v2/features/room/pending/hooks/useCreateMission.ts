@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { MISSION_ENDPOINT } from '@/shared/constants/endpoints';
-import { request } from '@/shared/utils/apis';
+import { request } from '@/shared/utils/request';
 
 export function useCreateMission() {
   const queryClient = useQueryClient();

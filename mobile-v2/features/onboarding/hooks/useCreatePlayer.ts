@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { PLAYER_ENDPOINT } from '@/shared/constants/endpoints';
 import { type Session } from '@/shared/types/session';
-import { request } from '@/shared/utils/apis';
+import { request } from '@/shared/utils/request';
 
 export function useCreatePlayer() {
   const queryClient = useQueryClient();
