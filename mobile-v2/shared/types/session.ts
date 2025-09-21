@@ -1,5 +1,5 @@
 import { type Mission } from './mission';
-import { type PlayerStatus } from './player';
+import { type TargetPlayer, type PlayerStatus } from './player';
 import { type Room } from './room';
 
 export interface Session {
@@ -10,4 +10,6 @@ export interface Session {
   status: PlayerStatus;
   token: string;
   authoredMissions?: Mission[];
+  target?: TargetPlayer;
+  assignedMission?: Mission;
 }

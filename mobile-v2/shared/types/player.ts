@@ -7,3 +7,5 @@ export interface Player {
   avatar: string;
   hasAtLeastOneMission: boolean;
 }
+
+export type TargetPlayer = Pick<Player, 'id' | 'name' | 'avatar'>;

@@ -5,7 +5,7 @@ import { type Session } from '@/shared/types/session';
 import { request } from '@/shared/utils/request';
 
 export function useGetSession() {
-  const queryFn = () => {
+  const queryFn = async () => {
     return request<Session>({
       url: `${PLAYER_ENDPOINT}/me`,
       method: 'GET',

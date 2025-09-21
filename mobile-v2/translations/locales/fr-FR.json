@@ -85,7 +85,7 @@
   "room.start.party.button": "Lancer la partie",
   "room.game.master.title": "Vous êtes le maître du jeu, surveillez le bon déroulement de la partie.",
   "room.target.title": "Essayez de tuer votre cible et de survivre",
-  "room.target.to.kill": "Votre cible est {{pseudo}}",
+  "room.target.to.kill": "Votre cible est {{pseudo}} !",
   "room.target.mission": "Mission que doit remplir votre cible :",
   "room.killed.message": "Quelqu'un a réussi à vous tuer ?",
   "room.killed.notify": "Cliquez sur le bouton ci-dessous pour informer les autres joueurs que vous avez été tué.",
