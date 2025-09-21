@@ -4,15 +4,17 @@ import { t, type TranslationKey } from '@/translations';
 
 import { RequestError } from './errors';
 
+interface RequestParams {
+  url: string;
+  method: string;
+  requestInit?: RequestInit;
+}
+
 export async function request<T>({
   url,
   method,
   requestInit,
-}: {
-  url: string;
-  method: string;
-  requestInit?: RequestInit;
-}): Promise<T> {
+}: RequestParams): Promise<T> {
   const token = await AsyncStorage.getItem('token');
 
   const response = await fetch(url, {

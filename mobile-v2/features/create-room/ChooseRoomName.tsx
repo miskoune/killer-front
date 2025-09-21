@@ -33,7 +33,7 @@ export function ChooseRoomName() {
 
   const handleCreateRoom = () => {
     createRoom.mutate(
-      { isGameMastered: true },
+      { isGameMastered: false },
       {
         onSuccess: ({ id }) => router.push(`/room/${id}/pending`),
         onError: handleError,
