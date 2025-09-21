@@ -270,7 +270,7 @@ export default function PendingRoom() {
         <Button
           color="secondary"
           onPress={() => {
-            router.push(`/room/${roomId}/missions`);
+            router.push(`/room/${roomId}/pending/missions`);
           }}
           text={t('room.manage.missions')}
         />
