@@ -4,10 +4,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/shared/components/Button';
 import { COLORS } from '@/shared/constants/theme';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useTranslation } from '@/translations';
 
 import { useGetRoom } from '../hooks/useGetRoom';
+
+import { useStartRoom } from './hooks/useStartRoom';
 
 interface FooterActionsProps {
   roomId: string;
@@ -19,13 +22,24 @@ export function FooterActions({ roomId }: FooterActionsProps) {
   const room = useGetRoom(roomId);
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const startRoom = useStartRoom();
+  const { handleError } = useErrorHandler();
+
+  const handleStartRoom = () => {
+    startRoom.mutate(roomId, {
+      onSuccess: () => {
+        router.push(`/room/${roomId}/in-game`);
+      },
+      onError: handleError,
+    });
+  };
 
   return (
     <View style={[styles.bottomActions, { paddingBottom: insets.bottom + 20 }]}>
       {session.data?.id === room.data?.admin.id && (
         <Button
           color="primary"
-          onPress={() => {}}
+          onPress={handleStartRoom}
           text={t('room.start.party.button')}
           disabled={
             !room.data?.hasEnoughPlayers || !room.data?.hasEnoughMissions

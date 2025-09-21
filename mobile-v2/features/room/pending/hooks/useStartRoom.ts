@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { PLAYER_ENDPOINT } from '@/shared/constants/endpoints';
+import { ROOM_ENDPOINT } from '@/shared/constants/endpoints';
 import { request } from '@/shared/utils/request';
 
-export function useLeaveRoom() {
+export function useStartRoom() {
   const queryClient = useQueryClient();
 
-  const mutationFn = (playerId?: number) => {
+  const mutationFn = (roomCode: string) => {
     return request<void>({
-      url: `${PLAYER_ENDPOINT}/${playerId}`,
+      url: `${ROOM_ENDPOINT}/${roomCode}`,
       method: 'PATCH',
-      requestInit: { body: JSON.stringify({ room: null }) },
+      requestInit: { body: JSON.stringify({ status: 'IN_GAME' }) },
     });
   };
 
@@ -18,8 +18,5 @@ export function useLeaveRoom() {
     queryClient.invalidateQueries({ queryKey: ['session'] });
   };
 
-  return useMutation({
-    mutationFn,
-    onSuccess,
-  });
+  return useMutation({ mutationFn: mutationFn, onSuccess });
 }

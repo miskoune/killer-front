@@ -26,7 +26,6 @@ import { GameStatus } from './GameStatus';
 import LeaveIcon from './icons/leave.svg';
 import { Players } from './Players';
 import { RoomCode } from './RoomCode';
-import { EmptyState } from './state/EmptyState';
 import { ErrorState } from './state/ErrorState';
 import { LoadingState } from './state/LoadingState';
 
@@ -95,7 +94,7 @@ export function PendingRoom() {
     );
   };
 
-  if (room.isLoading) {
+  if (room.isPending) {
     return <LoadingState />;
   }
 
@@ -103,18 +102,7 @@ export function PendingRoom() {
     return (
       <ErrorState
         refresh={handleRefresh}
-        refreshLoading={room.isPending}
-        leaveRoomLoading={leaveRoom.isPending}
-        leaveRoom={handleLeaveRoom}
-      />
-    );
-  }
-
-  if (!room.data) {
-    return (
-      <EmptyState
-        refresh={handleRefresh}
-        refreshLoading={room.isPending}
+        refreshLoading={room.isFetching}
         leaveRoomLoading={leaveRoom.isPending}
         leaveRoom={handleLeaveRoom}
       />
@@ -128,7 +116,7 @@ export function PendingRoom() {
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
-            refreshing={room.isPending}
+            refreshing={room.isFetching}
             onRefresh={handleRefresh}
           />
         }

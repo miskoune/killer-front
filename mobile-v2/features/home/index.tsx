@@ -21,12 +21,7 @@ export function Home() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    // Only redirect if we're actually on the index page
-    if (
-      pathname === '/' &&
-      session?.room?.id &&
-      session.room.status === 'PENDING'
-    ) {
+    if (session?.room?.id && session.room.status === 'PENDING') {
       router.replace(`/room/${session.room.id}/pending`);
     }
   }, [session, router, pathname]);
