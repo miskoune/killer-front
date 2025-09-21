@@ -13,6 +13,7 @@ import { useLeaveRoom } from '../hooks/useLeaveRoom';
 import { ErrorState } from '../pending/state/ErrorState';
 import { LoadingState } from '../pending/state/LoadingState';
 
+import SettingsIcon from './icons/settings.svg';
 import { MissionView } from './MissionView';
 
 export function InGameRoom() {
@@ -32,6 +33,10 @@ export function InGameRoom() {
       onError: handleError,
       onSuccess: () => router.replace('/'),
     });
+  };
+
+  const handleGoToSettings = () => {
+    router.push(`/room/${roomId}/in-game/settings`);
   };
 
   if (room.isFetching) {
@@ -62,7 +67,13 @@ export function InGameRoom() {
           />
         }
       >
-        <Header title="Survivre ou mourir" />
+        <Header
+          title="Survivre ou mourir"
+          rightAction={{
+            icon: SettingsIcon,
+            onPress: handleGoToSettings,
+          }}
+        />
         <FadeInView style={styles.content}>
           <MissionView
             mission={session.data.assignedMission}
