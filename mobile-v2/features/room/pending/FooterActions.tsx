@@ -26,12 +26,7 @@ export function FooterActions({ roomId }: FooterActionsProps) {
   const { handleError } = useErrorHandler();
 
   const handleStartRoom = () => {
-    startRoom.mutate(roomId, {
-      onSuccess: () => {
-        router.push(`/room/${roomId}/in-game`);
-      },
-      onError: handleError,
-    });
+    startRoom.mutate(roomId, { onError: handleError });
   };
 
   return (
