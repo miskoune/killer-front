@@ -10,8 +10,8 @@ import { useGetSession } from '@/shared/hooks/useGetSession';
 
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
-import { ErrorState } from '../pending/state/ErrorState';
-import { LoadingState } from '../pending/state/LoadingState';
+import { ErrorState } from '../state/ErrorState';
+import { LoadingState } from '../state/LoadingState';
 
 import SettingsIcon from './icons/settings.svg';
 import { MissionView } from './MissionView';

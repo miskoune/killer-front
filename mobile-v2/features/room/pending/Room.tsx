@@ -20,14 +20,14 @@ import { useTranslation } from '@/translations';
 import { ROOM_TOPIC } from '../constants';
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
+import { ErrorState } from '../state/ErrorState';
+import { LoadingState } from '../state/LoadingState';
 
 import { FooterActions } from './FooterActions';
 import { GameStatus } from './GameStatus';
 import LeaveIcon from './icons/leave.svg';
 import { Players } from './Players';
 import { RoomCode } from './RoomCode';
-import { ErrorState } from './state/ErrorState';
-import { LoadingState } from './state/LoadingState';
 
 export function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
