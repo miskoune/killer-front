@@ -38,13 +38,7 @@ export function PendingRoom() {
   const insets = useSafeAreaInsets();
   const { handleError } = useErrorHandler();
   const session = useGetSession();
-  const {
-    data: room,
-    isLoading,
-    isPending,
-    error,
-    refetch: refetchRoom,
-  } = useGetRoom(roomId);
+  const room = useGetRoom(roomId);
   const leaveRoom = useLeaveRoom();
 
   useEffect(
@@ -60,7 +54,7 @@ export function PendingRoom() {
           );
 
           if (isPlayerInRoom) {
-            refetchRoom().then(() => {
+            room.refetch().then(() => {
               session.refetch();
             });
           } else {
@@ -71,11 +65,11 @@ export function PendingRoom() {
 
       return () => roomEventSource.close();
     },
-    [roomId, session.data?.id, refetchRoom, session.refetch],
+    [roomId, session.data?.id, room.refetch, session.refetch],
   );
 
   const handleRefresh = () => {
-    Promise.all([refetchRoom(), session.refetch()]);
+    Promise.all([room.refetch(), session.refetch()]);
   };
 
   const handleLeaveRoom = () => {
@@ -103,26 +97,26 @@ export function PendingRoom() {
     );
   };
 
-  if (isLoading) {
+  if (room.isLoading) {
     return <LoadingState />;
   }
 
-  if (error) {
+  if (room.error) {
     return (
       <ErrorState
         refresh={handleRefresh}
-        refreshLoading={isPending}
+        refreshLoading={room.isPending}
         leaveRoomLoading={leaveRoom.isPending}
         leaveRoom={handleLeaveRoom}
       />
     );
   }
 
-  if (!room) {
+  if (!room.data) {
     return (
       <EmptyState
         refresh={handleRefresh}
-        refreshLoading={isPending}
+        refreshLoading={room.isPending}
         leaveRoomLoading={leaveRoom.isPending}
         leaveRoom={handleLeaveRoom}
       />
@@ -132,7 +126,7 @@ export function PendingRoom() {
   return (
     <View style={styles.container}>
       <Header
-        title={room.name.toUpperCase()}
+        title={room.data?.name.toUpperCase()}
         rightAction={{
           icon: LeaveIcon,
           onPress: confirmLeaveRoom,
@@ -143,32 +137,37 @@ export function PendingRoom() {
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl refreshing={isPending} onRefresh={handleRefresh} />
+          <RefreshControl
+            refreshing={room.isPending}
+            onRefresh={handleRefresh}
+          />
         }
       >
         <FadeInView style={styles.content}>
           {/* Room Info Section */}
           <View style={styles.roomInfoContainer}>
             <Text style={styles.roomCode}>
-              {t('room.join.room.code', { roomCode: room.id })}
+              {t('room.join.room.code', { roomCode: room.data?.id })}
             </Text>
 
             {/* Player count info */}
             <View style={styles.statsContainer}>
               <Text style={styles.statsText}>
-                {room.players.length === 1
-                  ? t('room.players.count_one', { count: room.players.length })
+                {room.data?.players.length === 1
+                  ? t('room.players.count_one', {
+                      count: room.data?.players.length,
+                    })
                   : t('room.players.count_other', {
-                      count: room.players.length,
+                      count: room.data?.players.length,
                     })}
               </Text>
               <Text style={styles.statsText}>
-                {room.missions.length === 1
+                {room.data?.missions.length === 1
                   ? t('room.missions.count_one', {
-                      count: room.missions.length,
+                      count: room.data?.missions.length,
                     })
                   : t('room.missions.count_other', {
-                      count: room.missions.length,
+                      count: room.data?.missions.length,
                     })}
               </Text>
             </View>
@@ -182,13 +181,13 @@ export function PendingRoom() {
             </Text>
 
             <View style={styles.playersContainer}>
-              {room.players.map((player: Player) => (
+              {room.data?.players.map((player: Player) => (
                 <View key={player.id} style={styles.playerCard}>
                   <Avatar avatarId={player.avatar} size={60} />
                   <View style={styles.playerInfo}>
                     <View style={styles.playerNameContainer}>
                       <Text style={styles.playerName}>{player.name}</Text>
-                      {player.id === room.admin.id && (
+                      {player.id === room.data?.admin.id && (
                         <Text style={styles.adminBadge}>Admin</Text>
                       )}
                       {player.id === session.data?.id && (
@@ -215,7 +214,7 @@ export function PendingRoom() {
             <View style={styles.conditionsContainer}>
               <View style={styles.conditionItem}>
                 <Text style={styles.conditionText}>
-                  {room.isGameMastered
+                  {room.data?.isGameMastered
                     ? t(
                         'room.start.party.three.players.with.game.master.condition',
                       )
@@ -224,26 +223,26 @@ export function PendingRoom() {
                 <Text
                   style={[
                     styles.conditionStatus,
-                    room.hasEnoughPlayers && styles.conditionMet,
+                    room.data?.hasEnoughPlayers && styles.conditionMet,
                   ]}
                 >
-                  {room.hasEnoughPlayers ? '✓' : '✗'}
+                  {room.data?.hasEnoughPlayers ? '✓' : '✗'}
                 </Text>
               </View>
 
               <View style={styles.conditionItem}>
                 <Text style={styles.conditionText}>
-                  {room.isGameMastered
+                  {room.data?.isGameMastered
                     ? t('room.start.party.same.missions.as.players.condition')
                     : t('room.start.party.each.player.has.mission.condition')}
                 </Text>
                 <Text
                   style={[
                     styles.conditionStatus,
-                    room.hasEnoughMissions && styles.conditionMet,
+                    room.data?.hasEnoughMissions && styles.conditionMet,
                   ]}
                 >
-                  {room.hasEnoughMissions ? '✓' : '✗'}
+                  {room.data?.hasEnoughMissions ? '✓' : '✗'}
                 </Text>
               </View>
             </View>
@@ -255,12 +254,14 @@ export function PendingRoom() {
       <View
         style={[styles.bottomActions, { paddingBottom: insets.bottom + 20 }]}
       >
-        {session.data?.id === room.admin.id && (
+        {session.data?.id === room.data?.admin.id && (
           <Button
             color="primary"
             onPress={() => {}}
             text={t('room.start.party.button')}
-            disabled={!room.hasEnoughPlayers || !room.hasEnoughMissions}
+            disabled={
+              !room.data?.hasEnoughPlayers || !room.data?.hasEnoughMissions
+            }
           />
         )}
 
