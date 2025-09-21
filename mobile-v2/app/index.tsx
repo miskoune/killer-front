@@ -47,11 +47,18 @@ export default function Index() {
           </View>
           <View style={styles.actions}>
             {session?.name ? (
-              <Button
-                color="primary"
-                onPress={() => router.push('/create-room/room-name')}
-                text={t('home.create.room.button')}
-              />
+              <>
+                <Button
+                  color="primary"
+                  onPress={() => router.push('/create-room/room-name')}
+                  text={t('home.create.room.button')}
+                />
+                <Button
+                  color="secondary"
+                  onPress={() => router.push('/join-room/room-code')}
+                  text={t('home.join.room')}
+                />
+              </>
             ) : (
               <Button
                 color="primary"

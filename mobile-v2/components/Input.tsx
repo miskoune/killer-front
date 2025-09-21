@@ -1,34 +1,36 @@
-import * as React from 'react';
 import { Animated, TextInput, StyleSheet, Pressable } from 'react-native';
 
 import { COLORS } from '@/constants/theme';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   value: string;
   setValue: (value: string) => void;
   label: string;
-  innerRef?: React.RefObject<TextInput>;
+  innerRef?: React.RefObject<TextInput | null>;
 }
 
 export function Input({ value, setValue, label, innerRef }: Props) {
-  const focusAnim = React.useRef(new Animated.Value(0)).current;
-  const [isFocused, setFocused] = React.useState(false);
-  const textInputRef = React.useRef<TextInput>(null);
+  const focusAnim = useRef(new Animated.Value(0)).current;
+  const [isFocused, setFocused] = useState(false);
+  const textInputRef = useRef<TextInput>(null);
+
+  const refToUse = innerRef || textInputRef;
+
+  useEffect(function autoFocus() {
+    refToUse.current?.focus();
+  }, []);
 
   const handleFocus = () => {
     setFocused(true);
 
     // Ensure the input is focused with a slight delay to make sure the animation has started
     setTimeout(() => {
-      if (innerRef?.current) {
-        innerRef.current.focus();
-      } else if (textInputRef.current) {
-        textInputRef.current.focus();
-      }
-    }, 50);
+      refToUse.current?.focus();
+    }, 100);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     Animated.timing(focusAnim, {
       toValue: isFocused || value ? 1 : 0,
       duration: 250,
@@ -69,7 +71,7 @@ export function Input({ value, setValue, label, innerRef }: Props) {
         </Animated.Text>
       </Animated.View>
       <TextInput
-        ref={textInputRef}
+        ref={refToUse}
         style={[
           styles.input,
           (isFocused || value) && {
