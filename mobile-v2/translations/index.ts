@@ -18,7 +18,7 @@ export type TranslationKey = keyof typeof french | keyof typeof english;
  * Setup the internationalization.
  * @param userLocale  - The user locale.
  */
-function setupIntl(userLocale: string | null): void {
+export function setupIntl(userLocale: string | null): void {
   i18next.use(initReactI18next).init({
     lng: userLocale || LOCALE.FRENCH,
     returnNull: false,
@@ -30,14 +30,14 @@ function setupIntl(userLocale: string | null): void {
   });
 }
 
-function t(
+export function t(
   key: TranslationKey,
   interpolations: Record<string, unknown> = {},
 ): string {
   return i18nTranslate(key, interpolations);
 }
 
-function useTranslation() {
+export function useTranslation() {
   const { t: translateFunc, ...i18nTranslation } = useI18nTranslation();
 
   const translate = (
@@ -49,5 +49,3 @@ function useTranslation() {
 
   return { ...i18nTranslation, t: translate };
 }
-
-export { setupIntl, useTranslation, t, LOCALE };

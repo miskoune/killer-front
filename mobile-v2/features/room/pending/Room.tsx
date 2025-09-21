@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import EventSource from 'react-native-sse';
 
-import LeaveIcon from '@/assets/icons/leave.svg';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
 import { COLORS } from '@/shared/constants/theme';
@@ -24,6 +23,7 @@ import { useLeaveRoom } from '../hooks/useLeaveRoom';
 
 import { FooterActions } from './FooterActions';
 import { GameStatus } from './GameStatus';
+import LeaveIcon from './icons/leave.svg';
 import { Players } from './Players';
 import { RoomCode } from './RoomCode';
 import { EmptyState } from './state/EmptyState';

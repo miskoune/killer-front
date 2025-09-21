@@ -8,8 +8,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import ArrowLeft from '@/assets/icons/arrowLeft.svg';
 import { COLORS } from '@/shared/constants/theme';
+
+import BackIcon from '../assets/icons/back.svg';
 
 interface Props {
   title: string;
@@ -50,7 +51,7 @@ export function Header({
           ]}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <ArrowLeft height={20} width={20} fill={COLORS.arrowColor} />
+          <BackIcon height={20} width={20} fill={COLORS.arrowColor} />
         </Pressable>
       ) : (
         <View style={styles.placeholder} />
