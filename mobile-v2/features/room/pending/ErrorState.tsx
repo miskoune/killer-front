@@ -1,5 +1,4 @@
 import { Image } from 'expo-image';
-import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   StyleSheet,
   Text,
@@ -11,40 +10,26 @@ import {
 import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
 import { COLORS } from '@/shared/constants/theme';
-import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
-import { useGetSession } from '@/shared/hooks/useGetSession';
 
-import { useGetRoom } from '../hooks/useGetRoom';
-import { useLeaveRoom } from '../hooks/useLeaveRoom';
+interface ErrorStateProps {
+  refresh: () => void;
+  leaveRoom: () => void;
+  refreshLoading: boolean;
+  leaveRoomLoading: boolean;
+}
 
-export function RoomError() {
-  const { roomId } = useLocalSearchParams<{ roomId: string }>();
-  const session = useGetSession();
-  const room = useGetRoom(roomId);
-  const leaveRoom = useLeaveRoom();
-  const { handleError } = useErrorHandler();
-  const router = useRouter();
-
-  const handleLeaveRoom = () => {
-    leaveRoom.mutate(session.data?.id, {
-      onError: handleError,
-      onSuccess: () => router.replace('/'),
-    });
-  };
-
-  const handleRefresh = () => {
-    Promise.all([session.refetch(), room.refetch()]);
-  };
-
+export function ErrorState({
+  refresh,
+  leaveRoom,
+  refreshLoading,
+  leaveRoomLoading,
+}: ErrorStateProps) {
   return (
     <View style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         refreshControl={
-          <RefreshControl
-            refreshing={session.isPending || room.isPending}
-            onRefresh={handleRefresh}
-          />
+          <RefreshControl refreshing={refreshLoading} onRefresh={refresh} />
         }
       >
         <Header title="Partie indisponible" />
@@ -58,8 +43,10 @@ export function RoomError() {
           </Text>
           <Button
             color="primary"
-            onPress={handleLeaveRoom}
+            onPress={leaveRoom}
             text="Créer ou rejoindre une autre partie"
+            disabled={leaveRoomLoading}
+            isLoading={leaveRoomLoading}
           />
         </View>
       </ScrollView>

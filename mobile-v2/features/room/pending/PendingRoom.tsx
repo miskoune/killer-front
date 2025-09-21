@@ -5,7 +5,6 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  ActivityIndicator,
   Alert,
   RefreshControl,
 } from 'react-native';
@@ -28,7 +27,9 @@ import { ROOM_TOPIC } from '../constants';
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
 
-import { RoomError } from './RoomError';
+import { EmptyState } from './EmptyState';
+import { ErrorState } from './ErrorState';
+import { LoadingState } from './LoadingState';
 
 export function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
@@ -36,7 +37,7 @@ export function PendingRoom() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { handleError } = useErrorHandler();
-  const { data: session, refetch: refetchSession } = useGetSession();
+  const session = useGetSession();
   const {
     data: room,
     isLoading,
@@ -46,13 +47,42 @@ export function PendingRoom() {
   } = useGetRoom(roomId);
   const leaveRoom = useLeaveRoom();
 
-  const handleLeaveRoom = () => {
-    if (session?.id) {
-      leaveRoom.mutate(session.id, {
-        onError: handleError,
-        onSuccess: () => router.replace('/'),
+  useEffect(
+    function listenEvents() {
+      const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomId}`);
+
+      roomEventSource.addEventListener('message', (event) => {
+        if (event.type === 'message' && event.data) {
+          const roomInfos: Room = JSON.parse(event.data);
+
+          const isPlayerInRoom = roomInfos.players.some(
+            ({ id }) => id === session.data?.id,
+          );
+
+          if (isPlayerInRoom) {
+            refetchRoom().then(() => {
+              session.refetch();
+            });
+          } else {
+            session.refetch();
+          }
+        }
       });
-    }
+
+      return () => roomEventSource.close();
+    },
+    [roomId, session.data?.id, refetchRoom, session.refetch],
+  );
+
+  const handleRefresh = () => {
+    Promise.all([refetchRoom(), session.refetch()]);
+  };
+
+  const handleLeaveRoom = () => {
+    leaveRoom.mutate(session.data?.id, {
+      onError: handleError,
+      onSuccess: () => router.replace('/'),
+    });
   };
 
   const confirmLeaveRoom = () => {
@@ -73,63 +103,29 @@ export function PendingRoom() {
     );
   };
 
-  useEffect(
-    function listenEvents() {
-      const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomId}`);
-
-      roomEventSource.addEventListener('message', (event) => {
-        if (event.type === 'message' && event.data) {
-          const roomInfos: Room = JSON.parse(event.data);
-
-          const isPlayerInRoom = roomInfos.players.some(
-            ({ id }) => id === session?.id,
-          );
-
-          if (isPlayerInRoom) {
-            refetchRoom().then(() => {
-              refetchSession();
-            });
-          } else {
-            refetchSession();
-          }
-        }
-      });
-
-      return () => roomEventSource.close();
-    },
-    [roomId, session?.id, refetchRoom, refetchSession],
-  );
-
-  const handleRefresh = () => {
-    Promise.all([refetchRoom(), refetchSession()]);
-  };
-
-  if (error) {
-    return <RoomError />;
+  if (isLoading) {
+    return <LoadingState />;
   }
 
-  // Handle loading state
-  if (isLoading) {
+  if (error) {
     return (
-      <View style={styles.container}>
-        <Header title="Chargement..." />
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={COLORS.buttonPrimaryColor} />
-          <Text style={styles.loadingText}>Chargement de la partie...</Text>
-        </View>
-      </View>
+      <ErrorState
+        refresh={handleRefresh}
+        refreshLoading={isPending}
+        leaveRoomLoading={leaveRoom.isPending}
+        leaveRoom={handleLeaveRoom}
+      />
     );
   }
 
-  // Handle no room data
   if (!room) {
     return (
-      <View style={styles.container}>
-        <Header title="Partie introuvable" />
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>Cette partie n&apos;existe pas.</Text>
-        </View>
-      </View>
+      <EmptyState
+        refresh={handleRefresh}
+        refreshLoading={isPending}
+        leaveRoomLoading={leaveRoom.isPending}
+        leaveRoom={handleLeaveRoom}
+      />
     );
   }
 
@@ -195,7 +191,7 @@ export function PendingRoom() {
                       {player.id === room.admin.id && (
                         <Text style={styles.adminBadge}>Admin</Text>
                       )}
-                      {player.id === session?.id && (
+                      {player.id === session.data?.id && (
                         <Text style={styles.youBadge}>Vous</Text>
                       )}
                     </View>
@@ -259,7 +255,7 @@ export function PendingRoom() {
       <View
         style={[styles.bottomActions, { paddingBottom: insets.bottom + 20 }]}
       >
-        {session?.id === room.admin.id && (
+        {session.data?.id === room.admin.id && (
           <Button
             color="primary"
             onPress={() => {}}
@@ -293,30 +289,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingBottom: 20,
   },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 20,
-  },
-  loadingText: {
-    color: COLORS.textSecondaryColor,
-    fontSize: 16,
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    marginHorizontal: 20,
-    gap: 20,
-    textAlign: 'center',
-  },
-  errorText: {
-    color: COLORS.textPrimaryColor,
-    fontSize: 16,
-    textAlign: 'center',
-  },
-
   // Room Info Styles
   roomInfoContainer: {
     backgroundColor: COLORS.secondaryBackgroundColor,
