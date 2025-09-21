@@ -22,12 +22,6 @@ export default function RootLayout() {
     SplashScreen.hideAsync();
   }, []);
 
-  /*   if (__DEV__) {
-    AsyncStorage.clear().then(() => {
-      console.log('AsyncStorage cleared on startup (dev only)');
-    });
-  } */
-
   return (
     <Providers>
       <View
@@ -44,14 +38,7 @@ export default function RootLayout() {
             animationDuration: 100,
             gestureEnabled: false,
           }}
-        >
-          <Stack.Screen name="index" />
-          <Stack.Screen
-            name="rules"
-            options={{ presentation: 'modal', animation: 'slide_from_bottom' }}
-          />
-          <Stack.Screen name="onboarding" />
-        </Stack>
+        />
       </View>
       <StatusBar style="light" />
     </Providers>

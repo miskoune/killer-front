@@ -33,7 +33,7 @@ export default function Pseudo() {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
     >
       <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
-        <Header title="Choisir un pseudo" />
+        <Header title="Choisir un pseudo" showBackButton />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={[styles.view]}>
             <Image

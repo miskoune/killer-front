@@ -82,7 +82,7 @@ export default function Avatar() {
   return (
     <View style={styles.content}>
       <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
-        <Header title="Choisir un avatar" />
+        <Header title="Choisir un avatar" showBackButton />
         <View style={[styles.view]}>
           <View style={styles.avatarSliderContainer}>
             <ScrollView
