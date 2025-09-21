@@ -31,20 +31,14 @@ export function Avatar({ onPress, size = 48, avatarId, style }: AvatarProps) {
   }
 
   return (
-    <Pressable
-      onPress={onPress}
-      style={({ pressed }) => [avatarStyle, pressed && styles.avatarPressed]}
-    >
-      {
-        <Image
-          source={avatarData.source}
-          style={{
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-          }}
-        />
-      }
+    <Pressable onPress={onPress} style={avatarStyle}>
+      <Image
+        source={avatarData.source}
+        style={{
+          width: size,
+          height: size,
+        }}
+      />
     </Pressable>
   );
 }
@@ -54,13 +48,5 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.secondaryBackgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: COLORS.shadowColor,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-  },
-  avatarPressed: {
-    backgroundColor: COLORS.arrowButtonPressedColor,
   },
 });
