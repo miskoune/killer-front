@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRouter, usePathname } from 'expo-router';
+import { useRouter, usePathname, type RelativePathString } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import { useEffect } from 'react';
 import { Text, View, StyleSheet, ScrollView, Pressable } from 'react-native';
@@ -11,6 +11,7 @@ import { COLORS } from '@/shared/constants/theme';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useTranslation } from '@/translations';
 
+import { MAP_ROOM_STATUS_TO_ROUTE } from './constants/room-status';
 import CloseIcon from './icons/close.svg';
 
 export function Home() {
@@ -21,8 +22,10 @@ export function Home() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    if (session?.room?.id && session.room.status === 'PENDING') {
-      router.replace(`/room/${session.room.id}/pending`);
+    if (session?.room?.id) {
+      const route = MAP_ROOM_STATUS_TO_ROUTE.get(session.room.status);
+
+      router.replace(`/room/${session.room.id}/${route}` as RelativePathString);
     }
   }, [session, router, pathname]);
 
