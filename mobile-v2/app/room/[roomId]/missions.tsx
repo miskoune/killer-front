@@ -1,5 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Text,
   View,
@@ -29,11 +29,16 @@ export default function MissionsManagement() {
   const [deletingMissionId, setDeletingMissionId] = useState<number | null>(
     null,
   );
+  const textInputRef = useRef<TextInput>(null);
   const { data: room, isLoading, error } = useGetRoom(roomId);
   const { data: session } = useGetSession();
   const { handleError } = useErrorHandler();
   const createMission = useCreateMission();
   const deleteMission = useDeleteMission();
+
+  useEffect(function autoFocus() {
+    textInputRef.current?.focus();
+  }, []);
 
   const handleCreateMission = () => {
     if (!newMissionContent.trim()) {
@@ -133,6 +138,7 @@ export default function MissionsManagement() {
 
             <View style={styles.inputContainer}>
               <TextInput
+                ref={textInputRef}
                 style={styles.textInput}
                 value={newMissionContent}
                 onChangeText={setNewMissionContent}
