@@ -13,7 +13,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint"
+      "npm run lint"
     ]
   },
   "dependencies": {
