@@ -258,10 +258,7 @@ export default function PendingRoom() {
         {isAdmin && (
           <Button
             color="primary"
-            onPress={() => {
-              // TODO: Implement start game functionality
-              console.log('Start game');
-            }}
+            onPress={() => {}}
             text={t('room.start.party.button')}
             disabled={!room.hasEnoughPlayers || !room.hasEnoughMissions}
           />

@@ -4,6 +4,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
@@ -18,6 +19,7 @@ export default defineConfig([
       ecmaVersion: 'latest',
       sourceType: 'module',
       parser: tsParser,
+      globals: globals.node,
     },
     settings: {
       react: {
@@ -33,24 +35,8 @@ export default defineConfig([
       '@typescript-eslint/no-var-requires': 'off',
       'react/jsx-fragments': ['error', 'syntax'],
       'react/prop-types': 'off',
-      'react/require-default-props': 'off',
-
-      'react/jsx-filename-extension': [
-        'error',
-        {
-          extensions: ['.tsx'],
-        },
-      ],
-      'react/jsx-props-no-spreading': 'off',
-      'import/prefer-default-export': 'off',
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
-      '@typescript-eslint/no-use-before-define': [
-        'error',
-        {
-          typedefs: false,
-        },
-      ],
       'import/no-extraneous-dependencies': [
         'error',
         {
@@ -99,14 +85,6 @@ export default defineConfig([
         'error',
         {
           fixStyle: 'inline-type-imports',
-        },
-      ],
-      '@typescript-eslint/no-use-before-define': [
-        'error',
-        {
-          functions: false, // still error if you use a function before its declaration
-          classes: true, // still error if you instantiate a class before it's declared
-          variables: false, // ✅ allow variables (styles) to be “hoisted”
         },
       ],
       '@typescript-eslint/no-require-imports': 'off',
