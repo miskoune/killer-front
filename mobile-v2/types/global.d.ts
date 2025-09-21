@@ -1,5 +1,3 @@
-import { type StyleProp, type ViewStyle } from 'react-native/types';
-
 declare global {
   declare module '*.svg' {
     import type * as React from 'react';
@@ -8,3 +6,5 @@ declare global {
     export default content;
   }
 }
+
+export {};

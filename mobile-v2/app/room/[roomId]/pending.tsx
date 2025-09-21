@@ -11,19 +11,19 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EventSource from 'react-native-sse';
 
+import LeaveIcon from '@/assets/icons/leave.svg';
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
 import { Header } from '@/components/Header';
-import LeaveIcon from '@/assets/icons/leave.svg';
 import { ROOM_TOPIC } from '@/constants/sse';
 import { COLORS } from '@/constants/theme';
 import { useGetSession } from '@/features/onboarding/queries';
 import { useGetRoom } from '@/features/room/queries';
+import { useErrorHandler } from '@/hooks/useErrorHandler';
 import { useLeaveRoom } from '@/requests/mutations';
 import { type Room, type Player } from '@/requests/types';
 import { useTranslation } from '@/translations';
-import { useErrorHandler } from '@/hooks/useErrorHandler';
 
 export default function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();

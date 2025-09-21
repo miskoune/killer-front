@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { type SVGProps } from 'react';
 import {
   Pressable,
   View,
@@ -8,7 +9,6 @@ import {
 } from 'react-native';
 
 import ArrowLeft from '@/assets/icons/arrowLeft.svg';
-
 import { COLORS } from '@/constants/theme';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   showBackButton?: boolean;
   onBackPress?: () => void;
   rightAction?: {
-    icon: React.ComponentType<any>;
+    icon: React.ComponentType<SVGProps<SVGElement>>;
     onPress: () => void;
     loading?: boolean;
   };

@@ -1,7 +1,7 @@
+import { useEffect, useRef, useState } from 'react';
 import { Animated, TextInput, StyleSheet, Pressable } from 'react-native';
 
 import { COLORS } from '@/constants/theme';
-import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   value: string;
@@ -17,9 +17,12 @@ export function Input({ value, setValue, label, innerRef }: Props) {
 
   const refToUse = innerRef || textInputRef;
 
-  useEffect(function autoFocus() {
-    refToUse.current?.focus();
-  }, []);
+  useEffect(
+    function autoFocus() {
+      refToUse.current?.focus();
+    },
+    [refToUse],
+  );
 
   const handleFocus = () => {
     setFocused(true);
