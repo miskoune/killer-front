@@ -27,6 +27,7 @@ import { ROOM_TOPIC } from '../constants';
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
 
+import { RoomCode } from './RoomCode';
 import { EmptyState } from './state/EmptyState';
 import { ErrorState } from './state/ErrorState';
 import { LoadingState } from './state/LoadingState';
@@ -144,34 +145,7 @@ export function PendingRoom() {
         }
       >
         <FadeInView style={styles.content}>
-          {/* Room Info Section */}
-          <View style={styles.roomInfoContainer}>
-            <Text style={styles.roomCode}>
-              {t('room.join.room.code', { roomCode: room.data?.id })}
-            </Text>
-
-            {/* Player count info */}
-            <View style={styles.statsContainer}>
-              <Text style={styles.statsText}>
-                {room.data?.players.length === 1
-                  ? t('room.players.count_one', {
-                      count: room.data?.players.length,
-                    })
-                  : t('room.players.count_other', {
-                      count: room.data?.players.length,
-                    })}
-              </Text>
-              <Text style={styles.statsText}>
-                {room.data?.missions.length === 1
-                  ? t('room.missions.count_one', {
-                      count: room.data?.missions.length,
-                    })
-                  : t('room.missions.count_other', {
-                      count: room.data?.missions.length,
-                    })}
-              </Text>
-            </View>
-          </View>
+          <RoomCode roomCode={room.data?.id} />
 
           {/* Players List Section */}
           <View style={styles.playersSection}>
@@ -289,36 +263,6 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
     paddingBottom: 20,
-  },
-  // Room Info Styles
-  roomInfoContainer: {
-    backgroundColor: COLORS.secondaryBackgroundColor,
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 20,
-    shadowColor: COLORS.shadowColor,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-  },
-  roomCode: {
-    fontSize: 16,
-    color: COLORS.textSecondaryColor,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  statsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderTopWidth: 1,
-    borderTopColor: COLORS.inputBorderColor,
-    paddingTop: 15,
-  },
-  statsText: {
-    fontSize: 16,
-    color: COLORS.textPrimaryColor,
-    fontWeight: '500',
   },
 
   // Players Section Styles
