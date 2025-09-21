@@ -11,7 +11,6 @@ import {
   Alert,
 } from 'react-native';
 
-import { useCreateMission, useDeleteMission } from '@/requests/mission';
 import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
@@ -21,6 +20,9 @@ import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useTranslation } from '@/translations';
 
 import { useGetRoom } from '../hooks/useGetRoom';
+
+import { useCreateMission } from './hooks/useCreateMission';
+import { useDeleteMission } from './hooks/useDeleteMission';
 
 export function Missions() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
