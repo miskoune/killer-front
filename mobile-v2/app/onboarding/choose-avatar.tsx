@@ -15,9 +15,9 @@ import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { COLORS } from '@/constants/theme';
 import { AVATARS } from '@/features/onboarding/constants';
-import { useErrorHandler } from '@/hooks/useErrorHandler';
 import { useCreatePlayer } from '@/requests/mutations';
 import { selectPlayer, selectUpdatePlayer } from '@/selectors/player';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { usePlayerStore } from '@/store/player';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');

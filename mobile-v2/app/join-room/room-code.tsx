@@ -15,9 +15,9 @@ import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { Input } from '@/components/Input';
 import { COLORS } from '@/constants/theme';
-import { useGetSession } from '@/features/onboarding/queries';
-import { useErrorHandler } from '@/hooks/useErrorHandler';
 import { useUpdatePlayer } from '@/requests/mutations';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
+import { useGetSession } from '@/shared/hooks/useGetSession';
 
 export default function RoomCode() {
   const [roomCode, setRoomCode] = useState('');

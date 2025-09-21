@@ -1,10 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { PLAYER_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { PLAYER_ENDPOINT } from '@/constants/endpoints';
+import { type Session } from '@/shared/types/session';
 import { request } from '@/utils/apis';
-
-import { type Session, type Room, type SessionUpdate } from './types';
 
 export function useCreatePlayer() {
   const queryClient = useQueryClient();
@@ -29,24 +28,17 @@ export function useCreatePlayer() {
   });
 }
 
+interface SessionUpdate {
+  id: number;
+  room: string;
+}
+
 export function useUpdatePlayer() {
   const mutationFn = (session: Partial<SessionUpdate>) => {
     return request<Session>({
       url: `${PLAYER_ENDPOINT}/${session.id}`,
       method: 'PATCH',
       requestInit: { body: JSON.stringify(session) },
-    });
-  };
-
-  return useMutation({ mutationFn });
-}
-
-export function useCreateRoom() {
-  const mutationFn = ({ isGameMastered }: { isGameMastered: boolean }) => {
-    return request<Room>({
-      url: ROOM_ENDPOINT,
-      method: 'POST',
-      requestInit: { body: JSON.stringify({ isGameMastered }) },
     });
   };
 

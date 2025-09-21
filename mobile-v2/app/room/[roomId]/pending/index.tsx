@@ -18,11 +18,12 @@ import { FadeInView } from '@/components/FadeInView';
 import { Header } from '@/components/Header';
 import { ROOM_TOPIC } from '@/constants/sse';
 import { COLORS } from '@/constants/theme';
-import { useGetSession } from '@/features/onboarding/queries';
 import { useGetRoom } from '@/features/room/queries';
-import { useErrorHandler } from '@/hooks/useErrorHandler';
 import { useLeaveRoom } from '@/requests/mutations';
-import { type Room, type Player } from '@/requests/types';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
+import { useGetSession } from '@/shared/hooks/useGetSession';
+import { type Player } from '@/shared/types/player';
+import { type Room } from '@/shared/types/room';
 import { useTranslation } from '@/translations';
 
 export default function PendingRoom() {

@@ -16,11 +16,12 @@ import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
 import { Input } from '@/components/Input';
 import { COLORS } from '@/constants/theme';
-import { useGetSession } from '@/features/onboarding/queries';
-import { useErrorHandler } from '@/hooks/useErrorHandler';
-import { useCreateRoom } from '@/requests/mutations';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
+import { useGetSession } from '@/shared/hooks/useGetSession';
 
-export default function RoomName() {
+import { useCreateRoom } from './hooks/useCreateRoom';
+
+export function ChooseRoomName() {
   const { data: session } = useGetSession();
   const [roomName, setRoomName] = useState(
     session?.name ? `Partie de ${session.name}` : '',
@@ -28,16 +29,16 @@ export default function RoomName() {
   const { handleError } = useErrorHandler();
   const inputRef = createRef<TextInput>();
   const insets = useSafeAreaInsets();
-  const { mutateAsync: createRoom } = useCreateRoom();
+  const createRoom = useCreateRoom();
 
-  const handleRoomName = async () => {
-    try {
-      const room = await createRoom({ isGameMastered: true });
-
-      router.push(`/room/${room.id}/pending`);
-    } catch (error) {
-      handleError(error);
-    }
+  const handleCreateRoom = () => {
+    createRoom.mutate(
+      { isGameMastered: true },
+      {
+        onSuccess: ({ id }) => router.push(`/room/${id}/pending`),
+        onError: handleError,
+      },
+    );
   };
 
   return (
@@ -66,7 +67,7 @@ export default function RoomName() {
           <Button
             disabled={!roomName}
             color="primary"
-            onPress={handleRoomName}
+            onPress={handleCreateRoom}
             text="Créer la partie"
             customStyle={{ marginBottom: insets.bottom }}
           />

@@ -9,8 +9,8 @@ import DeletePlayerIcon from '@/assets/icons/x.svg';
 import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
 import { COLORS } from '@/constants/theme';
-import { useGetSession } from '@/features/onboarding/queries';
 import { selectClearPlayer } from '@/selectors/player';
+import { useGetSession } from '@/shared/hooks/useGetSession';
 import { usePlayerStore } from '@/store/player';
 import { useTranslation } from '@/translations';
 
@@ -76,7 +76,7 @@ export default function Index() {
               <>
                 <Button
                   color="primary"
-                  onPress={() => router.push('/create-room/room-name')}
+                  onPress={() => router.push('/create-room')}
                   text={t('home.create.room.button')}
                 />
                 <Button

@@ -15,10 +15,10 @@ import { Button } from '@/components/Button';
 import { FadeInView } from '@/components/FadeInView';
 import { Header } from '@/components/Header';
 import { COLORS } from '@/constants/theme';
-import { useGetSession } from '@/features/onboarding/queries';
 import { useGetRoom } from '@/features/room/queries';
-import { useErrorHandler } from '@/hooks/useErrorHandler';
 import { useCreateMission, useDeleteMission } from '@/requests/mission';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
+import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useTranslation } from '@/translations';
 
 export default function MissionsManagement() {
