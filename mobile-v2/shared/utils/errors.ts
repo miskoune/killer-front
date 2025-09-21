@@ -1,4 +1,4 @@
-import { type ErrorCode } from '@/types/errors';
+import { type ErrorCode } from '@/shared/types/errors';
 
 interface RequestErrorParams {
   errorCode: ErrorCode;

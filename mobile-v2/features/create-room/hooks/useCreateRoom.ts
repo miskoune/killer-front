@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { ROOM_ENDPOINT } from '@/constants/endpoints';
 import { type Room } from '@/shared/types/room';
-import { request } from '@/utils/apis';
+import { request } from '@/shared/utils/apis';
 
 export function useCreateRoom() {
   const mutationFn = ({ isGameMastered }: { isGameMastered: boolean }) => {

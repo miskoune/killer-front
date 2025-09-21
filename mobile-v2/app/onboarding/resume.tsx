@@ -3,11 +3,11 @@ import { useRouter } from 'expo-router';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Button } from '@/components/Button';
-import { Header } from '@/components/Header';
 import { COLORS } from '@/constants/theme';
 import { AVATARS } from '@/features/onboarding/constants';
 import { selectPlayer } from '@/selectors/player';
+import { Button } from '@/shared/components/Button';
+import { Header } from '@/shared/components/Header';
 import { usePlayerStore } from '@/store/player';
 
 export default function Resume() {

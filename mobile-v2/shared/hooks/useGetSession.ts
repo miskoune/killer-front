@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { PLAYER_ENDPOINT } from '@/constants/endpoints';
 import { type Session } from '@/shared/types/session';
-import { request } from '@/utils/apis';
+import { request } from '@/shared/utils/apis';
 
 export function useGetSession() {
   const queryFn = () => {

@@ -6,8 +6,8 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { COLORS } from '@/constants/theme';
+import { Providers } from '@/shared/utils/providers';
 import { setupIntl } from '@/translations';
-import { Providers } from '@/utils/providers';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
