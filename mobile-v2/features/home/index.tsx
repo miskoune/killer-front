@@ -62,7 +62,7 @@ export function Home() {
             <Text style={styles.title}>KILLER PARTY</Text>
 
             <LottieView
-              source={require('@/assets/lotties/players.json')}
+              source={require('./lotties/home.json')}
               autoPlay
               style={styles.image}
               loop

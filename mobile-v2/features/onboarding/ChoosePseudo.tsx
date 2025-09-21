@@ -37,7 +37,7 @@ export function ChoosePseudo() {
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={[styles.view]}>
             <Image
-              source={require('@/assets/images/pseudo.png')}
+              source={require('./images/pseudo.png')}
               style={styles.lottie}
             />
             <Input

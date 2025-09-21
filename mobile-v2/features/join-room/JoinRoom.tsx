@@ -48,7 +48,7 @@ export function JoinRoom() {
         <TouchableWithoutFeedback>
           <View style={styles.view}>
             <Image
-              source={require('@/assets/images/room-code.png')}
+              source={require('./images/room-code.png')}
               style={styles.image}
             />
             <Input

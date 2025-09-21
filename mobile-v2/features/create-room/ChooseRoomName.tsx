@@ -52,7 +52,7 @@ export function ChooseRoomName() {
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={styles.view}>
             <Image
-              source={require('@/assets/images/room-name.png')}
+              source={require('./images/room-name.png')}
               style={styles.image}
             />
             <Input
