@@ -21,9 +21,6 @@ export function useRoomEvents() {
       if (event.type === 'message' && event.data) {
         const roomInfos: Room = JSON.parse(event.data);
 
-        // eslint-disable-next-line no-console
-        console.log('roomInfos', roomInfos);
-
         const isPlayerInRoom = roomInfos.players.some(
           ({ id }) => id === session.data?.id,
         );
