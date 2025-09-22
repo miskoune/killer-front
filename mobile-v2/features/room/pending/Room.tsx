@@ -1,12 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  RefreshControl,
-  Image,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import EventSource from 'react-native-sse';
 
 import { FadeInView } from '@/shared/components/FadeInView';
@@ -23,7 +17,6 @@ import { ErrorState } from '../state/ErrorState';
 import { LoadingState } from '../state/LoadingState';
 
 import { FooterActions } from './FooterActions';
-import { GameStatus } from './GameStatus';
 import SettingsIcon from './icons/settings.svg';
 import { Players } from './Players';
 import { RoomCode } from './RoomCode';
@@ -107,13 +100,8 @@ export function PendingRoom() {
         />
 
         <FadeInView style={styles.content}>
-          <Image
-            source={require('./images/room-pending.png')}
-            style={styles.image}
-          />
           <RoomCode roomCode={room.data?.id} />
           <Players roomId={room.data?.id} />
-          <GameStatus roomId={room.data?.id} />
         </FadeInView>
       </ScrollView>
 
@@ -133,11 +121,5 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 1,
-  },
-  image: {
-    height: 300,
-    width: 300,
-    alignSelf: 'center',
-    marginBottom: 20,
   },
 });

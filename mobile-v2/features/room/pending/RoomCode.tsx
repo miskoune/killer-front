@@ -1,9 +1,12 @@
+import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { COLORS } from '@/shared/constants/theme';
 import { useTranslation } from '@/translations';
 
 import { useGetRoom } from '../hooks/useGetRoom';
+
+import { GameStatus } from './GameStatus';
 
 interface RoomCodeProps {
   roomCode: string;
@@ -39,9 +42,14 @@ export function RoomCode({ roomCode }: RoomCodeProps) {
   return (
     <View style={styles.playersSection}>
       <View style={styles.roomInfoContainer}>
+        <Image
+          source={require('./images/room-pending.png')}
+          style={styles.image}
+        />
         <Text style={styles.roomCode}>
-          {t('room.join.room.code', { roomCode: room.data?.id })}
+          Le code pour rejoindre cette partie est {room.data?.id}
         </Text>
+        <GameStatus roomId={roomCode} />
 
         <View style={styles.statsContainer}>
           <Text style={styles.statsText}>{getPlayerCount()}</Text>
@@ -56,11 +64,15 @@ const styles = StyleSheet.create({
   playersSection: {
     marginBottom: 20,
   },
+  image: {
+    height: 200,
+    width: 200,
+    alignSelf: 'center',
+  },
   sectionTitle: {
     fontSize: 20,
     fontWeight: '600',
     color: COLORS.textPrimaryColor,
-    marginBottom: 8,
   },
   sectionDescription: {
     fontSize: 14,
@@ -68,15 +80,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   roomInfoContainer: {
-    backgroundColor: COLORS.secondaryBackgroundColor,
-    borderRadius: 20,
-    padding: 20,
     marginBottom: 20,
-    shadowColor: COLORS.shadowColor,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
   },
   roomCode: {
     fontSize: 16,

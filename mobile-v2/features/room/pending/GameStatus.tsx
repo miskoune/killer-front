@@ -38,12 +38,10 @@ export function GameStatus({ roomId }: GameStatusProps) {
 
   return (
     <View style={styles.gameStatusSection}>
-      <Text style={styles.sectionTitle}>Informations de la partie</Text>
-      <Text style={styles.sectionDescription}>
-        {t('room.start.party.conditions')}
-      </Text>
-
       <View style={styles.conditionsContainer}>
+        <Text style={styles.sectionTitle}>
+          {t('room.start.party.conditions')}
+        </Text>
         <View style={styles.conditionItem}>
           <Text style={styles.conditionText}>{getPlayersConditionText()}</Text>
           <Text
@@ -77,7 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '600',
     color: COLORS.textPrimaryColor,
     marginBottom: 8,
@@ -107,7 +105,7 @@ const styles = StyleSheet.create({
   conditionStatus: {
     fontSize: 18,
     fontWeight: '600',
-    color: COLORS.textSecondaryColor,
+    color: COLORS.errorColor,
   },
   conditionMet: {
     color: COLORS.buttonPrimaryColor,

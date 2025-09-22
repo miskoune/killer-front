@@ -15,4 +15,5 @@ export const COLORS = {
   inputBorderColor: '#74767E',
   inputBackgroundColor: '#2F323A',
   shadowColor: 'black',
+  errorColor: '#FF6B6B',
 };
