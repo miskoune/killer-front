@@ -17,7 +17,10 @@ export function ConfirmKillButton({ session }: ConfirmKillButtonProps) {
   const { handleError } = useErrorHandler();
 
   const handleKillPlayer = () => {
-    updatePlayer.mutate({ id: session.id }, { onError: handleError });
+    updatePlayer.mutate(
+      { id: session.id, status: 'KILLED' },
+      { onError: handleError },
+    );
   };
 
   return (

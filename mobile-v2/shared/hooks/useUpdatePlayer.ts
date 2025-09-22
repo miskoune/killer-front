@@ -5,6 +5,7 @@ import { type Session } from '@/shared/types/session';
 import { request } from '@/shared/utils/request';
 
 import { UPDATE_PLAYER_WAIT_TIME } from '../constants/timers';
+import { type PlayerStatus } from '../types/player';
 import { wait } from '../utils/wait';
 
 interface SessionUpdate {
@@ -12,6 +13,7 @@ interface SessionUpdate {
   room: string;
   name: string;
   avatar: string;
+  status: PlayerStatus;
 }
 
 export function useUpdatePlayer() {
