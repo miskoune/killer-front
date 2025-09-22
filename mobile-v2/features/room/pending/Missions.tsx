@@ -146,7 +146,7 @@ export function Missions() {
                 value={newMissionContent}
                 onChangeText={setNewMissionContent}
                 multiline
-                numberOfLines={3}
+                numberOfLines={2}
                 textAlignVertical="top"
                 maxLength={500}
               />
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   inputContainer: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   textInput: {
     backgroundColor: COLORS.primaryBackgroundColor,
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     padding: 15,
     fontSize: 16,
     color: COLORS.textPrimaryColor,
-    minHeight: 80,
+    minHeight: 40,
   },
   characterCount: {
     fontSize: 12,

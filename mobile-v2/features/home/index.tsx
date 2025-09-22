@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import { Text, View, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
@@ -15,7 +16,7 @@ import CloseIcon from './icons/close.svg';
 export function Home() {
   const { t } = useTranslation();
   const router = useRouter();
-
+  const insets = useSafeAreaInsets();
   const session = useGetSession();
   const queryClient = useQueryClient();
 
@@ -52,7 +53,7 @@ export function Home() {
               loop
             />
           </View>
-          <View style={styles.actions}>
+          <View style={[styles.actions, { marginBottom: insets.bottom }]}>
             {session?.data?.name ? (
               <>
                 <Button
@@ -119,9 +120,12 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   actions: {
-    margin: 20,
-    marginBottom: 40,
-    gap: 10,
+    padding: 20,
+    paddingBottom: 0,
+    backgroundColor: COLORS.primaryBackgroundColor,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.inputBorderColor,
+    gap: 15,
   },
   icon: {
     borderRadius: 10,
