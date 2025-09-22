@@ -26,4 +26,9 @@ export const AVATARS = [
     name: 'Loup-garou',
     source: require('../assets/images/werewolf.png'),
   },
+  {
+    id: 'vampire',
+    name: 'Vampire',
+    source: require('../assets/images/vampire.png'),
+  },
 ];
