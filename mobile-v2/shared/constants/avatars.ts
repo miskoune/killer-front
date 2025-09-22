@@ -5,4 +5,5 @@ export const AVATARS = [
   { id: 'pumpkin', source: require('../assets/images/pumpkin.png') },
   { id: 'bat', source: require('../assets/images/bat.png') },
   { id: 'scarecrow', source: require('../assets/images/scarecrow.png') },
+  { id: 'werewolf', source: require('../assets/images/werewolf.png') },
 ];
