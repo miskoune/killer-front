@@ -37,20 +37,36 @@ export function RoomCode({ roomCode }: RoomCodeProps) {
   };
 
   return (
-    <View style={styles.roomInfoContainer}>
-      <Text style={styles.roomCode}>
-        {t('room.join.room.code', { roomCode: room.data?.id })}
-      </Text>
+    <View style={styles.playersSection}>
+      <View style={styles.roomInfoContainer}>
+        <Text style={styles.roomCode}>
+          {t('room.join.room.code', { roomCode: room.data?.id })}
+        </Text>
 
-      <View style={styles.statsContainer}>
-        <Text style={styles.statsText}>{getPlayerCount()}</Text>
-        <Text style={styles.statsText}>{getMissionCount()}</Text>
+        <View style={styles.statsContainer}>
+          <Text style={styles.statsText}>{getPlayerCount()}</Text>
+          <Text style={styles.statsText}>{getMissionCount()}</Text>
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  playersSection: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: COLORS.textPrimaryColor,
+    marginBottom: 8,
+  },
+  sectionDescription: {
+    fontSize: 14,
+    color: COLORS.textSecondaryColor,
+    marginBottom: 15,
+  },
   roomInfoContainer: {
     backgroundColor: COLORS.secondaryBackgroundColor,
     borderRadius: 20,

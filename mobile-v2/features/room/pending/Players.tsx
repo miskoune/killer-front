@@ -35,7 +35,7 @@ export function Players({ roomId }: PlayersProps) {
       <View style={styles.playersContainer}>
         {room.data?.players.map((player: Player) => (
           <View key={player.id} style={styles.playerCard}>
-            <Avatar avatarId={player.avatar} size={60} />
+            <Avatar avatarId={player.avatar} size={100} />
             <View style={styles.playerInfo}>
               <View style={styles.playerNameContainer}>
                 <Text style={styles.playerName}>{player.name}</Text>

@@ -1,6 +1,12 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect } from 'react';
-import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+  Image,
+} from 'react-native';
 import EventSource from 'react-native-sse';
 
 import { FadeInView } from '@/shared/components/FadeInView';
@@ -98,7 +104,7 @@ export function PendingRoom() {
         }
       >
         <Header
-          title={room.data?.name.toUpperCase()}
+          title="Partie en attente"
           rightAction={{
             icon: SettingsIcon,
             onPress: () => router.push(`/room/${roomId}/pending/settings`),
@@ -106,6 +112,10 @@ export function PendingRoom() {
         />
 
         <FadeInView style={styles.content}>
+          <Image
+            source={require('./images/room-pending-2.png')}
+            style={styles.image}
+          />
           <RoomCode roomCode={room.data?.id} />
           <Players roomId={room.data?.id} />
           <GameStatus roomId={room.data?.id} />
@@ -124,10 +134,15 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 20,
+    padding: 20,
   },
   scrollViewContent: {
     flexGrow: 1,
-    paddingBottom: 20,
+  },
+  image: {
+    height: 250,
+    width: 250,
+    alignSelf: 'center',
+    marginBottom: 20,
   },
 });
