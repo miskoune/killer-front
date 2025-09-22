@@ -72,7 +72,6 @@ export function PendingRoomSettings() {
       setSelectedAvatar(avatarId);
       updatePlayerMutation.mutate({ avatar: avatarId });
     }
-    setShowAvatarModal(false);
   };
 
   const handleLeaveRoom = () => {
@@ -204,21 +203,24 @@ export function PendingRoomSettings() {
               showsVerticalScrollIndicator={false}
             >
               {AVATARS.map((avatar) => (
-                <TouchableOpacity
+                <View
                   key={avatar.id}
-                  onPress={() => handleUpdateAvatar(avatar.id)}
                   style={[
                     styles.avatarOption,
                     selectedAvatar === avatar.id && styles.selectedAvatarOption,
                   ]}
                 >
-                  <Avatar size={80} avatarId={avatar.id} />
+                  <Avatar
+                    size={80}
+                    avatarId={avatar.id}
+                    onPress={() => handleUpdateAvatar(avatar.id)}
+                  />
                   {selectedAvatar === avatar.id && (
                     <View style={styles.selectedIndicator}>
                       <Text style={styles.checkmark}>✓</Text>
                     </View>
                   )}
-                </TouchableOpacity>
+                </View>
               ))}
             </ScrollView>
           </View>
