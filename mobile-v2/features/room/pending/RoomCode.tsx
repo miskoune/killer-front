@@ -49,59 +49,40 @@ export function RoomCode({ roomCode }: RoomCodeProps) {
   };
 
   return (
-    <View style={styles.playersSection}>
-      <View style={styles.roomInfoContainer}>
-        <Image
-          source={require('./images/room-pending.png')}
-          style={styles.image}
-        />
-        <Pressable
-          style={({ pressed }) => [
-            styles.roomCode,
-            pressed && styles.roomCodePressed,
-          ]}
-          onPress={handleRoomCodePress}
-        >
-          <Text style={styles.roomCode}>
-            {t('room.join.room.code', { roomCode })}
-          </Text>
-        </Pressable>
-        <GameStatus roomId={roomCode} />
-
-        <View style={styles.statsContainer}>
-          <Text style={styles.statsText}>{getPlayerCount()}</Text>
-          <Text style={styles.statsText}>{getMissionCount()}</Text>
-        </View>
+    <View>
+      <Image
+        source={require('./images/room-pending.png')}
+        style={styles.image}
+      />
+      <Pressable
+        style={({ pressed }) => [
+          styles.roomCode,
+          pressed && styles.roomCodePressed,
+        ]}
+        onPress={handleRoomCodePress}
+      >
+        <Text style={styles.roomCode}>
+          {t('room.join.room.code', { roomCode })}
+        </Text>
+      </Pressable>
+      <View style={styles.statsContainer}>
+        <Text style={styles.statsText}>{getPlayerCount()}</Text>
+        <Text style={styles.statsText}>{getMissionCount()}</Text>
       </View>
+      <GameStatus roomId={roomCode} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  playersSection: {
-    marginBottom: 20,
-  },
   image: {
     height: 200,
     width: 200,
     alignSelf: 'center',
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: COLORS.textPrimaryColor,
-  },
-  sectionDescription: {
-    fontSize: 14,
-    color: COLORS.textSecondaryColor,
-    marginBottom: 15,
-  },
-  roomInfoContainer: {
-    marginBottom: 20,
-  },
   roomCode: {
     fontSize: 16,
-    color: COLORS.textPrimaryColor,
+    color: COLORS.textSecondaryColor,
     textAlign: 'center',
     marginBottom: 10,
   },
@@ -114,6 +95,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: COLORS.inputBorderColor,
     paddingTop: 15,
+    paddingBottom: 20,
   },
   statsText: {
     fontSize: 16,
