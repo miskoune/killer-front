@@ -1,12 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Alert,
-  RefreshControl,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import EventSource from 'react-native-sse';
 
 import { FadeInView } from '@/shared/components/FadeInView';
@@ -15,7 +9,6 @@ import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { type Room } from '@/shared/types/room';
-import { useTranslation } from '@/translations';
 
 import { ROOM_TOPIC } from '../constants';
 import { useGetRoom } from '../hooks/useGetRoom';
@@ -25,17 +18,16 @@ import { LoadingState } from '../state/LoadingState';
 
 import { FooterActions } from './FooterActions';
 import { GameStatus } from './GameStatus';
-import LeaveIcon from './icons/leave.svg';
+import SettingsIcon from './icons/settings.svg';
 import { Players } from './Players';
 import { RoomCode } from './RoomCode';
 
 export function PendingRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
-  const { t } = useTranslation();
   const router = useRouter();
-  const { handleError } = useErrorHandler();
   const session = useGetSession();
   const room = useGetRoom(roomId);
+  const { handleError } = useErrorHandler();
   const leaveRoom = useLeaveRoom();
 
   useEffect(
@@ -72,26 +64,10 @@ export function PendingRoom() {
   const handleLeaveRoom = () => {
     leaveRoom.mutate(session.data?.id, {
       onError: handleError,
-      onSuccess: () => router.replace('/'),
+      onSuccess: () => {
+        router.replace('/');
+      },
     });
-  };
-
-  const confirmLeaveRoom = () => {
-    Alert.alert(
-      t('alert.leave.warning.title'),
-      t('alert.leave.warning.description'),
-      [
-        {
-          text: 'Annuler',
-          style: 'cancel',
-        },
-        {
-          text: t('room.leave.confirm.button'),
-          style: 'destructive',
-          onPress: handleLeaveRoom,
-        },
-      ],
-    );
   };
 
   if (room.isPending) {
@@ -124,9 +100,8 @@ export function PendingRoom() {
         <Header
           title={room.data?.name.toUpperCase()}
           rightAction={{
-            icon: LeaveIcon,
-            onPress: confirmLeaveRoom,
-            loading: leaveRoom.isPending,
+            icon: SettingsIcon,
+            onPress: () => router.push(`/room/${roomId}/pending/settings`),
           }}
         />
 

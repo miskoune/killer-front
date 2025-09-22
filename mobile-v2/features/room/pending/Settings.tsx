@@ -1,0 +1,430 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  Modal,
+  TouchableOpacity,
+} from 'react-native';
+
+import CloseIcon from '@/shared/assets/icons/close.svg';
+import { Avatar } from '@/shared/components/Avatar';
+import { Button } from '@/shared/components/Button';
+import { FadeInView } from '@/shared/components/FadeInView';
+import { Header } from '@/shared/components/Header';
+import { Input } from '@/shared/components/Input';
+import { AVATARS } from '@/shared/constants/avatars';
+import { PLAYER_ENDPOINT } from '@/shared/constants/endpoints';
+import { COLORS } from '@/shared/constants/theme';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
+import { useGetSession } from '@/shared/hooks/useGetSession';
+import { type Session } from '@/shared/types/session';
+import { request } from '@/shared/utils/request';
+import { useTranslation } from '@/translations';
+
+import { useLeaveRoom } from '../hooks/useLeaveRoom';
+
+interface UpdatePlayerData {
+  name?: string;
+  avatar?: string;
+}
+
+export function PendingRoomSettings() {
+  const { t } = useTranslation();
+  const router = useRouter();
+  const { handleError } = useErrorHandler();
+  const session = useGetSession();
+  const leaveRoom = useLeaveRoom();
+  const queryClient = useQueryClient();
+
+  const [playerName, setPlayerName] = useState(session.data?.name || '');
+  const [selectedAvatar, setSelectedAvatar] = useState(
+    session.data?.avatar || '',
+  );
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
+
+  const updatePlayerMutation = useMutation({
+    mutationFn: (data: UpdatePlayerData) => {
+      return request<Session>({
+        url: `${PLAYER_ENDPOINT}/${session.data?.id}`,
+        method: 'PATCH',
+        requestInit: { body: JSON.stringify(data) },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['session'] });
+    },
+    onError: handleError,
+  });
+
+  const handleUpdateName = () => {
+    if (playerName.trim() && playerName !== session.data?.name) {
+      updatePlayerMutation.mutate({ name: playerName.trim() });
+    }
+  };
+
+  const handleUpdateAvatar = (avatarId: string) => {
+    if (avatarId !== session.data?.avatar) {
+      setSelectedAvatar(avatarId);
+      updatePlayerMutation.mutate({ avatar: avatarId });
+    }
+    setShowAvatarModal(false);
+  };
+
+  const handleLeaveRoom = () => {
+    leaveRoom.mutate(session.data?.id, {
+      onError: handleError,
+      onSuccess: () => {
+        router.replace('/');
+      },
+    });
+  };
+
+  const confirmLeaveRoom = () => {
+    Alert.alert(
+      t('alert.leave.warning.title'),
+      t('alert.leave.warning.description'),
+      [
+        {
+          text: 'Annuler',
+          style: 'cancel',
+        },
+        {
+          text: t('room.leave.confirm.button'),
+          style: 'destructive',
+          onPress: handleLeaveRoom,
+        },
+      ],
+    );
+  };
+
+  const handleClose = () => {
+    setPlayerName(session.data?.name || '');
+    router.back();
+  };
+
+  return (
+    <>
+      <View style={styles.container}>
+        <Header title="Paramètres" showBackButton onBackPress={handleClose} />
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <FadeInView style={styles.content}>
+            <Text style={styles.sectionTitle}>👤 Vos informations</Text>
+            <View style={styles.playerCard}>
+              <View style={styles.playerInfo}>
+                <TouchableOpacity
+                  onPress={() => setShowAvatarModal(true)}
+                  style={styles.avatarContainer}
+                >
+                  {session.data?.avatar && (
+                    <Avatar
+                      size={200}
+                      avatarId={selectedAvatar || session.data.avatar}
+                    />
+                  )}
+                  <Text style={styles.editAvatarText}>
+                    Modifier votre avatar
+                  </Text>
+                </TouchableOpacity>
+
+                <View style={styles.nameEditContainer}>
+                  <Input value={playerName} setValue={setPlayerName} label="" />
+                  <View style={styles.nameEditButtons}>
+                    <Button
+                      color="primary"
+                      text="Sauvegarder"
+                      onPress={handleUpdateName}
+                      isLoading={updatePlayerMutation.isPending}
+                      customStyle={styles.smallButton}
+                      disabled={
+                        updatePlayerMutation.isPending ||
+                        playerName.trim() === session.data?.name
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            {/* Danger Zone */}
+            <View style={styles.dangerSection}>
+              <Text style={styles.dangerTitle}>⚠️ Zone de danger</Text>
+              <Text style={styles.dangerDescription}>
+                Attention ! Cette action est irréversible. Une fois que vous
+                quittez la partie, vous ne pourrez plus y revenir.
+              </Text>
+
+              <View style={styles.dangerActions}>
+                <Button
+                  color="secondary"
+                  text={t('room.leave.current.room')}
+                  onPress={confirmLeaveRoom}
+                  isLoading={leaveRoom.isPending}
+                  customStyle={styles.leaveButton}
+                />
+              </View>
+            </View>
+          </FadeInView>
+        </ScrollView>
+      </View>
+
+      {/* Avatar Selection Modal */}
+      <Modal
+        visible={showAvatarModal}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowAvatarModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Choisir un avatar</Text>
+              <TouchableOpacity
+                onPress={() => setShowAvatarModal(false)}
+                style={styles.modalCloseButton}
+              >
+                <CloseIcon
+                  width={24}
+                  height={24}
+                  color={COLORS.textPrimaryColor}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView
+              contentContainerStyle={styles.avatarGrid}
+              showsVerticalScrollIndicator={false}
+            >
+              {AVATARS.map((avatar) => (
+                <TouchableOpacity
+                  key={avatar.id}
+                  onPress={() => handleUpdateAvatar(avatar.id)}
+                  style={[
+                    styles.avatarOption,
+                    selectedAvatar === avatar.id && styles.selectedAvatarOption,
+                  ]}
+                >
+                  <Avatar size={80} avatarId={avatar.id} />
+                  {selectedAvatar === avatar.id && (
+                    <View style={styles.selectedIndicator}>
+                      <Text style={styles.checkmark}>✓</Text>
+                    </View>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.primaryBackgroundColor,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 60,
+    paddingBottom: 20,
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: COLORS.textPrimaryColor,
+  },
+  closeButton: {
+    padding: 8,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollViewContent: {
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+    gap: 20,
+  },
+
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLORS.textPrimaryColor,
+  },
+
+  playerCard: {
+    backgroundColor: COLORS.secondaryBackgroundColor,
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: COLORS.shadowColor,
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  playerInfo: {
+    alignItems: 'center',
+  },
+  avatarContainer: {
+    marginBottom: 16,
+  },
+  editAvatarText: {
+    fontSize: 20,
+    color: COLORS.buttonPrimaryColor,
+    fontWeight: '600',
+  },
+  nameDisplayContainer: {
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  nameEditContainer: {
+    width: '100%',
+    marginBottom: 16,
+  },
+  nameEditButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 12,
+    gap: 12,
+  },
+  smallButton: {
+    flex: 1,
+    marginTop: 10,
+    padding: 15,
+  },
+  playerName: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: COLORS.textPrimaryColor,
+    marginBottom: 4,
+  },
+  editNameButton: {
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+  },
+  editNameText: {
+    fontSize: 14,
+    color: COLORS.buttonPrimaryColor,
+    fontWeight: '600',
+  },
+  playerStatus: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.textSecondaryColor,
+  },
+
+  // Danger Section
+  dangerSection: {
+    backgroundColor: '#2B1D1A',
+    borderRadius: 20,
+    padding: 20,
+    borderWidth: 2,
+    borderColor: '#FF6B6B',
+    shadowColor: '#FF6B6B',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  dangerTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#FF6B6B',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  dangerDescription: {
+    fontSize: 14,
+    color: '#FFB3B3',
+    lineHeight: 20,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  dangerActions: {
+    alignItems: 'center',
+  },
+  leaveButton: {
+    backgroundColor: '#FF6B6B',
+    width: '100%',
+  },
+
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: COLORS.primaryBackgroundColor,
+    borderRadius: 20,
+    padding: 20,
+    width: '90%',
+    maxHeight: '80%',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLORS.textPrimaryColor,
+  },
+  modalCloseButton: {
+    padding: 8,
+  },
+  avatarGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  avatarOption: {
+    width: '30%',
+    aspectRatio: 1,
+    margin: 5,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.secondaryBackgroundColor,
+    position: 'relative',
+  },
+  selectedAvatarOption: {
+    borderWidth: 3,
+    borderColor: COLORS.buttonPrimaryColor,
+  },
+  selectedIndicator: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    backgroundColor: COLORS.buttonPrimaryColor,
+    borderRadius: 12,
+    width: 24,
+    height: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  checkmark: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
