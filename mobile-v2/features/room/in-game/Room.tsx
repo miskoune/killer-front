@@ -13,7 +13,7 @@ import { useLeaveRoom } from '../hooks/useLeaveRoom';
 import { ErrorState } from '../state/ErrorState';
 import { LoadingState } from '../state/LoadingState';
 
-import { ConfirmKillButton } from './ConfirmKillButton';
+import { ConfirmKill } from './ConfirmKill';
 import SettingsIcon from './icons/settings.svg';
 import { MissionView } from './MissionView';
 
@@ -78,7 +78,7 @@ export function InGameRoom() {
             targetPlayer={session.data.target}
           />
         </ScrollView>
-        <ConfirmKillButton session={session.data} />
+        <ConfirmKill session={session.data} />
       </FadeInView>
     </View>
   );
