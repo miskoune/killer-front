@@ -69,7 +69,7 @@ export function Home() {
             ) : (
               <Button
                 color="primary"
-                onPress={() => router.push('/onboarding/choose-pseudo')}
+                onPress={() => router.push('/onboarding/choose-avatar')}
                 text="Commencer à jouer"
               />
             )}

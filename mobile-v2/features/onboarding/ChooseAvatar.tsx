@@ -1,6 +1,5 @@
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -15,9 +14,7 @@ import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
 import { AVATARS } from '@/shared/constants/avatars';
 import { COLORS } from '@/shared/constants/theme';
-import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 
-import { useCreatePlayer } from './hooks/useCreatePlayer';
 import {
   selectPlayer,
   selectUpdatePlayer,
@@ -34,22 +31,12 @@ const AVATAR_WIDTH =
   (SCREEN_WIDTH - PADDING * 2 - GAP * (COLUMNS - 1)) / COLUMNS;
 
 export function ChooseAvatar() {
-  const player = usePlayerStore(selectPlayer);
-  const updatePlayer = usePlayerStore(selectUpdatePlayer);
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(
-    player?.avatar || null,
-  );
-  const createPlayer = useCreatePlayer();
-  const { handleError } = useErrorHandler();
+  const player = usePlayerStore(selectPlayer);
+  const updatePlayer = usePlayerStore(selectUpdatePlayer);
 
-  const handleAvatarSelect = (avatarId: string) => {
-    setSelectedAvatar(avatarId);
-    updatePlayer({ avatar: avatarId });
-  };
-
-  const handleCreatePlayer = async () => {
+  /*   const handleCreatePlayer = async () => {
     if (!player?.name || !player?.avatar) return;
 
     createPlayer.mutate(
@@ -62,7 +49,7 @@ export function ChooseAvatar() {
         onError: handleError,
       },
     );
-  };
+  }; */
 
   return (
     <View style={styles.content}>
@@ -73,10 +60,10 @@ export function ChooseAvatar() {
             {AVATARS.map((avatar) => (
               <Pressable
                 key={avatar.id}
-                onPress={() => handleAvatarSelect(avatar.id)}
+                onPress={() => updatePlayer({ avatar: avatar.id })}
                 style={[
                   styles.avatarCard,
-                  selectedAvatar === avatar.id && styles.avatarCardSelected,
+                  player?.avatar === avatar.id && styles.avatarCardSelected,
                 ]}
               >
                 <View style={styles.avatarImageContainer}>
@@ -85,7 +72,7 @@ export function ChooseAvatar() {
                 <Text
                   style={[
                     styles.avatarName,
-                    selectedAvatar === avatar.id && styles.avatarNameSelected,
+                    player?.avatar === avatar.id && styles.avatarNameSelected,
                   ]}
                 >
                   {avatar.name}
@@ -98,11 +85,9 @@ export function ChooseAvatar() {
       <View style={styles.buttonContainer}>
         <Button
           color="primary"
-          onPress={handleCreatePlayer}
+          onPress={() => router.push('/onboarding/choose-pseudo')}
           text="Suivant"
           customStyle={{ marginBottom: insets.bottom }}
-          disabled={createPlayer.isPending || !selectedAvatar}
-          isLoading={createPlayer.isPending}
         />
       </View>
     </View>
@@ -162,6 +147,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: PADDING,
+    paddingBottom: 0,
     paddingTop: 20,
     backgroundColor: COLORS.primaryBackgroundColor,
     borderTopWidth: 1,

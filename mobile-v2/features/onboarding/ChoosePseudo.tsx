@@ -6,8 +6,6 @@ import {
   type TextInput,
   TouchableWithoutFeedback,
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -31,11 +29,7 @@ export function ChoosePseudo() {
   const insets = useSafeAreaInsets();
 
   return (
-    <KeyboardAvoidingView
-      style={[styles.content]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
-    >
+    <View style={[styles.content]}>
       <ScrollView contentContainerStyle={[styles.scrollViewContent]}>
         <Header title="Choisir un pseudo" showBackButton />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
@@ -62,7 +56,7 @@ export function ChoosePseudo() {
           />
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -84,7 +78,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 20,
-    paddingBottom: 20,
+    paddingBottom: 0,
+    backgroundColor: COLORS.primaryBackgroundColor,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.inputBorderColor,
   },
   lottie: {
     width: 220,
