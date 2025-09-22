@@ -28,8 +28,8 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 // Calculate grid dimensions
 const PADDING = 20;
-const GAP = 15;
-const COLUMNS = 2;
+const GAP = 10;
+const COLUMNS = 3;
 const AVATAR_WIDTH =
   (SCREEN_WIDTH - PADDING * 2 - GAP * (COLUMNS - 1)) / COLUMNS;
 
@@ -131,10 +131,10 @@ const styles = StyleSheet.create({
   avatarCard: {
     width: AVATAR_WIDTH,
     backgroundColor: COLORS.secondaryBackgroundColor,
-    borderRadius: 16,
-    padding: 16,
+    borderRadius: 10,
+    padding: 5,
     alignItems: 'center',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'transparent',
   },
   avatarCardSelected: {
@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
     height: AVATAR_WIDTH - 32,
     borderRadius: 12,
     overflow: 'hidden',
-    marginBottom: 12,
   },
   avatar: {
     width: '100%',

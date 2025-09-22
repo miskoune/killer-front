@@ -7,14 +7,9 @@ export const AVATARS = [
     source: require('../assets/images/zombie.png'),
   },
   {
-    id: 'pumpkin',
-    name: 'Citrouille',
-    source: require('../assets/images/pumpkin.png'),
-  },
-  {
-    id: 'bat',
-    name: 'Chauve-souris',
-    source: require('../assets/images/bat.png'),
+    id: 'werewolf',
+    name: 'Loup-garou',
+    source: require('../assets/images/werewolf.png'),
   },
   {
     id: 'scarecrow',
@@ -22,13 +17,23 @@ export const AVATARS = [
     source: require('../assets/images/scarecrow.png'),
   },
   {
-    id: 'werewolf',
-    name: 'Loup-garou',
-    source: require('../assets/images/werewolf.png'),
+    id: 'pumpkin',
+    name: 'Citrouille',
+    source: require('../assets/images/pumpkin.png'),
   },
   {
     id: 'vampire',
     name: 'Vampire',
     source: require('../assets/images/vampire.png'),
+  },
+  {
+    id: 'skeleton',
+    name: 'Squelette',
+    source: require('../assets/images/skeleton.png'),
+  },
+  {
+    id: 'demon',
+    name: 'Démon',
+    source: require('../assets/images/demon.png'),
   },
 ];

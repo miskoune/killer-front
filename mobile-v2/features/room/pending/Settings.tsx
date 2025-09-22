@@ -163,7 +163,7 @@ export function PendingRoomSettings() {
       <Modal
         visible={showAvatarModal}
         transparent
-        animationType="slide"
+        animationType="fade"
         onRequestClose={() => setShowAvatarModal(false)}
       >
         <View style={styles.modalOverlay}>
