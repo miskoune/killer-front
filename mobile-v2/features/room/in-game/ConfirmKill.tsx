@@ -34,7 +34,7 @@ export function ConfirmKill({ session }: ConfirmKillProps) {
   };
 
   return (
-    <View style={[styles.bottomActions, { paddingBottom: insets.bottom + 20 }]}>
+    <View style={[styles.bottomActions, { paddingBottom: insets.bottom }]}>
       <Button
         color="primary"
         onPress={handleShowConfirmModal}
