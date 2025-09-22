@@ -1,5 +1,6 @@
+import * as Clipboard from 'expo-clipboard';
 import { Image } from 'expo-image';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { COLORS } from '@/shared/constants/theme';
 import { useTranslation } from '@/translations';
@@ -39,6 +40,14 @@ export function RoomCode({ roomCode }: RoomCodeProps) {
     });
   };
 
+  const handleRoomCodePress = async () => {
+    await Clipboard.setStringAsync(roomCode);
+    Alert.alert(
+      'Code copié!',
+      `Le code "${roomCode}" a été copié dans le presse-papier.`,
+    );
+  };
+
   return (
     <View style={styles.playersSection}>
       <View style={styles.roomInfoContainer}>
@@ -46,9 +55,17 @@ export function RoomCode({ roomCode }: RoomCodeProps) {
           source={require('./images/room-pending.png')}
           style={styles.image}
         />
-        <Text style={styles.roomCode}>
-          Le code pour rejoindre cette partie est {room.data?.id}
-        </Text>
+        <Pressable
+          style={({ pressed }) => [
+            styles.roomCode,
+            pressed && styles.roomCodePressed,
+          ]}
+          onPress={handleRoomCodePress}
+        >
+          <Text style={styles.roomCode}>
+            {t('room.join.room.code', { roomCode })}
+          </Text>
+        </Pressable>
         <GameStatus roomId={roomCode} />
 
         <View style={styles.statsContainer}>
@@ -84,9 +101,12 @@ const styles = StyleSheet.create({
   },
   roomCode: {
     fontSize: 16,
-    color: COLORS.textSecondaryColor,
+    color: COLORS.textPrimaryColor,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
+  },
+  roomCodePressed: {
+    opacity: 0.5,
   },
   statsContainer: {
     flexDirection: 'row',
