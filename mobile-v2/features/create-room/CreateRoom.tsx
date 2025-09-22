@@ -46,7 +46,7 @@ export function CreateRoom() {
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={styles.view}>
             <Image
-              source={require('./images/room-name.png')}
+              source={require('./images/create-room.png')}
               style={styles.image}
             />
             <Input
