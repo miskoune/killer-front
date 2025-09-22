@@ -17,6 +17,11 @@ export const AVATARS = [
     source: require('../assets/images/scarecrow.png'),
   },
   {
+    id: 'cat',
+    name: 'Chat noir',
+    source: require('../assets/images/cat.png'),
+  },
+  {
     id: 'pumpkin',
     name: 'Citrouille',
     source: require('../assets/images/pumpkin.png'),
@@ -37,13 +42,28 @@ export const AVATARS = [
     source: require('../assets/images/clown.png'),
   },
   {
+    id: 'bat',
+    name: 'Chauve-souris',
+    source: require('../assets/images/bat.png'),
+  },
+  {
     id: 'ghost',
     name: 'Fantôme',
     source: require('../assets/images/ghost.png'),
   },
   {
-    id: 'demon',
-    name: 'Démon',
-    source: require('../assets/images/demon.png'),
+    id: 'mad-scientist',
+    name: 'Savant fou',
+    source: require('../assets/images/mad-scientist.png'),
+  },
+  {
+    id: 'witch',
+    name: 'Sorcière',
+    source: require('../assets/images/witch.png'),
+  },
+  {
+    id: 'bear',
+    name: 'Ours',
+    source: require('../assets/images/bear.png'),
   },
 ];
