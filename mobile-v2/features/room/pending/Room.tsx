@@ -1,6 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 
+import SettingsIcon from '@/shared/assets/icons/settings.svg';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
 import { COLORS } from '@/shared/constants/theme';
@@ -13,7 +14,6 @@ import { ErrorState } from '../state/ErrorState';
 import { LoadingState } from '../state/LoadingState';
 
 import { FooterActions } from './FooterActions';
-import SettingsIcon from './icons/settings.svg';
 import { Players } from './Players';
 import { RoomCode } from './RoomCode';
 

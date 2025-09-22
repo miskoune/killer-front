@@ -1,48 +1,39 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import { Text, View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import SettingsIcon from '@/shared/assets/icons/settings.svg';
 import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { COLORS } from '@/shared/constants/theme';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useTranslation } from '@/translations';
 
-import CloseIcon from './icons/close.svg';
-
 export function Home() {
   const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const session = useGetSession();
-  const queryClient = useQueryClient();
-
-  const handleDeletePlayer = async () => {
-    await AsyncStorage.removeItem('token');
-    queryClient.setQueriesData({ queryKey: ['session'] }, null);
-  };
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <FadeInView style={styles.fadeInView}>
-          {__DEV__ && (
-            <View style={styles.deletePlayer}>
-              <Pressable
-                onPress={handleDeletePlayer}
-                style={({ pressed }) => [
-                  styles.icon,
-                  styles.arrowIconContainer,
-                  pressed && styles.arrowIconPressedContainer,
-                ]}
-              >
-                <CloseIcon height={20} width={20} color={COLORS.arrowColor} />
-              </Pressable>
-            </View>
-          )}
+          <View style={styles.deletePlayer}>
+            <Pressable
+              onPress={() => router.push('/settings')}
+              style={({ pressed }) => [
+                !session?.data?.name && styles.hideIcon,
+                styles.icon,
+                styles.iconContainer,
+                pressed && styles.iconPressedContainer,
+              ]}
+            >
+              <SettingsIcon height={20} width={20} color={COLORS.arrowColor} />
+            </Pressable>
+          </View>
+
           <View style={styles.header}>
             <Text style={styles.title}>KILLER PARTY</Text>
 
@@ -130,11 +121,14 @@ const styles = StyleSheet.create({
   icon: {
     borderRadius: 10,
   },
-  arrowIconContainer: {
+  iconContainer: {
     backgroundColor: COLORS.arrowButtonColor,
     padding: 8,
   },
-  arrowIconPressedContainer: {
+  iconPressedContainer: {
     backgroundColor: COLORS.arrowButtonPressedColor,
+  },
+  hideIcon: {
+    opacity: 0,
   },
 });
