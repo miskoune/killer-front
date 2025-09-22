@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
   View,
@@ -21,17 +21,23 @@ import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useUpdatePlayer } from '@/shared/hooks/useUpdatePlayer';
+import { type Player } from '@/shared/types/player';
 import { useTranslation } from '@/translations';
 
+import { useGetRoom } from '../hooks/useGetRoom';
+import { useKickPlayer } from '../hooks/useKickPlayer';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
 
 export function PendingRoomSettings() {
+  const { roomId } = useLocalSearchParams<{ roomId: string }>();
   const { t } = useTranslation();
   const router = useRouter();
   const { handleError } = useErrorHandler();
   const session = useGetSession();
+  const room = useGetRoom(roomId);
   const leaveRoom = useLeaveRoom();
   const updatePlayer = useUpdatePlayer();
+  const kickPlayer = useKickPlayer();
 
   const [playerName, setPlayerName] = useState(session.data?.name || '');
   const [selectedAvatar, setSelectedAvatar] = useState(
@@ -85,6 +91,35 @@ export function PendingRoomSettings() {
     router.back();
   };
 
+  const handleKickPlayer = (playerId: number, playerNameToKick: string) => {
+    Alert.alert(
+      'Exclure le joueur',
+      `Êtes-vous sûr de vouloir exclure ${playerNameToKick} de la partie ? Cette action est irréversible.`,
+      [
+        {
+          text: 'Annuler',
+          style: 'cancel',
+        },
+        {
+          text: 'Exclure',
+          style: 'destructive',
+          onPress: () => {
+            kickPlayer.mutate(playerId, { onError: handleError });
+          },
+        },
+      ],
+    );
+  };
+
+  // Vérifier si l'utilisateur actuel est l'admin
+  const isAdmin = session.data?.id === room.data?.admin.id;
+
+  // Filtrer les joueurs (exclure l'admin lui-même)
+  const kickablePlayer =
+    room.data?.players.filter(
+      (player: Player) => player.id !== session.data?.id,
+    ) || [];
+
   return (
     <>
       <View style={styles.container}>
@@ -104,7 +139,7 @@ export function PendingRoomSettings() {
                 >
                   {session.data?.avatar && (
                     <Avatar
-                      size={200}
+                      size={100}
                       avatarId={selectedAvatar || session.data.avatar}
                     />
                   )}
@@ -136,6 +171,55 @@ export function PendingRoomSettings() {
                 </View>
               </View>
             </View>
+
+            {/* Admin Section - Kick Players */}
+            {isAdmin && kickablePlayer.length > 0 && (
+              <View style={styles.adminSection}>
+                <Text style={styles.sectionTitle}>👑 Administration</Text>
+                <Text style={styles.sectionDescription}>
+                  Options réservées à l'administrateur de la partie
+                </Text>
+
+                <View style={styles.adminCard}>
+                  <View style={styles.adminHeader}>
+                    <Text style={styles.adminTitle}>Gestion des joueurs</Text>
+                  </View>
+
+                  <Text style={styles.adminDescription}>
+                    Excluez les joueurs indésirables de la partie.
+                  </Text>
+
+                  <View style={styles.playersSection}>
+                    {kickablePlayer.map((player: Player) => (
+                      <View key={player.id} style={styles.playerKickCard}>
+                        <Avatar avatarId={player.avatar} size={50} />
+                        <View style={styles.playerInfoToKick}>
+                          <Text style={styles.playerNameToKick}>
+                            {player.name}
+                          </Text>
+                          <Text style={styles.playerStatus}>
+                            {player.hasAtLeastOneMission
+                              ? '✅ Mission ajoutée'
+                              : '⏳ Pas de mission'}
+                          </Text>
+                        </View>
+                        <TouchableOpacity
+                          style={styles.kickButton}
+                          onPress={() =>
+                            handleKickPlayer(player.id, player.name)
+                          }
+                          disabled={kickPlayer.isPending}
+                        >
+                          <Text style={styles.kickButtonText}>
+                            {kickPlayer.isPending ? 'Exclusion...' : 'Exclure'}
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    ))}
+                  </View>
+                </View>
+              </View>
+            )}
 
             {/* Danger Zone */}
             <View style={styles.dangerSection}>
@@ -269,6 +353,7 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     marginBottom: 16,
+    alignItems: 'center',
   },
   editAvatarText: {
     fontSize: 20,
@@ -348,6 +433,96 @@ const styles = StyleSheet.create({
   leaveButton: {
     backgroundColor: '#FF6B6B',
     width: '100%',
+  },
+
+  // Admin Section
+  adminSection: {
+    marginTop: 10,
+  },
+  sectionDescription: {
+    fontSize: 14,
+    color: COLORS.textSecondaryColor,
+    marginBottom: 15,
+  },
+  adminCard: {
+    backgroundColor: COLORS.secondaryBackgroundColor,
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: COLORS.shadowColor,
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+    borderWidth: 2,
+    borderColor: COLORS.buttonPrimaryColor,
+  },
+  adminHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  adminTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.buttonPrimaryColor,
+  },
+  adminDescription: {
+    fontSize: 14,
+    color: COLORS.textSecondaryColor,
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+  toggleButton: {
+    backgroundColor: COLORS.buttonPrimaryColor,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 10,
+  },
+  toggleButtonText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  playersSection: {
+    gap: 10,
+  },
+  playerKickCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.primaryBackgroundColor,
+    borderRadius: 15,
+    padding: 15,
+    gap: 12,
+  },
+  playerInfoToKick: {
+    flex: 1,
+    gap: 4,
+  },
+  playerNameToKick: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.textPrimaryColor,
+  },
+  kickButton: {
+    backgroundColor: '#FF6B6B',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 10,
+  },
+  kickButtonText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  emptyState: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  emptyStateText: {
+    fontSize: 14,
+    color: COLORS.textSecondaryColor,
+    fontStyle: 'italic',
   },
 
   // Modal Styles
