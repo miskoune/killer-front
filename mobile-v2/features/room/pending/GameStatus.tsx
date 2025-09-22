@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import { Button } from '@/shared/components/Button';
 import { COLORS } from '@/shared/constants/theme';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useTranslation } from '@/translations';
 
 import { useGetRoom } from '../hooks/useGetRoom';
+
+import { useStartRoom } from './hooks/useStartRoom';
 
 interface GameStatusProps {
   roomId: string;
@@ -12,6 +16,12 @@ interface GameStatusProps {
 export function GameStatus({ roomId }: GameStatusProps) {
   const { t } = useTranslation();
   const room = useGetRoom(roomId);
+  const startRoom = useStartRoom();
+  const { handleError } = useErrorHandler();
+
+  const handleStartRoom = () => {
+    startRoom.mutate(roomId, { onError: handleError });
+  };
 
   const getPlayersConditionText = () => {
     if (room.data?.isGameMastered) {
@@ -65,6 +75,17 @@ export function GameStatus({ roomId }: GameStatusProps) {
             {roomHasEnoughMissions() ? '✓' : '✗'}
           </Text>
         </View>
+        <Button
+          color="primary"
+          onPress={handleStartRoom}
+          text="Lancer la partie"
+          disabled={
+            !roomHasEnoughMissions() ||
+            !room.data?.hasEnoughPlayers ||
+            startRoom.isPending
+          }
+          isLoading={startRoom.isPending}
+        />
       </View>
     </View>
   );

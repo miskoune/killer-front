@@ -86,7 +86,7 @@ export function Button({
 
 const styles = StyleSheet.create({
   content: {
-    padding: 16,
+    padding: 12,
     borderRadius: 10,
     shadowColor: 'hsl(210, 7%, 40%)',
     shadowOffset: { width: 1, height: 2 },
