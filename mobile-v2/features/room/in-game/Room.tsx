@@ -14,6 +14,7 @@ import { ErrorState } from '../state/ErrorState';
 import { LoadingState } from '../state/LoadingState';
 
 import { ConfirmKill } from './ConfirmKill';
+import { DeadView } from './DeadView';
 import SettingsIcon from './icons/settings.svg';
 import { MissionView } from './MissionView';
 
@@ -41,7 +42,7 @@ export function InGameRoom() {
     return <LoadingState />;
   }
 
-  if (room.error || !session.data?.target || !session.data.assignedMission) {
+  if (room.error) {
     return (
       <ErrorState
         refresh={handleRefresh}
@@ -50,6 +51,14 @@ export function InGameRoom() {
         leaveRoomLoading={false}
       />
     );
+  }
+
+  if (
+    session.data?.status === 'KILLED' ||
+    !session.data?.target ||
+    !session.data?.assignedMission
+  ) {
+    return <DeadView />;
   }
 
   return (
