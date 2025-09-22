@@ -4,7 +4,10 @@ export interface Player {
   id: number;
   name: string;
   status: PlayerStatus;
-  avatar: string;
+  avatar: {
+    id: string;
+    name: string;
+  };
   hasAtLeastOneMission: boolean;
 }
 

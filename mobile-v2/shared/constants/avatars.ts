@@ -32,6 +32,16 @@ export const AVATARS = [
     source: require('../assets/images/skeleton.png'),
   },
   {
+    id: 'clown',
+    name: 'Clown',
+    source: require('../assets/images/clown.png'),
+  },
+  {
+    id: 'ghost',
+    name: 'Fantôme',
+    source: require('../assets/images/ghost.png'),
+  },
+  {
     id: 'demon',
     name: 'Démon',
     source: require('../assets/images/demon.png'),

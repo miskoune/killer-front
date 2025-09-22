@@ -1,4 +1,3 @@
-import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { createRef } from 'react';
 import {
@@ -10,6 +9,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { Avatar } from '@/shared/components/Avatar';
 import { Button } from '@/shared/components/Button';
 import { Header } from '@/shared/components/Header';
 import { Input } from '@/shared/components/Input';
@@ -34,9 +34,10 @@ export function ChoosePseudo() {
         <Header title="Choisir un pseudo" showBackButton />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
           <View style={[styles.view]}>
-            <Image
-              source={require('./images/pseudo.png')}
-              style={styles.lottie}
+            <Avatar
+              style={styles.avatar}
+              avatarId={player?.avatar?.id ?? ''}
+              size={220}
             />
             <Input
               label="Pseudo"
@@ -89,5 +90,10 @@ const styles = StyleSheet.create({
     marginTop: -20,
     marginBottom: 20,
     alignSelf: 'center',
+  },
+  avatar: {
+    marginBottom: 20,
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
   },
 });
