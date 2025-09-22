@@ -38,7 +38,7 @@ export function ChooseAvatar() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { mutateAsync: createPlayer } = useCreatePlayer();
+  const createPlayer = useCreatePlayer();
   const { handleError } = useErrorHandler();
 
   const handleAvatarSelect = (avatarId: string, index: number) => {
@@ -71,16 +71,16 @@ export function ChooseAvatar() {
   const handleCreatePlayer = async () => {
     if (!player?.name || !player?.avatar) return;
 
-    try {
-      await createPlayer({
+    createPlayer.mutate(
+      {
         name: player.name,
         avatar: player.avatar,
-      });
-
-      router.push('/onboarding/choose-room');
-    } catch (error) {
-      handleError(error);
-    }
+      },
+      {
+        onSuccess: () => router.push('/onboarding/choose-room'),
+        onError: handleError,
+      },
+    );
   };
 
   return (
@@ -164,6 +164,8 @@ export function ChooseAvatar() {
             onPress={handleCreatePlayer}
             text="Suivant"
             customStyle={{ marginBottom: insets.bottom }}
+            disabled={createPlayer.isPending}
+            isLoading={createPlayer.isPending}
           />
         </View>
       </ScrollView>

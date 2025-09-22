@@ -65,11 +65,12 @@ export function ChooseRoomName() {
 
         <View style={[styles.buttonContainer]}>
           <Button
-            disabled={!roomName}
+            disabled={!roomName || createRoom.isPending}
             color="primary"
             onPress={handleCreateRoom}
             text="Créer la partie"
             customStyle={{ marginBottom: insets.bottom }}
+            isLoading={createRoom.isPending}
           />
         </View>
       </ScrollView>

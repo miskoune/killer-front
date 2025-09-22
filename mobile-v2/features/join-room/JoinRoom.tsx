@@ -61,11 +61,12 @@ export function JoinRoom() {
 
         <View style={[styles.buttonContainer]}>
           <Button
-            disabled={!roomCode}
+            disabled={!roomCode || updatePlayer.isPending}
             color="primary"
             onPress={handleRoomName}
             text="Rejoindre la partie"
             customStyle={{ marginBottom: insets.bottom }}
+            isLoading={updatePlayer.isPending}
           />
         </View>
       </ScrollView>
