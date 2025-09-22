@@ -36,7 +36,7 @@ export function ChoosePseudo() {
     if (!player?.name || !player?.avatar) return;
 
     createPlayer.mutate(
-      { name: player.name, avatar: player.avatar.id },
+      { name: player.name, avatar: player.avatar },
       {
         onSuccess: () => router.push('/onboarding/choose-room'),
         onError: handleError,
@@ -52,7 +52,7 @@ export function ChoosePseudo() {
           <View style={[styles.view]}>
             <Avatar
               style={styles.avatar}
-              avatarId={player?.avatar?.id ?? ''}
+              avatarId={player?.avatar ?? ''}
               size={220}
             />
             <Input

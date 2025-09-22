@@ -45,10 +45,10 @@ export function ChooseAvatar() {
             {AVATARS.map((avatar) => (
               <Pressable
                 key={avatar.id}
-                onPress={() => updatePlayer({ avatar })}
+                onPress={() => updatePlayer({ avatar: avatar.id })}
                 style={[
                   styles.avatarCard,
-                  player?.avatar?.id === avatar.id && styles.avatarCardSelected,
+                  player?.avatar === avatar.id && styles.avatarCardSelected,
                 ]}
               >
                 <View style={styles.avatarImageContainer}>
@@ -57,8 +57,7 @@ export function ChooseAvatar() {
                 <Text
                   style={[
                     styles.avatarName,
-                    player?.avatar?.id === avatar.id &&
-                      styles.avatarNameSelected,
+                    player?.avatar === avatar.id && styles.avatarNameSelected,
                   ]}
                 >
                   {avatar.name}

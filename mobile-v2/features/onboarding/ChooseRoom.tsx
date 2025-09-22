@@ -1,6 +1,7 @@
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
   usePlayerStore,
@@ -16,10 +17,8 @@ export function ChooseRoom() {
   const { t } = useTranslation();
   const player = usePlayerStore(selectPlayer);
   const router = useRouter();
-
-  const playerAvatar = AVATARS.find(
-    (avatar) => avatar.id === player?.avatar?.id,
-  );
+  const insets = useSafeAreaInsets();
+  const playerAvatar = AVATARS.find((avatar) => avatar.id === player?.avatar);
 
   return (
     <View style={styles.content}>
@@ -38,7 +37,7 @@ export function ChooseRoom() {
           </View>
         </View>
 
-        <View style={styles.buttonContainer}>
+        <View style={[styles.buttonContainer, { marginBottom: insets.bottom }]}>
           <Button
             color="primary"
             onPress={() => router.push('/create-room')}
@@ -70,7 +69,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 20,
-    paddingBottom: 40,
+    paddingBottom: 0,
+    backgroundColor: COLORS.primaryBackgroundColor,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.inputBorderColor,
     gap: 15,
   },
   avatar: {

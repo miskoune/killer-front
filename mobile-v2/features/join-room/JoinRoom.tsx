@@ -41,7 +41,7 @@ export function JoinRoom() {
         <TouchableWithoutFeedback>
           <View style={styles.view}>
             <Image
-              source={require('./images/room-code.png')}
+              source={require('./images/join-room.png')}
               style={styles.image}
             />
             <Input
@@ -52,13 +52,12 @@ export function JoinRoom() {
           </View>
         </TouchableWithoutFeedback>
 
-        <View style={[styles.buttonContainer]}>
+        <View style={[styles.buttonContainer, { marginBottom: insets.bottom }]}>
           <Button
             disabled={!roomCode || updatePlayer.isPending}
             color="primary"
             onPress={handleRoomName}
             text="Rejoindre la partie"
-            customStyle={{ marginBottom: insets.bottom }}
             isLoading={updatePlayer.isPending}
           />
         </View>
