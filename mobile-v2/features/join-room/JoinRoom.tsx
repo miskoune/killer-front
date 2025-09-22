@@ -17,8 +17,7 @@ import { Input } from '@/shared/components/Input';
 import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
-
-import { useUpdatePlayer } from './hooks/useUpdatePlayer';
+import { useUpdatePlayer } from '@/shared/hooks/useUpdatePlayer';
 
 export function JoinRoom() {
   const [roomCode, setRoomCode] = useState('');

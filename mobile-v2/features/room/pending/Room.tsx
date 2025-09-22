@@ -92,7 +92,7 @@ export function PendingRoom() {
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
-            refreshing={room.isFetching}
+            refreshing={room.isPending}
             onRefresh={handleRefresh}
           />
         }

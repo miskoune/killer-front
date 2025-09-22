@@ -8,21 +8,27 @@ interface Props {
   setValue: (value: string) => void;
   label: string;
   innerRef?: React.RefObject<TextInput | null>;
+  autoFocus?: boolean;
 }
 
-export function Input({ value, setValue, label, innerRef }: Props) {
+export function Input({
+  value,
+  setValue,
+  label,
+  innerRef,
+  autoFocus = true,
+}: Props) {
   const focusAnim = useRef(new Animated.Value(0)).current;
   const [isFocused, setFocused] = useState(false);
   const textInputRef = useRef<TextInput>(null);
 
   const refToUse = innerRef || textInputRef;
 
-  useEffect(
-    function autoFocus() {
+  useEffect(() => {
+    if (autoFocus) {
       refToUse.current?.focus();
-    },
-    [refToUse],
-  );
+    }
+  }, [autoFocus, refToUse]);
 
   const handleFocus = () => {
     setFocused(true);

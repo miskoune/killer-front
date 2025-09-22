@@ -1,4 +1,3 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -18,20 +17,13 @@ import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
 import { Input } from '@/shared/components/Input';
 import { AVATARS } from '@/shared/constants/avatars';
-import { PLAYER_ENDPOINT } from '@/shared/constants/endpoints';
 import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
-import { type Session } from '@/shared/types/session';
-import { request } from '@/shared/utils/request';
+import { useUpdatePlayer } from '@/shared/hooks/useUpdatePlayer';
 import { useTranslation } from '@/translations';
 
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
-
-interface UpdatePlayerData {
-  name?: string;
-  avatar?: string;
-}
 
 export function PendingRoomSettings() {
   const { t } = useTranslation();
@@ -39,7 +31,7 @@ export function PendingRoomSettings() {
   const { handleError } = useErrorHandler();
   const session = useGetSession();
   const leaveRoom = useLeaveRoom();
-  const queryClient = useQueryClient();
+  const updatePlayer = useUpdatePlayer();
 
   const [playerName, setPlayerName] = useState(session.data?.name || '');
   const [selectedAvatar, setSelectedAvatar] = useState(
@@ -47,30 +39,22 @@ export function PendingRoomSettings() {
   );
   const [showAvatarModal, setShowAvatarModal] = useState(false);
 
-  const updatePlayerMutation = useMutation({
-    mutationFn: (data: UpdatePlayerData) => {
-      return request<Session>({
-        url: `${PLAYER_ENDPOINT}/${session.data?.id}`,
-        method: 'PATCH',
-        requestInit: { body: JSON.stringify(data) },
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['session'] });
-    },
-    onError: handleError,
-  });
-
   const handleUpdateName = () => {
     if (playerName.trim() && playerName !== session.data?.name) {
-      updatePlayerMutation.mutate({ name: playerName.trim() });
+      updatePlayer.mutate(
+        { id: session.data?.id, name: playerName.trim() },
+        { onError: handleError },
+      );
     }
   };
 
   const handleUpdateAvatar = (avatarId: string) => {
     if (avatarId !== session.data?.avatar) {
       setSelectedAvatar(avatarId);
-      updatePlayerMutation.mutate({ avatar: avatarId });
+      updatePlayer.mutate(
+        { id: session.data?.id, avatar: avatarId },
+        { onError: handleError },
+      );
     }
   };
 
@@ -135,16 +119,21 @@ export function PendingRoomSettings() {
                 </TouchableOpacity>
 
                 <View style={styles.nameEditContainer}>
-                  <Input value={playerName} setValue={setPlayerName} label="" />
+                  <Input
+                    value={playerName}
+                    setValue={setPlayerName}
+                    label=""
+                    autoFocus={false}
+                  />
                   <View style={styles.nameEditButtons}>
                     <Button
                       color="primary"
                       text="Sauvegarder"
                       onPress={handleUpdateName}
-                      isLoading={updatePlayerMutation.isPending}
+                      isLoading={updatePlayer.isPending}
                       customStyle={styles.smallButton}
                       disabled={
-                        updatePlayerMutation.isPending ||
+                        updatePlayer.isPending ||
                         playerName.trim() === session.data?.name
                       }
                     />
