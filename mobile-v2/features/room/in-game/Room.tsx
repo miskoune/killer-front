@@ -13,6 +13,7 @@ import { useLeaveRoom } from '../hooks/useLeaveRoom';
 import { ErrorState } from '../state/ErrorState';
 import { LoadingState } from '../state/LoadingState';
 
+import { ConfirmKillButton } from './ConfirmKillButton';
 import SettingsIcon from './icons/settings.svg';
 import { MissionView } from './MissionView';
 
@@ -53,31 +54,32 @@ export function InGameRoom() {
 
   return (
     <View style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollViewContent}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={session.isFetching}
-            onRefresh={session.refetch}
+      <FadeInView style={styles.content}>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={session.isFetching}
+              onRefresh={session.refetch}
+            />
+          }
+        >
+          <Header
+            title="Survivre ou mourir"
+            rightAction={{
+              icon: SettingsIcon,
+              onPress: handleGoToSettings,
+            }}
           />
-        }
-      >
-        <Header
-          title="Survivre ou mourir"
-          rightAction={{
-            icon: SettingsIcon,
-            onPress: handleGoToSettings,
-          }}
-        />
-        <FadeInView style={styles.content}>
           <MissionView
             mission={session.data.assignedMission}
             targetPlayer={session.data.target}
           />
-        </FadeInView>
-      </ScrollView>
+        </ScrollView>
+        <ConfirmKillButton session={session.data} />
+      </FadeInView>
     </View>
   );
 }

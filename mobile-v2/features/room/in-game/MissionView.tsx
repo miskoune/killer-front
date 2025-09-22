@@ -44,8 +44,7 @@ export function MissionView({ mission, targetPlayer }: MissionViewProps) {
           <Text style={styles.instructionsTitle}>📋 Instructions</Text>
           <Text style={styles.instructionsText}>
             Pour éliminer votre cible, vous devez la faire exécuter la mission
-            ci-dessus. Soyez discret et créatif ! Une fois que votre cible a
-            accompli la mission, vous pourrez la confirmer comme éliminée.
+            ci-dessus. Soyez discret et créatif !
           </Text>
         </View>
 
