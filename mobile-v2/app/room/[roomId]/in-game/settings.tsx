@@ -1,5 +1,5 @@
-import { RoomSettings } from '@/features/room/in-game/RoomSettings';
+import { Settings } from '@/features/room/in-game/Settings';
 
-export default function RoomSettingsPage() {
-  return <RoomSettings />;
+export default function InGameSettingsPage() {
+  return <Settings />;
 }

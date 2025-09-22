@@ -14,7 +14,7 @@ import { useTranslation } from '@/translations';
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
 
-export function RoomSettings() {
+export function Settings() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
   const { t } = useTranslation();
   const router = useRouter();
