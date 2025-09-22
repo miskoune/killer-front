@@ -1,16 +1,12 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect } from 'react';
 import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
-import EventSource from 'react-native-sse';
 
 import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
 import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useGetSession } from '@/shared/hooks/useGetSession';
-import { type Room } from '@/shared/types/room';
 
-import { ROOM_TOPIC } from '../constants';
 import { useGetRoom } from '../hooks/useGetRoom';
 import { useLeaveRoom } from '../hooks/useLeaveRoom';
 import { ErrorState } from '../state/ErrorState';
@@ -28,33 +24,6 @@ export function PendingRoom() {
   const room = useGetRoom(roomId);
   const { handleError } = useErrorHandler();
   const leaveRoom = useLeaveRoom();
-
-  useEffect(
-    function listenEvents() {
-      const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomId}`);
-
-      roomEventSource.addEventListener('message', (event) => {
-        if (event.type === 'message' && event.data) {
-          const roomInfos: Room = JSON.parse(event.data);
-
-          const isPlayerInRoom = roomInfos.players.some(
-            ({ id }) => id === session.data?.id,
-          );
-
-          if (isPlayerInRoom) {
-            room.refetch().then(() => {
-              session.refetch();
-            });
-          } else {
-            session.refetch();
-          }
-        }
-      });
-
-      return () => roomEventSource.close();
-    },
-    [roomId, session.data?.id, room.refetch, session.refetch],
-  );
 
   const handleRefresh = () => {
     Promise.all([room.refetch(), session.refetch()]);
