@@ -59,6 +59,7 @@ export function ChoosePseudo() {
               label="Pseudo"
               value={player?.name ?? ''}
               setValue={(name) => updatePlayer({ name })}
+              autoFocus={false}
             />
           </View>
         </TouchableWithoutFeedback>

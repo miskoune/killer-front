@@ -53,6 +53,7 @@ export function CreateRoom() {
               label="Nom de la partie"
               value={roomName}
               setValue={(name) => setRoomName(name)}
+              autoFocus={false}
             />
           </View>
         </TouchableWithoutFeedback>

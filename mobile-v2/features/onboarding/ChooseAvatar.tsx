@@ -36,21 +36,6 @@ export function ChooseAvatar() {
   const player = usePlayerStore(selectPlayer);
   const updatePlayer = usePlayerStore(selectUpdatePlayer);
 
-  /*   const handleCreatePlayer = async () => {
-    if (!player?.name || !player?.avatar) return;
-
-    createPlayer.mutate(
-      {
-        name: player.name,
-        avatar: player.avatar,
-      },
-      {
-        onSuccess: () => router.push('/onboarding/choose-room'),
-        onError: handleError,
-      },
-    );
-  }; */
-
   return (
     <View style={styles.content}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -107,6 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: PADDING,
     paddingVertical: 20,
+    marginTop: -10,
   },
   avatarGrid: {
     flexDirection: 'row',
@@ -149,7 +135,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     padding: PADDING,
     paddingBottom: 0,
-    paddingTop: 20,
+
     backgroundColor: COLORS.primaryBackgroundColor,
     borderTopWidth: 1,
     borderTopColor: COLORS.inputBorderColor,
