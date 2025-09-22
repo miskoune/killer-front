@@ -4,7 +4,7 @@ export const COLORS = {
   textPrimaryColor: 'white',
   textSecondaryColor: '#BECAE8',
   buttonPrimaryColor: '#FED32B',
-  buttonPrimaryPressedColor: '#E6C21B',
+  buttonPrimaryPressedColor: '#927907',
   buttonSecondaryColor: '#BECAE8',
   buttonSecondaryPressedColor: '#99A7C4',
   buttonPrimaryTextColor: '#212328',

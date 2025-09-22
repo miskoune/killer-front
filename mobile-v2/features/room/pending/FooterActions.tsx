@@ -30,7 +30,7 @@ export function FooterActions({ roomId }: FooterActionsProps) {
   };
 
   return (
-    <View style={[styles.bottomActions, { paddingBottom: insets.bottom + 20 }]}>
+    <View style={[styles.bottomActions, { paddingBottom: insets.bottom }]}>
       {session.data?.id === room.data?.admin.id && (
         <Button
           color="primary"

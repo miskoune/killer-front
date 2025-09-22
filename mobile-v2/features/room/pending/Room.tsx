@@ -61,7 +61,7 @@ export function PendingRoom() {
         }
       >
         <Header
-          title="Partie en attente"
+          title="En attente des joueurs"
           rightAction={{
             icon: SettingsIcon,
             onPress: () => router.push(`/room/${roomId}/pending/settings`),
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
+    marginTop: -20,
   },
   scrollViewContent: {
     flexGrow: 1,
