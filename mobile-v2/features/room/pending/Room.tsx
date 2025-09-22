@@ -68,12 +68,7 @@ export function PendingRoom() {
   };
 
   const handleLeaveRoom = () => {
-    leaveRoom.mutate(session.data?.id, {
-      onError: handleError,
-      onSuccess: () => {
-        router.replace('/');
-      },
-    });
+    leaveRoom.mutate(session.data?.id, { onError: handleError });
   };
 
   if (room.isPending) {

@@ -59,12 +59,7 @@ export function PendingRoomSettings() {
   };
 
   const handleLeaveRoom = () => {
-    leaveRoom.mutate(session.data?.id, {
-      onError: handleError,
-      onSuccess: () => {
-        router.replace('/');
-      },
-    });
+    leaveRoom.mutate(session.data?.id, { onError: handleError });
   };
 
   const confirmLeaveRoom = () => {

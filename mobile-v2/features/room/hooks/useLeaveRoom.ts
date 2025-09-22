@@ -1,10 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
 
 import { PLAYER_ENDPOINT } from '@/shared/constants/endpoints';
 import { request } from '@/shared/utils/request';
 
 export function useLeaveRoom() {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const mutationFn = (playerId?: number) => {
     return request<void>({
@@ -14,8 +16,10 @@ export function useLeaveRoom() {
     });
   };
 
-  const onSuccess = () => {
-    queryClient.invalidateQueries({ queryKey: ['session'] });
+  const onSuccess = async () => {
+    await queryClient.invalidateQueries({ queryKey: ['session'] });
+
+    router.replace('/');
   };
 
   return useMutation({

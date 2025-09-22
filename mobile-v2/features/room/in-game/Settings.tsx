@@ -24,12 +24,7 @@ export function Settings() {
   const leaveRoom = useLeaveRoom();
 
   const handleLeaveRoom = () => {
-    leaveRoom.mutate(session.data?.id, {
-      onError: handleError,
-      onSuccess: () => {
-        router.replace('/');
-      },
-    });
+    leaveRoom.mutate(session.data?.id, { onError: handleError });
   };
 
   const confirmLeaveRoom = () => {
