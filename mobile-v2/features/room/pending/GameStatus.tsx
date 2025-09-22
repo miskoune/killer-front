@@ -38,7 +38,8 @@ export function GameStatus({ roomId }: GameStatusProps) {
 
   return (
     <View style={styles.gameStatusSection}>
-      <Text style={styles.sectionTitle}>
+      <Text style={styles.sectionTitle}>Informations de la partie</Text>
+      <Text style={styles.sectionDescription}>
         {t('room.start.party.conditions')}
       </Text>
 
@@ -66,8 +67,6 @@ export function GameStatus({ roomId }: GameStatusProps) {
             {roomHasEnoughMissions() ? '✓' : '✗'}
           </Text>
         </View>
-
-        <View style={styles.conditionItem}></View>
       </View>
     </View>
   );
@@ -82,6 +81,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.textPrimaryColor,
     marginBottom: 8,
+  },
+  sectionDescription: {
+    fontSize: 14,
+    color: COLORS.textSecondaryColor,
+    marginBottom: 15,
   },
   conditionsContainer: {
     backgroundColor: COLORS.secondaryBackgroundColor,

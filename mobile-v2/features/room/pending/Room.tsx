@@ -140,8 +140,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   image: {
-    height: 250,
-    width: 250,
+    height: 300,
+    width: 300,
     alignSelf: 'center',
     marginBottom: 20,
   },
