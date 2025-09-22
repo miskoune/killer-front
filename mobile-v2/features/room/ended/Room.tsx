@@ -6,6 +6,7 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Avatar } from '@/shared/components/Avatar';
 import { Button } from '@/shared/components/Button';
@@ -27,7 +28,7 @@ export function EndedRoom() {
   const room = useGetRoom(roomId);
   const leaveRoom = useLeaveRoom();
   const { handleError } = useErrorHandler();
-
+  const insets = useSafeAreaInsets();
   const handleRefresh = () => {
     Promise.all([room.refetch(), session.refetch()]);
   };
@@ -85,17 +86,17 @@ export function EndedRoom() {
 
   return (
     <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollViewContent}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={room.isPending}
-            onRefresh={handleRefresh}
-          />
-        }
-      >
-        <FadeInView style={styles.content}>
+      <FadeInView style={styles.content}>
+        <ScrollView
+          contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={room.isPending}
+              onRefresh={handleRefresh}
+            />
+          }
+        >
           {/* Winner Section */}
           {room.data?.winner && (
             <View style={styles.winnerSection}>
@@ -164,16 +165,16 @@ export function EndedRoom() {
           </View>
 
           {/* Actions */}
-          <View style={styles.actionsSection}>
-            <Button
-              color="primary"
-              text="Nouvelle partie"
-              onPress={handleLeaveRoom}
-              isLoading={leaveRoom.isPending}
-            />
-          </View>
-        </FadeInView>
-      </ScrollView>
+        </ScrollView>
+        <View style={[styles.actionsSection, { paddingBottom: insets.bottom }]}>
+          <Button
+            color="primary"
+            text="Nouvelle partie"
+            onPress={handleLeaveRoom}
+            isLoading={leaveRoom.isPending}
+          />
+        </View>
+      </FadeInView>
     </View>
   );
 }
@@ -185,11 +186,10 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 1,
-    paddingBottom: 20,
+    padding: 20,
   },
   content: {
     flex: 1,
-    padding: 20,
   },
 
   // Winner Section
@@ -360,7 +360,12 @@ const styles = StyleSheet.create({
 
   // Actions Section
   actionsSection: {
-    marginTop: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    backgroundColor: COLORS.primaryBackgroundColor,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.inputBorderColor,
+    gap: 12,
   },
   primaryButton: {
     backgroundColor: COLORS.buttonPrimaryColor,
