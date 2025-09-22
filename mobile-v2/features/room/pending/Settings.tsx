@@ -176,9 +176,6 @@ export function PendingRoomSettings() {
             {isAdmin && kickablePlayer.length > 0 && (
               <View style={styles.adminSection}>
                 <Text style={styles.sectionTitle}>👑 Administration</Text>
-                <Text style={styles.sectionDescription}>
-                  Options réservées à l'administrateur de la partie
-                </Text>
 
                 <View style={styles.adminCard}>
                   <View style={styles.adminHeader}>
@@ -199,8 +196,8 @@ export function PendingRoomSettings() {
                           </Text>
                           <Text style={styles.playerStatus}>
                             {player.hasAtLeastOneMission
-                              ? '✅ Mission ajoutée'
-                              : '⏳ Pas de mission'}
+                              ? 'Mission ajoutée'
+                              : 'Pas de mission'}
                           </Text>
                         </View>
                         <TouchableOpacity
@@ -439,15 +436,11 @@ const styles = StyleSheet.create({
   adminSection: {
     marginTop: 10,
   },
-  sectionDescription: {
-    fontSize: 14,
-    color: COLORS.textSecondaryColor,
-    marginBottom: 15,
-  },
   adminCard: {
     backgroundColor: COLORS.secondaryBackgroundColor,
     borderRadius: 20,
     padding: 20,
+    marginTop: 20,
     shadowColor: COLORS.shadowColor,
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.3,

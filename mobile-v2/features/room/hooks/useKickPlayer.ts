@@ -1,11 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { PLAYER_ENDPOINT } from '@/shared/constants/endpoints';
 import { request } from '@/shared/utils/request';
 
 export function useKickPlayer() {
-  const queryClient = useQueryClient();
-
   const mutationFn = (playerId: number) => {
     return request<void>({
       url: `${PLAYER_ENDPOINT}/${playerId}`,
@@ -14,13 +12,7 @@ export function useKickPlayer() {
     });
   };
 
-  const onSuccess = async () => {
-    await queryClient.invalidateQueries({ queryKey: ['room'] });
-    await queryClient.invalidateQueries({ queryKey: ['session'] });
-  };
-
   return useMutation({
     mutationFn,
-    onSuccess,
   });
 }

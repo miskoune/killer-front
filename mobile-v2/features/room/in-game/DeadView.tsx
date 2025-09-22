@@ -1,5 +1,13 @@
 import { useLocalSearchParams } from 'expo-router';
-import { View, Text, StyleSheet, ScrollView, Alert, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  Image,
+  RefreshControl,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/shared/components/Button';
@@ -51,6 +59,12 @@ export function DeadView() {
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}
           showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={session.isFetching}
+              onRefresh={session.refetch}
+            />
+          }
         >
           <Header title="Fin de partie pour vous !" />
 

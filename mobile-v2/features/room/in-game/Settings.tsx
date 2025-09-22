@@ -6,6 +6,7 @@ import {
   ScrollView,
   Alert,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 
 import { Avatar } from '@/shared/components/Avatar';
@@ -96,6 +97,12 @@ export function Settings() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={room.isFetching}
+            onRefresh={room.refetch}
+          />
+        }
       >
         <FadeInView style={styles.content}>
           {/* Room Information */}
@@ -135,7 +142,7 @@ export function Settings() {
               <Text style={styles.sectionTitle}>👑 Administration</Text>
               <View style={styles.adminCard}>
                 <View style={styles.adminHeader}>
-                  <Text style={styles.adminTitle}>Gestion des joueurs AFK</Text>
+                  <Text style={styles.adminTitle}>Gestion des joueurs</Text>
                 </View>
 
                 <Text style={styles.adminDescription}>
