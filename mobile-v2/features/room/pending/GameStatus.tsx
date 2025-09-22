@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 
 import { Button } from '@/shared/components/Button';
 import { COLORS } from '@/shared/constants/theme';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
+import { useGetSession } from '@/shared/hooks/useGetSession';
 import { useTranslation } from '@/translations';
 
 import { useGetRoom } from '../hooks/useGetRoom';
@@ -18,8 +19,15 @@ export function GameStatus({ roomId }: GameStatusProps) {
   const room = useGetRoom(roomId);
   const startRoom = useStartRoom();
   const { handleError } = useErrorHandler();
+  const session = useGetSession();
 
   const handleStartRoom = () => {
+    if (session.data?.id !== room.data?.admin.id) {
+      return Alert.alert(
+        'Impossible de lancer la partie',
+        "Seul l'administrateur peut lancer la partie.",
+      );
+    }
     startRoom.mutate(roomId, { onError: handleError });
   };
 
