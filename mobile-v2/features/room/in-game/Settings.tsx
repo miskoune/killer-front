@@ -2,7 +2,6 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 
-import { Avatar } from '@/shared/components/Avatar';
 import { Button } from '@/shared/components/Button';
 import { FadeInView } from '@/shared/components/FadeInView';
 import { Header } from '@/shared/components/Header';
@@ -90,26 +89,6 @@ export function Settings() {
             </View>
           </View>
 
-          {/* Player Information */}
-          <View style={styles.playerSection}>
-            <Text style={styles.sectionTitle}>👤 Vos informations</Text>
-            <View style={styles.playerCard}>
-              <View style={styles.playerInfo}>
-                {session.data?.avatar && (
-                  <Avatar size={60} avatarId={session.data?.avatar} />
-                )}
-                <Text style={styles.playerName}>{session.data?.name}</Text>
-                <Text style={styles.playerStatus}>
-                  {session.data?.status === 'ALIVE'
-                    ? '💚 Vivant'
-                    : session.data?.status === 'KILLED'
-                      ? '💀 Éliminé'
-                      : '👁️ Spectateur'}
-                </Text>
-              </View>
-            </View>
-          </View>
-
           {/* Danger Zone */}
           <View style={styles.dangerSection}>
             <Text style={styles.dangerTitle}>⚠️ Zone de danger</Text>
@@ -191,33 +170,6 @@ const styles = StyleSheet.create({
   },
   statusValue: {
     color: COLORS.buttonPrimaryColor,
-  },
-
-  // Player Section
-  playerSection: {},
-  playerCard: {
-    backgroundColor: COLORS.secondaryBackgroundColor,
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: COLORS.shadowColor,
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
-  },
-  playerInfo: {
-    alignItems: 'center',
-  },
-  playerName: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: COLORS.textPrimaryColor,
-    marginBottom: 8,
-  },
-  playerStatus: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: COLORS.textSecondaryColor,
   },
 
   // Danger Section
