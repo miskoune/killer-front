@@ -4,7 +4,7 @@ import { PLAYER_ENDPOINT } from '@/shared/constants/endpoints';
 import { type Session } from '@/shared/types/session';
 import { request } from '@/shared/utils/request';
 
-import { UPDATE_PLAYER_WAIT_TIME } from '../constants/timers';
+import { SHOW_LOADING_WAIT_TIME } from '../constants/timers';
 import { type PlayerStatus } from '../types/player';
 import { wait } from '../utils/wait';
 
@@ -18,8 +18,7 @@ interface SessionUpdate {
 
 export function useUpdatePlayer() {
   const mutationFn = async (session: Partial<SessionUpdate>) => {
-    // Prevent glitch effect
-    await wait(UPDATE_PLAYER_WAIT_TIME);
+    await wait(SHOW_LOADING_WAIT_TIME);
 
     return request<Session>({
       url: `${PLAYER_ENDPOINT}/${session.id}`,

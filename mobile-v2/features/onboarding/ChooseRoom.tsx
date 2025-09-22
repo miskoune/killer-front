@@ -17,7 +17,9 @@ export function ChooseRoom() {
   const player = usePlayerStore(selectPlayer);
   const router = useRouter();
 
-  const playerAvatar = AVATARS.find((avatar) => avatar.id === player?.avatar);
+  const playerAvatar = AVATARS.find(
+    (avatar) => avatar.id === player?.avatar?.id,
+  );
 
   return (
     <View style={styles.content}>
@@ -25,7 +27,7 @@ export function ChooseRoom() {
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
       >
-        <Header title="Commencer à jouer" />
+        <Header title="Commencer à jouer" showBackButton />
         <View style={styles.view}>
           <View style={styles.playerInfoContainer}>
             {playerAvatar && (
