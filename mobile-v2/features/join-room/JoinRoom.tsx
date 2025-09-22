@@ -5,8 +5,6 @@ import {
   View,
   TouchableWithoutFeedback,
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -37,11 +35,7 @@ export function JoinRoom() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={[styles.content]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
-    >
+    <View style={[styles.content]}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <Header title="Rejoindre une partie" showBackButton />
         <TouchableWithoutFeedback>
@@ -69,7 +63,7 @@ export function JoinRoom() {
           />
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -92,6 +86,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 20,
+    paddingBottom: 0,
+    backgroundColor: COLORS.primaryBackgroundColor,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.inputBorderColor,
   },
   image: {
     height: 200,

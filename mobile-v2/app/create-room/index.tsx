@@ -1,5 +1,5 @@
-import { ChooseRoomName } from '@/features/create-room/ChooseRoomName';
+import { CreateRoom } from '@/features/create-room/CreateRoom';
 
 export default function CreateRoomPage() {
-  return <ChooseRoomName />;
+  return <CreateRoom />;
 }

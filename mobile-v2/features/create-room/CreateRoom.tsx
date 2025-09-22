@@ -6,8 +6,6 @@ import {
   type TextInput,
   TouchableWithoutFeedback,
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -21,7 +19,7 @@ import { useGetSession } from '@/shared/hooks/useGetSession';
 
 import { useCreateRoom } from './hooks/useCreateRoom';
 
-export function ChooseRoomName() {
+export function CreateRoom() {
   const { data: session } = useGetSession();
   const [roomName, setRoomName] = useState(
     session?.name ? `Partie de ${session.name}` : '',
@@ -42,11 +40,7 @@ export function ChooseRoomName() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={[styles.content]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
-    >
+    <View style={[styles.content]}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <Header title="Nom de la partie" showBackButton />
         <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
@@ -74,7 +68,7 @@ export function ChooseRoomName() {
           />
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -97,6 +91,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 20,
+    paddingBottom: 0,
+    backgroundColor: COLORS.primaryBackgroundColor,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.inputBorderColor,
   },
   image: {
     height: 200,
