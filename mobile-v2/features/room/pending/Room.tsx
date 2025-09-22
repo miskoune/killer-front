@@ -113,7 +113,7 @@ export function PendingRoom() {
 
         <FadeInView style={styles.content}>
           <Image
-            source={require('./images/room-pending-2.png')}
+            source={require('./images/room-pending.png')}
             style={styles.image}
           />
           <RoomCode roomCode={room.data?.id} />
