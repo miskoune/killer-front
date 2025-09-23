@@ -20,7 +20,7 @@ import { useCreateRoom } from './hooks/useCreateRoom';
 
 export function CreateRoom() {
   const { t } = useTranslation();
-  const [isGameMastered, setIsGameMastered] = useState(false);
+  const [isGameMastered, setIsGameMastered] = useState(true);
   const { handleError } = useErrorHandler();
   const insets = useSafeAreaInsets();
   const createRoom = useCreateRoom();
@@ -43,6 +43,46 @@ export function CreateRoom() {
         <View style={styles.view}>
           {/* Mode selector */}
           <View style={styles.modeSection}>
+            {/* Game master mode */}
+            <TouchableOpacity
+              style={[
+                styles.modeCard,
+                isGameMastered && styles.modeCardSelected,
+              ]}
+              onPress={() => setIsGameMastered(true)}
+            >
+              <Image
+                source={require('./images/game-master.png')}
+                style={styles.image}
+              />
+              <View style={styles.modeCardHeader}>
+                <View
+                  style={[
+                    styles.radioButton,
+                    isGameMastered && styles.radioButtonSelected,
+                  ]}
+                >
+                  {isGameMastered && <View style={styles.radioButtonInner} />}
+                </View>
+                <Text
+                  style={[
+                    styles.modeCardTitle,
+                    isGameMastered && styles.modeCardTitleSelected,
+                  ]}
+                >
+                  {t('create.room.game.master.mode.title')}
+                </Text>
+              </View>
+              <Text
+                style={[
+                  styles.modeCardDescription,
+                  isGameMastered && styles.modeCardDescriptionSelected,
+                ]}
+              >
+                {t('create.room.game.master.mode.description')}
+              </Text>
+            </TouchableOpacity>
+
             {/* Free for all mode */}
             <TouchableOpacity
               style={[
@@ -81,46 +121,6 @@ export function CreateRoom() {
                 ]}
               >
                 {t('create.room.free.for.all.mode.description')}
-              </Text>
-            </TouchableOpacity>
-
-            {/* Game master mode */}
-            <TouchableOpacity
-              style={[
-                styles.modeCard,
-                isGameMastered && styles.modeCardSelected,
-              ]}
-              onPress={() => setIsGameMastered(true)}
-            >
-              <Image
-                source={require('./images/game-master.png')}
-                style={styles.image}
-              />
-              <View style={styles.modeCardHeader}>
-                <View
-                  style={[
-                    styles.radioButton,
-                    isGameMastered && styles.radioButtonSelected,
-                  ]}
-                >
-                  {isGameMastered && <View style={styles.radioButtonInner} />}
-                </View>
-                <Text
-                  style={[
-                    styles.modeCardTitle,
-                    isGameMastered && styles.modeCardTitleSelected,
-                  ]}
-                >
-                  {t('create.room.game.master.mode.title')}
-                </Text>
-              </View>
-              <Text
-                style={[
-                  styles.modeCardDescription,
-                  isGameMastered && styles.modeCardDescriptionSelected,
-                ]}
-              >
-                {t('create.room.game.master.mode.description')}
               </Text>
             </TouchableOpacity>
           </View>
