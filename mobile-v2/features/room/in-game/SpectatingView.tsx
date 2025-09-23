@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import {
   View,
@@ -17,6 +17,8 @@ import { type Player } from '@/shared/types/player';
 import { useTranslation } from '@/translations';
 
 import { useGetRoom } from '../hooks/useGetRoom';
+
+import SettingsIcon from './icons/settings.svg';
 
 export function SpectatingView() {
   const { t } = useTranslation();
@@ -97,7 +99,13 @@ export function SpectatingView() {
             />
           }
         >
-          <Header title="Mode Spectateur" />
+          <Header
+            title="Mode Spectateur"
+            rightAction={{
+              icon: SettingsIcon,
+              onPress: () => router.push(`/room/${roomId}/in-game/settings`),
+            }}
+          />
 
           {/* Game Master Info */}
           <View style={styles.gameMasterCard}>

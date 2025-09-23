@@ -35,10 +35,6 @@ export function InGameRoom() {
     leaveRoom.mutate(session.data?.id, { onError: handleError });
   };
 
-  const handleGoToSettings = () => {
-    router.push(`/room/${roomId}/in-game/settings`);
-  };
-
   if (room.isFetching) {
     return <LoadingState />;
   }
@@ -80,7 +76,7 @@ export function InGameRoom() {
             title="Survivre ou mourir"
             rightAction={{
               icon: SettingsIcon,
-              onPress: handleGoToSettings,
+              onPress: () => router.push(`/room/${roomId}/in-game/settings`),
             }}
           />
           {session.data?.assignedMission && session.data?.target && (
