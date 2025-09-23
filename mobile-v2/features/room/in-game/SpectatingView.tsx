@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import {
@@ -109,6 +110,10 @@ export function SpectatingView() {
 
           {/* Game Master Info */}
           <View style={styles.gameMasterCard}>
+            <Image
+              source={require('./images/admin.png')}
+              style={styles.image}
+            />
             <Text style={styles.gameMasterTitle}>
               {t('room.game.master.title')}
             </Text>
@@ -116,6 +121,15 @@ export function SpectatingView() {
               En tant que maître de jeu, vous pouvez observer le déroulement de
               la partie en temps réel. Les joueurs ne savent pas que vous les
               observez.
+            </Text>
+          </View>
+
+          {/* End Game Condition */}
+          <View style={styles.endGameCard}>
+            <Text style={styles.endGameTitle}>🏆 Condition de victoire</Text>
+            <Text style={styles.endGameDescription}>
+              La partie se termine quand il ne reste qu'un seul joueur vivant,
+              qui sera déclaré vainqueur.
             </Text>
           </View>
 
@@ -140,15 +154,6 @@ export function SpectatingView() {
                 <Text style={styles.statLabel}>Missions total</Text>
               </View>
             </View>
-          </View>
-
-          {/* End Game Condition */}
-          <View style={styles.endGameCard}>
-            <Text style={styles.endGameTitle}>🏆 Condition de victoire</Text>
-            <Text style={styles.endGameDescription}>
-              La partie se termine quand il ne reste qu'un seul joueur vivant,
-              qui sera déclaré vainqueur.
-            </Text>
           </View>
 
           {/* Alive Players */}
@@ -262,8 +267,14 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingBottom: 20,
   },
+  image: {
+    width: 150,
+    height: 150,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
   gameMasterCard: {
-    backgroundColor: COLORS.buttonPrimaryColor,
+    backgroundColor: COLORS.secondaryBackgroundColor,
     borderRadius: 15,
     padding: 20,
     marginHorizontal: 20,
@@ -272,14 +283,15 @@ const styles = StyleSheet.create({
   gameMasterTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: COLORS.buttonPrimaryTextColor,
+    color: COLORS.textPrimaryColor,
     marginBottom: 8,
     textAlign: 'center',
   },
   gameMasterDescription: {
     fontSize: 14,
-    color: COLORS.buttonPrimaryTextColor,
+    color: COLORS.textSecondaryColor,
     lineHeight: 20,
+    textAlign: 'center',
   },
   statsCard: {
     backgroundColor: COLORS.secondaryBackgroundColor,
