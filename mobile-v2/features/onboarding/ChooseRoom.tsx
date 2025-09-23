@@ -84,10 +84,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     borderRadius: 20,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
   },
   playerName: {
     fontSize: 24,

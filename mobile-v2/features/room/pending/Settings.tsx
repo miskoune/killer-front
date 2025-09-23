@@ -562,7 +562,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   selectedAvatarOption: {
-    borderWidth: 3,
+    borderWidth: 1,
     borderColor: COLORS.buttonPrimaryColor,
   },
   selectedIndicator: {
