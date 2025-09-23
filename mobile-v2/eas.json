@@ -8,6 +8,7 @@
       "distribution": "internal"
     },
     "simulator": {
+      "extends": "development",
       "ios": {
         "simulator": true
       }
