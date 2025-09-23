@@ -17,6 +17,7 @@ import { ConfirmKill } from './ConfirmKill';
 import { DeadView } from './DeadView';
 import SettingsIcon from './icons/settings.svg';
 import { MissionView } from './MissionView';
+import { SpectatingView } from './SpectatingView';
 
 export function InGameRoom() {
   const { roomId } = useLocalSearchParams<{ roomId: string }>();
@@ -53,12 +54,12 @@ export function InGameRoom() {
     );
   }
 
-  if (
-    session.data?.status === 'KILLED' ||
-    !session.data?.target ||
-    !session.data?.assignedMission
-  ) {
+  if (session.data?.status === 'KILLED') {
     return <DeadView />;
+  }
+
+  if (session.data?.status === 'SPECTATING') {
+    return <SpectatingView />;
   }
 
   return (
@@ -82,12 +83,14 @@ export function InGameRoom() {
               onPress: handleGoToSettings,
             }}
           />
-          <MissionView
-            mission={session.data.assignedMission}
-            targetPlayer={session.data.target}
-          />
+          {session.data?.assignedMission && session.data?.target && (
+            <MissionView
+              mission={session.data.assignedMission}
+              targetPlayer={session.data.target}
+            />
+          )}
         </ScrollView>
-        <ConfirmKill session={session.data} />
+        {session.data && <ConfirmKill session={session.data} />}
       </FadeInView>
     </View>
   );

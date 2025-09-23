@@ -83,7 +83,7 @@
   "room.start.party.same.missions.as.players.condition": "Au moins autant de missions que de joueurs",
   "room.start.party.each.player.has.mission.condition": "Chaque joueur a proposé une mission",
   "room.start.party.button": "Lancer la partie",
-  "room.game.master.title": "Vous êtes le maître du jeu, surveillez le bon déroulement de la partie.",
+  "room.game.master.title": "Vous êtes le maître du jeu",
   "room.target.title": "Essayez de tuer votre cible et de survivre",
   "room.target.to.kill": "Votre cible est {{pseudo}} !",
   "room.target.mission": "Mission que doit remplir votre cible :",
