@@ -50,12 +50,16 @@ export function InGameRoom() {
     );
   }
 
-  if (session.data?.status === 'KILLED') {
-    return <DeadView />;
-  }
-
   if (session.data?.status === 'SPECTATING') {
     return <SpectatingView />;
+  }
+
+  if (
+    session.data?.status === 'KILLED' ||
+    !session.data?.assignedMission ||
+    !session.data?.target
+  ) {
+    return <DeadView />;
   }
 
   return (
@@ -79,14 +83,13 @@ export function InGameRoom() {
               onPress: () => router.push(`/room/${roomId}/in-game/settings`),
             }}
           />
-          {session.data?.assignedMission && session.data?.target && (
-            <MissionView
-              mission={session.data.assignedMission}
-              targetPlayer={session.data.target}
-            />
-          )}
+
+          <MissionView
+            mission={session.data.assignedMission}
+            targetPlayer={session.data.target}
+          />
         </ScrollView>
-        {session.data && <ConfirmKill session={session.data} />}
+        <ConfirmKill session={session.data} />
       </FadeInView>
     </View>
   );
