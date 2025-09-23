@@ -1,6 +1,13 @@
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
-import { Text, View, StyleSheet, ScrollView, Pressable } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+  RefreshControl,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import SettingsIcon from '@/shared/assets/icons/settings.svg';
@@ -18,7 +25,16 @@ export function Home() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={session.isFetching}
+            onRefresh={session.refetch}
+          />
+        }
+      >
         <FadeInView style={styles.fadeInView}>
           <View style={styles.deletePlayer}>
             <Pressable

@@ -8,12 +8,21 @@ import { useTranslation } from '@/translations';
 
 interface FooterActionsProps {
   roomId: string;
+  isGameMastered: boolean;
 }
 
-export function FooterActions({ roomId }: FooterActionsProps) {
+export function FooterActions({ roomId, isGameMastered }: FooterActionsProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+
+  const getManageMissionsButtonText = () => {
+    if (isGameMastered) {
+      return 'Gérer les missions de la partie';
+    }
+
+    return t('room.manage.missions');
+  };
 
   return (
     <View style={[styles.bottomActions, { paddingBottom: insets.bottom }]}>
@@ -22,7 +31,7 @@ export function FooterActions({ roomId }: FooterActionsProps) {
         onPress={() => {
           router.push(`/room/${roomId}/pending/missions`);
         }}
-        text={t('room.manage.missions')}
+        text={getManageMissionsButtonText()}
       />
     </View>
   );

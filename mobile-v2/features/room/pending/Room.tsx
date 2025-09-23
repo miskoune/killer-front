@@ -48,6 +48,10 @@ export function PendingRoom() {
     );
   }
 
+  const shouldShowFooterActions =
+    !room.data?.isGameMastered ||
+    (room.data?.isGameMastered && session.data?.id === room.data?.admin.id);
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -74,7 +78,12 @@ export function PendingRoom() {
         </FadeInView>
       </ScrollView>
 
-      <FooterActions roomId={room.data?.id} />
+      {shouldShowFooterActions && (
+        <FooterActions
+          roomId={room.data?.id}
+          isGameMastered={room.data?.isGameMastered}
+        />
+      )}
     </View>
   );
 }
