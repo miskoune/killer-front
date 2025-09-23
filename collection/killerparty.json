@@ -1,0 +1,231 @@
+{
+  "name": "killerparty",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Create player",
+      "filename": "Create player.bru",
+      "seq": 2,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "https://api.killerparty.app/player",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Test3\",\n  \"avatar\": \"pumpkin\",\n  \"room\": \"6GMFO\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "DELETE player",
+      "filename": "DELETE player.bru",
+      "seq": 7,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "https://api.killerparty.app/player/507",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NTgzOTI5MjEsImV4cCI6MTc2MTAyMTIwOSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNTA3In0.Eb4RnyfGRkQYE5OfMImWmOHNCObR-4RT5GetKq2LDMShcxrV0b8JGlHOb-QG5EKTWzQwbvFJXYF6quw2JLcQuYeHQYOvTZtcLoyel9Y8XrDdwE5r7rOm-Mo_P0KjEiKKQVtL2hem0wEyQN5bxw2mKIIDwgCSGDe_fegAMbasJ8oUooo2eA45IctGLl4-Mn0IE16L5UpwQaqBGZ8ptM-pkP1sQGnJKyk-EURym6URPvaffbKHPcF6F4REwQy29_hoRfq6wGbvqtSUKzqYB2RbzZvg1R1HdvojU3A1p9WcDDjOdjTweZ6W1GOzCTv4gKT52lkwVEpXj28h0xAgL_WR-g"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete mission",
+      "filename": "Delete mission.bru",
+      "seq": 4,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "https://api.killerparty.app/mission/500",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NTgzOTI5MjEsImV4cCI6MTc2MTAyMTIwOSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNTA3In0.Eb4RnyfGRkQYE5OfMImWmOHNCObR-4RT5GetKq2LDMShcxrV0b8JGlHOb-QG5EKTWzQwbvFJXYF6quw2JLcQuYeHQYOvTZtcLoyel9Y8XrDdwE5r7rOm-Mo_P0KjEiKKQVtL2hem0wEyQN5bxw2mKIIDwgCSGDe_fegAMbasJ8oUooo2eA45IctGLl4-Mn0IE16L5UpwQaqBGZ8ptM-pkP1sQGnJKyk-EURym6URPvaffbKHPcF6F4REwQy29_hoRfq6wGbvqtSUKzqYB2RbzZvg1R1HdvojU3A1p9WcDDjOdjTweZ6W1GOzCTv4gKT52lkwVEpXj28h0xAgL_WR-g"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Room",
+      "filename": "Room.bru",
+      "seq": 5,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "https://api.killerparty.app/room/WOIUZ",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NTg1NzU4NTEsImV4cCI6MTc2MTIwNDEzOSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNTU3In0.oYs9hNCYPv5FuCZGcxbwiu2BMb3iPBhshjNAv_bqRG04VW7jyxlCLi4TQUihBVwA7rbRa8QGW8VbjpUJUDwi-vL5MflAX4Xy8_YB-ymdaDxE92NLFylJ9wMlveQA8VQZMOs-6xUd70AQ9nbFXuwis2reiBTPIoAs1gYBOVG-36OIiulGuaipo3SOhE1o8JurOmWrWhn_NFu9fGcveDUm8IpxQjrTLM1tKF_UacBl0GI8mzZ7w73a8EvhVe5FRL6fbK95AZXXvfjUAR17HRy9uYGkcPkFK6tbfVZ-qSmo13bQ3oLxy2VYP9ZO9TSGdPb8jzxBXKzAO_2tTBYdOznjPw"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Session",
+      "filename": "Session.bru",
+      "seq": 6,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "https://api.killerparty.app/player/me",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NTg1NzU4NTEsImV4cCI6MTc2MTIwNDEzOSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNTU3In0.oYs9hNCYPv5FuCZGcxbwiu2BMb3iPBhshjNAv_bqRG04VW7jyxlCLi4TQUihBVwA7rbRa8QGW8VbjpUJUDwi-vL5MflAX4Xy8_YB-ymdaDxE92NLFylJ9wMlveQA8VQZMOs-6xUd70AQ9nbFXuwis2reiBTPIoAs1gYBOVG-36OIiulGuaipo3SOhE1o8JurOmWrWhn_NFu9fGcveDUm8IpxQjrTLM1tKF_UacBl0GI8mzZ7w73a8EvhVe5FRL6fbK95AZXXvfjUAR17HRy9uYGkcPkFK6tbfVZ-qSmo13bQ3oLxy2VYP9ZO9TSGdPb8jzxBXKzAO_2tTBYdOznjPw"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Start room",
+      "filename": "Start room.bru",
+      "seq": 8,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "https://api.killerparty.app/room/8MJIE",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NTg0OTUxMjgsImV4cCI6MTc2MTEyMzQxNiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNTM3In0.NCblZIRdj6Y96DMJ0ehw7ewoGEDhGoFVXQelSL-qkWPU1B6weIk2xA4pSDQ8EY-WZcjXWRRnSMz2GMndtiWSsM9Fgeed0lBouQPv2bBTDu5JMZfirAUqNeQckaug-4-niBK5teLkZwKY1BdwptHgcxPV6EUHykVDW0QxyAFBj5FJuVO_oDZbsDoWE3jUbpYE1Y-ZPSH8n2QUhgHIU2hqwgzLz6XZfvuQF3BmvsBpq7G_D1B-whrF9z2Ws17OFQwQJ4vK47bMsmmP_xXUQETGwy9gkXHRPFFGFctV5Z2FbR7KO0jIM-hPyu_S8dD_1JymZQMJ26U1WBbxArIGo9YxvQ"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Update player",
+      "filename": "Update player.bru",
+      "seq": 3,
+      "settings": {},
+      "tags": [],
+      "request": {
+        "url": "https://api.killerparty.app/player/508",
+        "method": "PATCH",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Test3\",\n  \"avatar\": \"pumpkin\",\n  \"room\": \"DXZT9\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NTgzOTMwMzAsImV4cCI6MTc2MTAyMTMxOCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNTA4In0.1PGAGev4zMzd-quk9ZHsrSr0FSQrgp-uQQiO7eT_YhcP5T7nnLWfleS-DC54_wiW7K2njSKDBDNhlkQvFWN2NWTb9H2HWR4yAcSJ_MUcvlvn5Yjm0vHj1dOYGvZUjlwcoW6mOIG77dH8qwhW5smEGONXYj9vS9b-HR2TGEjkfCSyWjdK0corsri9HnfpKfX0N9x25E4i-rF2radKf5GSIN5yV9vVlgfW1wAmeLG03T4q9-nvYrWpWBQD9dhAVDNwQbT4bvc162FJq3DOehk0cacnwDFuOfnvnyY7ikFDhHnmJY1EJ6y0vfTeIWhJnIu45MYHEiymdvdsAoCQ2mP-pA"
+          }
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "killerparty",
+    "type": "collection",
+    "ignore": ["node_modules", ".git"],
+    "size": 0.003962516784667969,
+    "filesCount": 7
+  }
+}

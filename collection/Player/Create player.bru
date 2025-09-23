@@ -1,0 +1,19 @@
+meta {
+  name: Create player
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://api.killerparty.app/player
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Test3",
+    "avatar": "pumpkin",
+    "room": "6GMFO"
+  }
+}

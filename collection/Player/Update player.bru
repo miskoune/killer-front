@@ -1,0 +1,23 @@
+meta {
+  name: Update player
+  type: http
+  seq: 2
+}
+
+patch {
+  url: https://api.killerparty.app/player/508
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NTgzOTMwMzAsImV4cCI6MTc2MTAyMTMxOCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNTA4In0.1PGAGev4zMzd-quk9ZHsrSr0FSQrgp-uQQiO7eT_YhcP5T7nnLWfleS-DC54_wiW7K2njSKDBDNhlkQvFWN2NWTb9H2HWR4yAcSJ_MUcvlvn5Yjm0vHj1dOYGvZUjlwcoW6mOIG77dH8qwhW5smEGONXYj9vS9b-HR2TGEjkfCSyWjdK0corsri9HnfpKfX0N9x25E4i-rF2radKf5GSIN5yV9vVlgfW1wAmeLG03T4q9-nvYrWpWBQD9dhAVDNwQbT4bvc162FJq3DOehk0cacnwDFuOfnvnyY7ikFDhHnmJY1EJ6y0vfTeIWhJnIu45MYHEiymdvdsAoCQ2mP-pA
+}
+
+body:json {
+  {
+    "name": "Test3",
+    "avatar": "pumpkin",
+    "room": "DXZT9"
+  }
+}
